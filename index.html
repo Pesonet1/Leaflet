@@ -296,7 +296,7 @@
           viheralueet.resetStyle(e.target);
   	}
 
-	
+	/*
 	//map.onclick -funktion rakentelua...
 	function onMapClick(e) { //(e), saadaan klikatun kohteen tietoja
 	    alert("Klikkasit karttaa, hienoa! ;)");
@@ -304,7 +304,11 @@
 	}
 
 	map.on('click', onMapClick);
-	
+	*/
+
+
+	// Create a featureLayer that will hold a marker and linestring.
+	var featureLayer = L.mapbox.featureLayer().addTo(map);
 
 	map.on('click', function(ev) {
 	    // ev.latlng gives us the coordinates of
@@ -320,20 +324,6 @@
 	        },
 	        "properties": {
 	          "marker-color": "#ff8888"
-	        }
-	      }, {
-	        "type": "Feature",
-	        "geometry": {
-	          "type": "LineString",
-	          "coordinates": [
-	            [fc.lng, fc.lat],
-	            [c.lng, c.lat]
-	          ]
-	        },
-	        "properties": {
-	          "stroke": "#000",
-	          "stroke-opacity": 0.5,
-	          "stroke-width": 4
 	        }
 	      }
 	    ];
