@@ -311,7 +311,7 @@
 	*/
 
 
-	map.on('click', function(ev) {
+	map.once('click', function(ev) {
 	  // ev.latlng gives us the coordinates of
 	  // the spot clicked on the map.
 	  var c = ev.latlng;
@@ -344,11 +344,10 @@
 	  }).addTo(map);
 	});
 	
-	function resetColors() {
-	    pisteet.clearLayers()
-	}
-	
-	map.on('click', removepoint);
+	var removeButton = document.getElementById('remove');
+	trackButton.addEventListener('click',function(event) {
+		pisteet.clearLayers()
+	});
 	
 	/*
 	//WMS-tasot
@@ -488,16 +487,19 @@
     </script>
     
     <div class="span9" style="height:100%">
-    <div id="map-wrapper">
+      <div id="map-wrapper">
     	<div id="map"></div>
   	<div id="button-wrapper">  
 	    <button class="btn btn-primary" title="Sivupalkki" onClick="toggleControlPanel()" href="#toggle">Valikko</button>   
     	</div>
-    </div>
+      </div>
     
-    	<div id='sidebar' class='sidebar' style="display: none;">
+      <div id='sidebar' class='sidebar' style="display: none;">
     	  <button class="btn btn-primary" title="Sivupalkki" onClick="toggleControlPanel()" href="#toggle">Sulje valikko</button>
-    	</div>
+      </div>
+      
+      <button id="track" class="btn btn-primary">Paikanna</button>
+      
     </div>
     	
     <nav id='menu-ui' class='menu-ui'></nav>
