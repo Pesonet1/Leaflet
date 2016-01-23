@@ -311,9 +311,12 @@
 	map.on('click', onMapClick);
 	*/
 
-	/*
+
+
+	
 	// Create a featureLayer that will hold a marker and linestring.
-	var featureLayer = L.mapbox.featureLayer().addTo(map);
+	//var featureLayer = L.mapbox.featureLayer().addTo(map);
+	var featureLayer = L.geoJson().addTo(map);
 
 	map.on('click', function(ev) {
 	    // ev.latlng gives us the coordinates of
@@ -335,9 +338,11 @@
 	
 	    featureLayer.setGeoJSON(geojson);
 	});
-	*/
 	
 	
+	
+	
+	/*
 	var markerLayer = L.mapbox.markerLayer({ 
 	    type: 'FeatureCollection', 
 	    features: { } 
@@ -373,8 +378,8 @@
 	
 	      markerLayer.clearLayers();
 	});
-
-
+	*/
+	
 	
 	/*
 	//WMS-tasot
