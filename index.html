@@ -324,17 +324,15 @@
 	    var c = ev.latlng;
 	
 	    var geojson = {
-	        "type": "Feature",
+	        "type": "Feature"
+	        },
 	        "geometry": {
 	          "type": "Point",
 	          "coordinates": [c.lng, c.lat]
-	        },
-	        "properties": {
-	          "marker-color": "#ff8888"
 	        }
 	    };
 	
-	    featureLayer.addData(geojsonFeature);
+	    featureLayer.addData(geojson);
 	});
 	
 	
