@@ -59,7 +59,7 @@
 	}
       
      
-      
+      /*
       .menu-ui {
  	background:#fff;
   	position:absolute;
@@ -97,7 +97,7 @@
       .menu-ui a.active:hover {
         background:#3074a4;
       }
-    
+    */
     
     </style>
   
@@ -299,8 +299,41 @@
 	
 	//map.onclick -funktion rakentelua...
 	function onMapClick(e) { //(e), saadaan klikatun kohteen tietoja
-		alert("Klikkasit karttaa, hienoa! ;)");
-		//var marker = new L.marker(e).addTo(map);
+	    alert("Klikkasit karttaa, hienoa! ;)");
+	    //var marker = new L.marker(e).addTo(map);
+	    
+	    // ev.latlng gives us the coordinates of
+	    // the spot clicked on the map.
+	    var c = ev.latlng;
+	
+	    var geojson = [
+	      {
+	        "type": "Feature",
+	        "geometry": {
+	          "type": "Point",
+	          "coordinates": [c.lng, c.lat]
+	        },
+	        "properties": {
+	          "marker-color": "#ff8888"
+	        }
+	      }, {
+	        "type": "Feature",
+	        "geometry": {
+	          "type": "LineString",
+	          "coordinates": [
+	            [fc.lng, fc.lat],
+	            [c.lng, c.lat]
+	          ]
+	        },
+	        "properties": {
+	          "stroke": "#000",
+	          "stroke-opacity": 0.5,
+	          "stroke-width": 4
+	        }
+	      }
+	    ];
+	
+	    featureLayer.setGeoJSON(geojson);
 	}
 
 	map.on('click', onMapClick);
