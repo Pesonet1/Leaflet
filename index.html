@@ -340,17 +340,16 @@
 	
 	var markerLayer = L.mapbox.markerLayer({ 
 	    type: 'FeatureCollection', 
-	    features: { 
-	    } 
-	    }).addTo(map); 
-	                  jQuery('.map-button').click(function(){
+	    features: { } 
+	}).addTo(map); 
+	                  
+	jQuery('.map-button').click(function(){
 	
-	                    //jQuery(this.addClass("active"));
-	                    var lat = jQuery(this).attr('data-lat');
-	                    var long = jQuery(this).attr('data-long');
+	    //jQuery(this.addClass("active"));
+	    var lat = jQuery(this).attr('data-lat');
+	    var long = jQuery(this).attr('data-long');
 	
-	
-	                 var geojson = [
+	    var geojson = [
 	     {
 	      "type": "Feature",
 	      "geometry": {
@@ -358,25 +357,22 @@
 	        "coordinates": [long,lat]
 	      },
 	      "properties": {
-	
 	        "marker-color": "#008000",
 	        "marker-size": "large",
-	
 	      }
 	      }
 	     ];
-	      markerLayer.setGeoJSON(geojson);
-	      map.setView([long, lat ], 9);
+	      
+	     markerLayer.setGeoJSON(geojson);
+	     map.setView([long, lat ], 9);
+
+	})
 	
-	                //map.setView([long, lat ], 9);
-	                    //alert(jQuery(this).attr('data-lat'));
-	                    })
-	
-	                       jQuery('#dialog-modal').live("dialogclose", function(){
+	jQuery('#dialog-modal').live("dialogclose", function(){
 	      //jQuery('.leaflet-marker-icon').hide();
 	
 	      markerLayer.clearLayers();
-	      });
+	});
 
 
 	
