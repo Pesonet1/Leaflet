@@ -323,8 +323,7 @@
 	    // the spot clicked on the map.
 	    var c = ev.latlng;
 	
-	    var geojson = [
-	      {
+	    var geojson = {
 	        "type": "Feature",
 	        "geometry": {
 	          "type": "Point",
@@ -333,8 +332,7 @@
 	        "properties": {
 	          "marker-color": "#ff8888"
 	        }
-	      }
-	    ];
+	    };
 	
 	    featureLayer.addData(geojsonFeature);
 	});
