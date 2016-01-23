@@ -311,7 +311,7 @@
 	*/
 
 
-	map.on('click', function(ev) {
+	viheralueet.on('click', function(ev) {
 	  // ev.latlng gives us the coordinates of
 	  // the spot clicked on the map.
 	  var c = ev.latlng;
@@ -337,16 +337,18 @@
 	    }
 	  };
 	
-	  L.geoJson(geojson, {
+	  var pisteet = L.geoJson(geojson, {
 	    pointToLayer: function (feature, latlng) {
 	        return L.circleMarker(latlng, geojsonstyle);
 	    }
 	  }).addTo(map);
 	});
 	
+	function removepoint() {
+	    map.removeLayer(pisteet)
+	}
 	
-	
-	
+	map.on('click', removepoint);
 	
 	/*
 	//WMS-tasot
