@@ -301,10 +301,15 @@
 	function onMapClick(e) { //(e), saadaan klikatun kohteen tietoja
 	    alert("Klikkasit karttaa, hienoa! ;)");
 	    //var marker = new L.marker(e).addTo(map);
-	    
+	}
+
+	map.on('click', onMapClick);
+	
+
+	map.on('click', function(ev) {
 	    // ev.latlng gives us the coordinates of
 	    // the spot clicked on the map.
-	    var c = e.latlng;
+	    var c = ev.latlng;
 	
 	    var geojson = [
 	      {
@@ -334,10 +339,9 @@
 	    ];
 	
 	    featureLayer.setGeoJSON(geojson);
-	}
+	});
 
-	map.on('click', onMapClick);
-	
+
 
 	
 	/*
