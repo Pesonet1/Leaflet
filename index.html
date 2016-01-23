@@ -271,7 +271,6 @@
           	  //mouseout: mouseout, 
 		  click: zoomToFeature
 		});    
-                        
               }
             }).addTo(map);
           }
@@ -354,15 +353,15 @@
 	
 	nappi.addEventListener('change', function() {
   	  var checked = this.checked;
-  	  if (checked !== viheralueet.getVisible()) {
-    	    viheralueet.setVisible(checked);
+  	  if (checked !== viheralueet_layer.getVisible()) {
+    	    viheralueet_layer.setVisible(checked);
   	  }
 	});
 
-	viheralueet.on('change:visible', function() {
+	viheralueet_layer.on('change:visible', function() {
 	  var visible = this.getVisible();
   	  if (visible !== nappi.checked) {
-    	    viheralueet.checked = visible;
+    	    viheralueet_layer.checked = visible;
   	  }
 	});
 	
@@ -518,7 +517,7 @@
     	  
     	   <button id="remove" class="btn btn-primary">Poista piste</button>
     	   
-    	   <input type="checkbox" id="nappi" checked>Liikuntapaikat
+    	   <input type="checkbox" id="nappi" checked>Pisteet
       </div>
     </div>
     	
