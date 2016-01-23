@@ -344,8 +344,9 @@
 	  }).addTo(map);
 	});
 	
+	
 	var removeButton = document.getElementById('remove');
-	trackButton.addEventListener('click',function(event) {
+	removeButton.addEventListener('click',function(event) {
 		pisteet.clearLayers()
 	});
 	
@@ -497,7 +498,7 @@
       <div id='sidebar' class='sidebar' style="display: none;">
     	  <button class="btn btn-primary" title="Sivupalkki" onClick="toggleControlPanel()" href="#toggle">Sulje valikko</button>
     	  
-    	   <button id="track" class="btn btn-primary">Paikanna</button>
+    	   <button id="remove" class="btn btn-primary">Poista piste</button>
       </div>
     </div>
     	
