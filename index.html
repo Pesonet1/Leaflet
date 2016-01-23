@@ -343,13 +343,13 @@
 	        return L.circleMarker(latlng, geojsonstyle);
 	    }
 	  }).addTo(map);
-	});
-	
-	
-	var removeButton = document.getElementById('remove');
-	removeButton.addEventListener('click',function(event) {
+	  
+	  var removeButton = document.getElementById('remove');
+		removeButton.addEventListener('click',function(event) {
 		map.clearLayers(pisteet);
+	  });
 	});
+	
 	
 	
 	
