@@ -344,8 +344,8 @@
 	  }).addTo(map);
 	});
 	
-	function removepoint() {
-	    map.removeLayer(pisteet)
+	function resetColors() {
+	    pisteet.clearLayers()
 	}
 	
 	map.on('click', removepoint);
