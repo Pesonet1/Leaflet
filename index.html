@@ -312,12 +312,7 @@
 	*/
 
 
-
-	
-	// Create a featureLayer that will hold a marker and linestring.
-	//var featureLayer = L.mapbox.featureLayer().addTo(map);
 	var featureLayer = L.geoJson().addTo(map);
-
 	map.on('click', function(ev) {
 	    // ev.latlng gives us the coordinates of
 	    // the spot clicked on the map.
@@ -329,7 +324,7 @@
 	          "name": "piste"
 	        },
 	        "geometry": {
-	          "type": "Point",
+	          "type": "Circle",
 	          "coordinates": [c.lng, c.lat]
 	        }
 	    };
@@ -339,44 +334,6 @@
 	
 	
 	
-	
-	/*
-	var markerLayer = L.mapbox.markerLayer({ 
-	    type: 'FeatureCollection', 
-	    features: { } 
-	}).addTo(map); 
-	                  
-	jQuery('.map-button').click(function(){
-	
-	    //jQuery(this.addClass("active"));
-	    var lat = jQuery(this).attr('data-lat');
-	    var long = jQuery(this).attr('data-long');
-	
-	    var geojson = [
-	     {
-	      "type": "Feature",
-	      "geometry": {
-	        "type": "Point",
-	        "coordinates": [long,lat]
-	      },
-	      "properties": {
-	        "marker-color": "#008000",
-	        "marker-size": "large",
-	      }
-	      }
-	     ];
-	      
-	     markerLayer.setGeoJSON(geojson);
-	     map.setView([long, lat ], 9);
-
-	})
-	
-	jQuery('#dialog-modal').live("dialogclose", function(){
-	      //jQuery('.leaflet-marker-icon').hide();
-	
-	      markerLayer.clearLayers();
-	});
-	*/
 	
 	
 	/*
@@ -492,12 +449,12 @@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     
+    <!-- jQuery scriptit -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
     <!-- Bootstarp scriptit -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    
-    <!-- jQuery scriptit -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
    
     <!--ESRI-leaflet scripti -->
     <script src="https://pesonet1.github.io/Leaflet/esri-leaflet.js"></script>
