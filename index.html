@@ -350,20 +350,7 @@
 	  
 	});
 	
-	
-	nappi.addEventListener('change', function() {
-  	  var checked = this.checked;
-  	  if (checked !== viheralueet_layer.getVisible()) {
-    	    viheralueet_layer.setVisible(checked);
-  	  }
-	});
 
-	viheralueet_layer.on('change:visible', function() {
-	  var visible = this.getVisible();
-  	  if (visible !== nappi.checked) {
-    	    viheralueet_layer.checked = visible;
-  	  }
-	});
 	
 	
 	
@@ -516,8 +503,6 @@
     	  <button class="btn btn-primary" title="Sivupalkki" onClick="toggleControlPanel()" href="#toggle">Sulje valikko</button>
     	  
     	   <button id="remove" class="btn btn-primary">Poista piste</button>
-    	   
-    	   <input type="checkbox" id="nappi" checked>Pisteet
       </div>
     </div>
     	
