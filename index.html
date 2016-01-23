@@ -312,7 +312,7 @@
 	*/
 
 
-	var featureLayer = L.geoJson().addTo(map);
+	//var featureLayer = L.geoJson().addTo(map);
 	map.on('click', function(ev) {
 	    // ev.latlng gives us the coordinates of
 	    // the spot clicked on the map.
@@ -338,7 +338,14 @@
 	        }
 	    };
 	
-	    featureLayer.addData(geojson, {style: geojsonstyle});
+	L.geoJson(geojson, {
+	    pointToLayer: function (feature, latlng) {
+	        return L.circleMarker(latlng, geojsonstyle);
+	    }
+	}).addTo(map);
+	
+	
+	    //featureLayer.addData(geojson, {style: geojsonstyle});
 
 	});
 	
