@@ -128,17 +128,12 @@
   	var map = L.map('map').setView([60.1708, 24.9375], 13);
   	var layers = document.getElementById('menu-ui');
   	
-  	
-  	//L.mapbox.accessToken = 'pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg';
-	//var map = L.mapbox.map('map', 'mapbox.streets').setView([60.1708, 24.9375], 13);
-  	
-  	
   	var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-		id: 'mapbox.streets'
+		id: 'mapbox.light'
 	}).addTo(map);
 	
 	
@@ -154,74 +149,75 @@
 	//Viheralueet WFS
 	//var viheralueet = null;
 	var viheralueet_layer = $.ajax({ 
-          url: viheralueet_wfs,
-	  datatype:"json",
-	  jsonCallback: 'getJson',
-	  success : function (response) {
-            viheralueet = L.geoJson(response, {
-              style: function (feature) {
-                var fillColor, 
-                kaytto = feature.properties.kayttotarkoitus;
+        	url: viheralueet_wfs,
+		datatype:"json",
+		jsonCallback: 'getJson',
+		success : function (response) {
+        	  viheralueet = L.geoJson(response, {
+                    style: function (feature) {
+                      var fillColor, 
+                      kaytto = feature.properties.kayttotarkoitus;
                       
-                if ( kaytto == "Asemakaavoitettu viheralue" ) fillColor = "#00b300";
-                else if ( kaytto == "Kartano- ja huvila-alue" ) fillColor = "#ff8433";
-                else if ( kaytto == "Kesamaja-alue" ) fillColor = "#8a8a8a";
-                else if ( kaytto == "Koira-aitaus" ) fillColor = "#ffff00";
-                else if ( kaytto == "Leikkipaikka" ) fillColor = "#ffcccc";
-                else if ( kaytto == "Leikkipuisto" ) fillColor = "#ffaa80";
-		else if ( kaytto == "Luonnonsuojelualue" ) fillColor = "#ff3384";
-		else if ( kaytto == "Siirtolapuutarha" ) fillColor = "#888844";
-		else if ( kaytto == "Uimaranta-alue" ) fillColor = "#003cb3";
-		else if ( kaytto == "Venesatama / Venevalkama" ) fillColor = "#00b7e6";
-		else if ( kaytto == "Viljelypalsta" ) fillColor = "#ffffb3";
-		else if ( kaytto == "Muut viheralueet" ) fillColor = "#804c1a";
-		//else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#ff0000";
-	        else fillColor == "black";  // no data
+                      if ( kaytto.indexOf("semakaavoitettu") > -1) fillColor = "#336666";
+                      else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#336666";
+                      else if ( kaytto == "Ulkoilumetsä" ) fillColor = "#336666";
+                      else if ( kaytto == "Kartano- ja huvila-alue" ) fillColor = "#996699";
+                      else if ( kaytto == "Kesämaja-alue" || kaytto == "Siirtolapuutarha" || kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue") fillColor = "#666699";
+                      else if ( kaytto == "Koira-aitaus" ) fillColor = "#666699";
+                      else if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
+		      else if ( kaytto == "Luonnonsuojelualue" ) fillColor = "#336666";
+		      else if ( kaytto.indexOf("luonnonsuojelualue") > -1 ) fillColor = "#336666";
+		      else if ( kaytto == "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama" ) fillColor = "#336699";
+		      else if ( kaytto.indexOf("Haudat") > -1 ) fillColor = "#666666";
+		      else if ( kaytto == "Muut viheralueet" ) fillColor = "#fff";
 		      
-	      //Muu toimiluokka
-	      //Yleiskaavan viheralue / luonnonsuojelualue
-	      //Yleiskaavan viheralue / kesämaja-alue
-	      //Yleiskaavan viheralue / kartanoalue
-	      //Yleiskaavan viheralue / leikkipuisto
-	      //Yleiskaavan viheralue
-	      //Yleiskaavan viheralue / erityiskohteet
-	      //Yleiskaavan viheralue / koira-aitaus
-	      //Ulkoilumetsä
-	      //Tontti (rakentamattomat / sopimus)
-	      //Erityiskohteet, asemakaavoitettu viheralue
-	      //Viljelypalsta-alue
-	      //Haudat (hautausmaat)
-	      //Suojaviheralue
-	      //Katualue
-	      //Rata-alue
-	      //Saari (saaret ilman siltayhteyttä)
+		      //else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#ff0000";
+		      else fillColor = "#999";  // no data
 		      
-		return {
-		  color: "black", 
-		  weight: 1, 
-		  fillColor: fillColor, 
-		  fillOpacity: 0.8 
-		};
+		      //Muu toimiluokka
+		      //Yleiskaavan viheralue / luonnonsuojelualue
+		      //Yleiskaavan viheralue / kesämaja-alue
+		      //Yleiskaavan viheralue / kartanoalue
+		      //Yleiskaavan viheralue / leikkipuisto
+		      //Yleiskaavan viheralue
+		      //Yleiskaavan viheralue / erityiskohteet
+		      //Yleiskaavan viheralue / koira-aitaus
+		      //Ulkoilumetsä
+		      //Tontti (rakentamattomat / sopimus)
+		      //Erityiskohteet, asemakaavoitettu viheralue
+		      //Viljelypalsta-alue
+		      //Haudat (hautausmaat)
+		      //Suojaviheralue
+		      //Katualue
+		      //Rata-alue
+		      //Saari (saaret ilman siltayhteyttä)
+		      
+		      return {
+		      	color: "black", 
+		      	weight: 1, 
+		      	fillColor: fillColor, 
+		      	fillOpacity: 0.8 
+		      };
                     	
-              },
-              onEachFeature: function (feature, layer) {
-                popupOptions = {maxWidth: 200};
-                layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
-                  "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
-                  "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
-                  "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
-                  "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
-                  ,popupOptions);
+                    },
+                    onEachFeature: function (feature, layer) {
+                      popupOptions = {maxWidth: 200};
+                      layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
+                        "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
+                        "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
+                        "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
+                        "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
+                        ,popupOptions);
                       
-                //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
-                layer.on({
-                  mousemove: mousemove,
-          	  mouseout: mouseout, 
-		  //click: zoomToFeature
-		});
-              }
-            }).addTo(map);
-          }
+                      //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
+                      layer.on({
+                      	mousemove: mousemove,
+          	        mouseout: mouseout, 
+		        //click: zoomToFeature
+		      });
+                    }
+                  }).addTo(map);
+                }
 	}); 
 
 
@@ -229,51 +225,56 @@
 	//Paavo WFS
 	//var paavo = null;
 	var paavo_layer = $.ajax({ 
-          url: paavo_kartta,
-	  datatype:"json",
-	  jsonCallback: 'getJson',
-	  success : function (response) {
-            paavo = L.geoJson(response, {
-              style: function (feature) {
-                var fillColor, 
-                vaki = feature.properties.he_vakiy;
+        	url: paavo_kartta,
+		datatype:"json",
+		jsonCallback: 'getJson',
+		success : function (response) {
+        	  paavo = L.geoJson(response, {
+                    style: function (feature) {
+                      var fillColor, 
+                      vaki = feature.properties.he_vakiy,
+                      ala = feature.properties.pinta_ala / 1000000,
+                      astiheys = vaki / ala;
                       
-                //if ( vaki > 22000) fillColor =
-                if ( vaki > 24000) fillColor = "#990000";
-                else if ( vaki > 21000) fillColor = "#d7301f";
-                else if ( vaki > 18000 ) fillColor = "#ef6548";
-		else if ( vaki > 15000 ) fillColor = "#fc8d59";
-		else if ( vaki > 12000 ) fillColor = "#fdbb84";
-		else if ( vaki > 90000 ) fillColor = "#fdd49e";
-		else if ( vaki > 3000 ) fillColor = "#fee8c8";
-		else if ( vaki > 0 ) fillColor = "#fff7ec";
-		else fillColor = "#ebfaeb";  // no data
+                      //if ( vaki > 22000) fillColor =
+                      if ( astiheys > 12000) fillColor = "#a63603";
+                      else if ( astiheys > 10000) fillColor = "#d94801";
+                      else if ( astiheys > 8000 ) fillColor = "#f16913";
+		      else if ( astiheys > 6000 ) fillColor = "#fd8d3c";
+		      else if ( astiheys > 4000 ) fillColor = "#fdae6b";
+		      else if ( astiheys > 2000 ) fillColor = "#fdd0a2";
+		      else if ( astiheys > 1000 ) fillColor = "#fee6ce";
+		      else if ( astiheys > 0 ) fillColor = "#fff5eb";
+		      else fillColor = "#ffffff";  // no data
 		      
-		return {
-		  color: "black",
-		  weight: 2,
-		  fillColor: fillColor,
-		  fillOpacity: 0.8 
-		};
+		      return {
+		      	color: "#fff",
+		      	weight: 2,
+		      	fillColor: fillColor,
+		      	fillOpacity: 0.5 
+		      };
 		      
-              },
-              onEachFeature: function (feature, layer) {
-                popupOptions = {maxWidth: 200};
-                layer.bindPopup("<b>Alueen nimi: </b> " + feature.properties.nimi + 
-                  "<br><b>Väkimäärä: </b> " + feature.properties.he_vakiy +
-                  "<br><b>Asuntojen määrä: </b> " + feature.properties.ra_asunn +
-                  "<br><b>Asumisväljyys: </b> " + feature.properties.te_as_valj
-                  ,popupOptions);
+                    },
+                    onEachFeature: function (feature, layer) {
+                      popupOptions = {maxWidth: 200};
+                      layer.bindPopup("<b>Alueen nimi: </b> " + feature.properties.nimi + 
+                      "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala + " m2" +
+                      "<br><b>Asukasmäärä: </b> " + feature.properties.he_vakiy +
+                      "<br><b>Asukastiheys: </b> " + feature.properties.he_vakiy / (feature.properties.pinta_ala / 1000000) + " as/k-m2" +
+                      "<br><b>Asuntojen määrä: </b> " + feature.properties.ra_asunn +
+                      "<br><b>Asumisväljyys: </b> " + feature.properties.te_as_valj
+                        ,popupOptions);
                         
-                //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
-                layer.on({
-                  //mousemove: mousemove,
-          	  //mouseout: mouseout, 
-		  click: zoomToFeature
-		});    
-              }
-            }).addTo(map);
-          }
+                      //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
+                      layer.on({
+                        //mousemove: mousemove,
+          	        //mouseout: mouseout, 
+		        click: zoomToFeature
+		      });    
+                        
+                    }
+                  }).addTo(map);
+                }
 	}); 
 
 	
