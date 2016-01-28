@@ -224,44 +224,46 @@
   	}
 
 
+
+
 	function addpoint() {
 	  map.on('click', function(ev) {
-	  var coord = ev.latlng;
+	    var coord = ev.latlng;
 	
-	  //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
-	  var geojsonstyle = {
-	    //radius: 100,
-	    fillColor: "#ff7800",
-	    color: "#000",
-	    weight: 1,
-	    opacity: 1,
-	    fillOpacity: 0.8
-	  };
+	    //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
+	    var geojsonstyle = {
+	      //radius: 100,
+	      fillColor: "#ff7800",
+	      color: "#000",
+	      weight: 1,
+	      opacity: 1,
+	      fillOpacity: 0.8
+	    };
 	
-	  var geojson = {
-	    "type": "Feature",
-	    "properties": {
-	      "name": "geojson piste"
-	    },
-	    "geometry": {
-	      "type": "Point",
-	      "coordinates": [coord.lng, coord.lat]
-	    }
-	  };
+	    var geojson = {
+	      "type": "Feature",
+	      "properties": {
+	        "name": "geojson piste"
+	      },
+	      "geometry": {
+	        "type": "Point",
+	        "coordinates": [coord.lng, coord.lat]
+	      }
+	    };
 	
-	  var pisteet = L.geoJson(geojson, {
-	    pointToLayer: function (feature, latlng) {
-	      return L.circle(latlng, radius, geojsonstyle); //{radius: 100});
-	    }
-	  }).addTo(map);
+	    var pisteet = L.geoJson(geojson, {
+	      pointToLayer: function (feature, latlng) {
+	        return L.circle(latlng, radius, geojsonstyle); //{radius: 100});
+  	      }
+	    }).addTo(map);
 	  
 	  
-	  var removeButton = document.getElementById('remove');
-	  removeButton.addEventListener('click',function(event) {
-	    pisteet.clearLayers();
-	  });
+	    var removeButton = document.getElementById('remove');
+	    removeButton.addEventListener('click',function(event) {
+	      pisteet.clearLayers();
+	    });
 	  
-	});	
+	  });	
 		
 	}
 	
@@ -273,8 +275,6 @@
 	    radius = 150
 	    addpoint();
 	  } else {
-	    radius = 100
-	    addpoint();
 	  }
 	});
 	
@@ -284,8 +284,6 @@
 	    radius = 300
 	    addpoint();
 	  } else {
-	    radius = 100
-	    addpoint();
 	  }
 	});
 	
