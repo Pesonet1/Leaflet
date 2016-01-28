@@ -269,10 +269,10 @@
 	  map.on('zoomend', function(e) {
 	    myZoom.end = map.getZoom();
 	    var diff = myZoom.start - myZoom.end;
-	    if (diff > 0) {
-	        pisteet.setRadius(pisteet.getRadius(); * 2);
-	    } else if (diff < 0) {
-	        pisteet.setRadius(pisteet.getRadius(); / 2);
+	    if (diff > 0) { 
+	    	pisteet.setRadius(pisteet.getRadius() * 2); 
+	    } else if (diff < 0) { 
+	    	pisteet.setRadius(pisteet.getRadius() / 2);
 	    }
 	  });
 	  
