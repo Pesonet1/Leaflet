@@ -226,9 +226,9 @@
 
 	
 	//Piirrettavan bufferin "default" arvo
-	var radius = null;
+	var radius = 100;
 
-	map.on('click', function(ev) {
+	var add_points = map.once('click', function(ev) {
 	  // ev.latlng gives us the coordinates of
 	  // the spot clicked on the map.
 	  var c = ev.latlng;
@@ -262,7 +262,7 @@
 	  
 	  
 	  var removeButton = document.getElementById('remove');
-	    removeButton.addEventListener('click',function(event) {
+	  removeButton.addEventListener('click',function(event) {
 	    pisteet.clearLayers();
 	  });
 	  
@@ -274,6 +274,7 @@
 	  var checked = this.checked;
 	  if (checked) {
 	    radius = 150
+	    add_points
 	  } else {
 	    radius = 100
 	  }
