@@ -261,7 +261,7 @@
 	
 	  var pisteet = L.geoJson(geojson, {
 	    pointToLayer: function (feature, latlng) {
-	      return L.circle(latlng, 100, geojsonstyle); //{radius: 100});
+	      return L.circle(latlng, radius: 100, geojsonstyle); //{radius: 100});
 	    }
 	  }).addTo(map);
 	  
@@ -273,6 +273,9 @@
 	  
 	});
 	
+	document.getElementById('150').onclick = function () {
+	  
+	}
 	
 	
 	
@@ -429,9 +432,11 @@
     	  
     	<br>
     	  
-    	<input type="checkbox" name="arvo" value="150">150m bufferi
+    	<input type="checkbox" id="150" value="150_box">150m bufferi
+    	
     	<br>
-	<input type="checkbox" name="arvo" value="300">300m buffer 
+    	
+	<input type="checkbox" id="300" value="300_box">300m buffer 
     	   
       </div>
     </div>
