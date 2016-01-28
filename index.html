@@ -274,10 +274,21 @@
 	  
 	});
 	
-	box1.addEventListener('change', function() {
+	
+	
+	box_150.addEventListener('change', function() {
 	  var checked = this.checked;
 	  if (checked) {
+	    radius = 150
 	    alert("a");
+	  }
+	});
+	
+	box_300.addEventListener('change', function() {
+	  var checked = this.checked;
+	  if (checked) {
+	    radius = 300
+	    alert("b");
 	  }
 	});
 	
@@ -334,11 +345,11 @@
     	  
     	<br>
     	  
-    	<input type="checkbox" id="box1" checked>150m bufferi
+    	<input type="checkbox" id="box_150" checked>150m bufferi
 
     	<br>
     	
-	<input type="checkbox" id="box2" name="box2" onclick="box2()" />300m buffer 
+	<input type="checkbox" id="box_300" checked>300m bufferi 
     	   
       </div>
     </div>
