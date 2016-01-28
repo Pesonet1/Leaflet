@@ -228,7 +228,7 @@
 	//Piirrettavan bufferin "default" arvo
 	var radius = 100;
 
-	var add_points = map.once('click', function(ev) {
+	map.on('add', function(ev) {
 	  // ev.latlng gives us the coordinates of
 	  // the spot clicked on the map.
 	  var c = ev.latlng;
@@ -274,7 +274,6 @@
 	  var checked = this.checked;
 	  if (checked) {
 	    radius = 150
-	    add_points
 	  } else {
 	    radius = 100
 	  }
