@@ -223,7 +223,7 @@
 	map.on('click', onMapClick);
 	*/
 
-	var zoom = map.getZoom();
+
 	map.on('click', function(ev) {
 	  // ev.latlng gives us the coordinates of
 	  // the spot clicked on the map.
@@ -231,7 +231,7 @@
 	
 	  //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
 	  var geojsonstyle = {
-	    radius: zoom,
+	    radius: 100,
 	    fillColor: "#ff7800",
 	    color: "#000",
 	    weight: 1,
@@ -263,6 +263,24 @@
 	  
 	});
 	
+	var myZoom = {
+	  start:  map.getZoom(),
+	  end: map.getZoom()
+	};
+	
+	map.on('zoomstart', function(e) {
+	   myZoom.start = map.getZoom();
+	});
+	
+	map.on('zoomend', function(e) {
+	    myZoom.end = map.getZoom();
+	    var diff = myZoom.start - myZoom.end;
+	    if (diff > 0) {
+	        pisteet.setRadius(circle.getRadius() * 2);
+	    } else if (diff < 0) {
+	        pisteet.setRadius(circle.getRadius() / 2);
+	    }
+	});
 	
 	
 	/*
