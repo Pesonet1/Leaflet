@@ -228,10 +228,8 @@
 	//Piirrettavan bufferin "default" arvo
 	var radius = 100;
 
-	map.on('add', function(ev) {
-	  // ev.latlng gives us the coordinates of
-	  // the spot clicked on the map.
-	  var c = ev.latlng;
+	map.on('click', function(ev) {
+	  var coord = ev.latlng;
 	
 	  //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
 	  var geojsonstyle = {
@@ -250,7 +248,7 @@
 	    },
 	    "geometry": {
 	      "type": "Point",
-	      "coordinates": [c.lng, c.lat]
+	      "coordinates": [coord.lng, coord.lat]
 	    }
 	  };
 	
