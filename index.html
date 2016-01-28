@@ -231,7 +231,7 @@
 	
 	  //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
 	  var geojsonstyle = {
-	    radius: 100,
+	    radius: map.getZoom(),
 	    fillColor: "#ff7800",
 	    color: "#000",
 	    weight: 1,
@@ -262,33 +262,6 @@
 	  });
 	  
 	});
-	
-	/*
-	map.on('zoomend', function() {
-	    var currentZoom = map.getZoom();
-	    pisteet.setRadius(currentZoom);
-	  });
-	*/
-	  
-	  var myZoom = {
-	    start:  map.getZoom(),
-	    end: map.getZoom()
-	  };
-	
-	  map.on('zoomstart', function(e) {
-	    myZoom.start = map.getZoom();
-	  });
-	
-	  map.on('zoomend', function(e) {
-	    myZoom.end = map.getZoom();
-	    var diff = myZoom.start - myZoom.end;
-	    if (diff > 0) {
-	        pisteet.setRadius(circle.getRadius() * 2);
-	    } else if (diff < 0) {
-	        pisteet.setRadius(circle.getRadius() / 2);
-	    }
-	  });
-	  
 	
 	
 	
