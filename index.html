@@ -281,6 +281,13 @@
 	  var checked = this.checked;
 	  if (checked) {
 	    radius = 300
+	    map.once('click', function(ev) {
+	    	var pisteet = L.geoJson(geojson, {
+	    	pointToLayer: function (feature, latlng) {
+		 return L.circle(latlng, radius, geojsonstyle); //{radius: 100});
+		 }	
+	  	}).addTo(map);
+	    });
 	  } else {
 	    radius = 100
 	  }
