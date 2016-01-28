@@ -274,113 +274,12 @@
 	  
 	});
 	
-	function box1(checkbox)
-	{
-	    if (checkbox.checked)
-	    {
+	function box1(checkbox) {
+	    if (checkbox.checked) {
 	        alert("a");
 	    }
-	}
+	};
 	
-	
-	
-	/*
-	//WMS-tasot
-	var rakennukset_wms = L.tileLayer.wms("http://130.233.249.20:8080/geoserver/WMS/wms", {
-		layers: 'WMS:Rakennukset',
-    		format: 'image/png',
-    		transparent: true
-	}).addTo(map);
-	
-	var vaki_wms = L.tileLayer.wms("http://130.233.249.20:8080/geoserver/WMS/wms", {
-		layers: 'WMS:vaki2014_1km',
-    		format: 'image/png',
-    		transparent: true
-	});
-
-	var aurinko_wms = L.tileLayer.wms("http://130.233.249.20:8080/geoserver/WMS/wms", {
-		layers: 'WMS:aurinkosahko_paneeli',
-    		format: 'image/png',
-    		transparent: true
-	});
-	*/
-	
-	/*
-	//LAYERTOGGLER
-	//addLayer(rakennukset_wms, 'Rakennukset', 1);
-	//addLayer(vaki_wms, 'Väkimäärä', 2);
-	//addLayer(aurinko_wms, 'Aurinkopaneelit', 3);
-	addLayer(viheralueet_layer, 'Viheralueet', 1);
-	addLayer(paavo_layer, 'Väestöruudukko', 2);
-	
-	//map.removeLayer(rakennukset_wms);
-	//map.removeLayer(vaki_wms);
-	//map.removeLayer(aurinko_wms);
-
-  	function addLayer(layer, name, zIndex) {
-	    layer
-	        .setZIndex(zIndex)
-	        .addTo(map);
-	
-	    // Create a simple layer switcher that
-	    // toggles layers on and off.
-	    var link = document.createElement('a');
-	        link.href = '#';
-	        link.className = 'active';
-	        link.innerHTML = name;
-	
-	    link.onclick = function(e) {
-	        e.preventDefault();
-	        e.stopPropagation();
-	
-	        if (map.hasLayer(layer)) {
-	            map.removeLayer(layer);
-	            this.className = '';
-	        } else {
-	            map.addLayer(layer);
-	            this.className = 'active';
-	        }
-	    };
-	    
-	    layers.appendChild(link);
-	}
-	*/
-	
-	//WMS-tason popup-scripti
-	/*
-	ms_url="http://130.233.249.20:8080/geoserver/WMS/wms";
-	map.addEventListener('click', Identify);
-	
-	function Identify(e) 
-	{
-	    // set parameters needed for GetFeatureInfo WMS request
-	    var BBOX = map.getBounds().toBBoxString();
-	    var WIDTH = map.getSize().x;
-	    var HEIGHT = map.getSize().y;
-	    var X = map.layerPointToContainerPoint(e.layerPoint).x;
-	    var Y = map.layerPointToContainerPoint(e.layerPoint).y;
-	     // compose the URL for the request
-	    var URL = ms_url + '?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetFeatureInfo&LAYERS=WMS:Rakennukset&QUERY_LAYERS=WMS:Rakennukset&BBOX='+BBOX+'&FEATURE_COUNT=1&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
-	
-	    //send the asynchronous HTTP request using jQuery $.ajax
-	    $.ajax({
-	        url: URL,
-	        dataType: "html",
-	        type: "GET",
-	        success: function(data) 
-	        {
-	            var popup = new L.Popup
-	            ({
-	                maxWidth: 300
-	            });
-	
-	            popup.setContent(data);
-	            popup.setLatLng(e.latlng);
-	            map.openPopup(popup);
-	        }
-	    });
-	}
-	*/
 	
       }
       
