@@ -257,7 +257,6 @@
   	      }
 	    }).addTo(map);
 	  
-	  
 	    var removeButton = document.getElementById('remove');
 	    removeButton.addEventListener('click',function(event) {
 	      pisteet.clearLayers();
@@ -275,7 +274,7 @@
 	    radius = 150
 	    addpoint();
 	  } else {
-	    radius = null
+	    //tassa vaiheessa ei pitaisi pystya luomaan pisteita kartalle
 	  }
 	});
 	
@@ -285,9 +284,11 @@
 	    radius = 300
 	    addpoint();
 	  } else {
-	    radius = null
+	    //tassa vaiheessa ei pitaisi pystya luomaan pisteita kartalle
 	  }
 	});
+	
+	
 	
 	//Tama scripti hoitaa sen, etta yksi laatikoista voi vain olla kerrallaan valittuna
 	$("input:checkbox").on('click', function() {
