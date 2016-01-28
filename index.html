@@ -60,6 +60,98 @@
 	
 	
 	
+	
+	
+	
+	function zoomToFeature(e) {
+	  map.fitBounds(e.target.getBounds());
+	}
+
+	function mousemove(e) {
+	  var layer = e.target;
+	
+	  // highlight feature
+	  layer.setStyle({
+	    weight: 3,
+	    opacity: 0.3,
+	    illOpacity: 0.9
+	  });
+	
+	  if (!L.Browser.ie && !L.Browser.opera) {
+	    layer.bringToFront();
+	  }
+	}
+
+	function mouseout(e) {
+          viheralueet.resetStyle(e.target);
+  	}
+
+
+	
+	//Piirrettavan bufferin "default" arvo
+	var radius = 100;
+
+	map.on('click', function(ev) {
+	  // ev.latlng gives us the coordinates of
+	  // the spot clicked on the map.
+	  var c = ev.latlng;
+	
+	  //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
+	  var geojsonstyle = {
+	    //radius: 100,
+	    fillColor: "#ff7800",
+	    color: "#000",
+	    weight: 1,
+	    opacity: 1,
+	    fillOpacity: 0.8
+	  };
+	
+	  var geojson = {
+	    "type": "Feature",
+	    "properties": {
+	      "name": "geojson piste"
+	    },
+	    "geometry": {
+	      "type": "Point",
+	      "coordinates": [c.lng, c.lat]
+	    }
+	  };
+	
+	  var pisteet = L.geoJson(geojson, {
+	    pointToLayer: function (feature, latlng) {
+	      return L.circle(latlng, radius, geojsonstyle); //{radius: 100});
+	    }
+	  }).addTo(map);
+	  
+	  
+	  var removeButton = document.getElementById('remove');
+	    removeButton.addEventListener('click',function(event) {
+	    pisteet.clearLayers();
+	  });
+	  
+	});
+	
+	
+	
+	box_150.addEventListener('change', function() {
+	  var checked = this.checked;
+	  if (checked) {
+	    radius = 150
+	  } else {
+	    radius = 100
+	  }
+	});
+	
+	box_300.addEventListener('change', function() {
+	  var checked = this.checked;
+	  if (checked) {
+	    radius = 300
+	  } else {
+	    radius = 100
+	  }
+	});
+	
+	
 	//WFS-tasot
 	//var viheralueet_wfs = "http://130.233.249.20:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=web_map_project:hkr_ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
 	var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
@@ -199,101 +291,6 @@
 	}); 
 
 	
-	function zoomToFeature(e) {
-	  map.fitBounds(e.target.getBounds());
-	}
-
-	function mousemove(e) {
-	  var layer = e.target;
-	
-	  // highlight feature
-	  layer.setStyle({
-	    weight: 3,
-	    opacity: 0.3,
-	    illOpacity: 0.9
-	  });
-	
-	  if (!L.Browser.ie && !L.Browser.opera) {
-	    layer.bringToFront();
-	  }
-	}
-
-	function mouseout(e) {
-          viheralueet.resetStyle(e.target);
-  	}
-
-
-	/*
-	//map.onclick -funktion rakentelua...
-	function onMapClick(e) { //(e), saadaan klikatun kohteen tietoja
-	    alert("Klikkasit karttaa, hienoa! ;)");
-	    //var marker = new L.marker(e).addTo(map);
-	}
-	map.on('click', onMapClick);
-	*/
-	
-	var radius = 100;
-
-	map.on('click', function(ev) {
-	  // ev.latlng gives us the coordinates of
-	  // the spot clicked on the map.
-	  var c = ev.latlng;
-	
-	  //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
-	  var geojsonstyle = {
-	    //radius: 100,
-	    fillColor: "#ff7800",
-	    color: "#000",
-	    weight: 1,
-	    opacity: 1,
-	    fillOpacity: 0.8
-	  };
-	
-	  var geojson = {
-	    "type": "Feature",
-	    "properties": {
-	      "name": "geojson piste"
-	    },
-	    "geometry": {
-	      "type": "Point",
-	      "coordinates": [c.lng, c.lat]
-	    }
-	  };
-	
-	  var pisteet = L.geoJson(geojson, {
-	    pointToLayer: function (feature, latlng) {
-	      return L.circle(latlng, radius, geojsonstyle); //{radius: 100});
-	    }
-	  }).addTo(map);
-	  
-	  
-	  var removeButton = document.getElementById('remove');
-	    removeButton.addEventListener('click',function(event) {
-	    pisteet.clearLayers();
-	  });
-	  
-	});
-	
-	
-	
-	box_150.addEventListener('change', function() {
-	  var checked = this.checked;
-	  if (checked) {
-	    radius = 150
-	  } else {
-	    radius = 100
-	  }
-	});
-	
-	box_300.addEventListener('change', function() {
-	  var checked = this.checked;
-	  if (checked) {
-	    radius = 300
-	  } else {
-	    radius = 100
-	  }
-	});
-	
 	
       }
       
@@ -309,9 +306,6 @@
     <!-- Leaflet scriptit -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    
-    <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
-    <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>-->
     
     <!--ESRI-leaflet scripti -->
     <script src="https://pesonet1.github.io/Leaflet/esri-leaflet.js"></script>
