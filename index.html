@@ -274,11 +274,12 @@
 	  
 	});
 	
-	function box(checkbox) {
-	    if (checkbox.checked) {
-	        alert("a");
-	    }
-	}
+	box1.addEventListener('change', function() {
+	  var checked = this.checked;
+	  if (checked) {
+	    alert("a");
+	  }
+	});
 	
 	
       }
@@ -333,8 +334,8 @@
     	  
     	<br>
     	  
-    	<input type="checkbox" name="box" onclick="box(this)" />150m bufferi
-  
+    	<input type="checkbox" id="box1" checked>150m bufferi
+
     	<br>
     	
 	<input type="checkbox" id="box2" name="box2" onclick="box2()" />300m buffer 
