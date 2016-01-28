@@ -266,13 +266,15 @@
 	    myZoom.start = map.getZoom();
 	  });
 	
+	  pisteet_rad = pisteet.getRadius();
+	
 	  map.on('zoomend', function(e) {
 	    myZoom.end = map.getZoom();
 	    var diff = myZoom.start - myZoom.end;
 	    if (diff > 0) { 
-	    	pisteet.setRadius(pisteet.getRadius() * 2); 
+	    	pisteet.setRadius(pisteet_rad * 2); 
 	    } else if (diff < 0) { 
-	    	pisteet.setRadius(pisteet.getRadius() / 2);
+	    	pisteet.setRadius(pisteet_rad / 2);
 	    }
 	  });
 	  
