@@ -252,7 +252,7 @@
 	
 	  var pisteet = L.geoJson(geojson, {
 	    pointToLayer: function (feature, latlng) {
-	      return L.circleMarker(latlng, geojsonstyle);
+	      return L.circleMarker(latlng, {radius: 500});//geojsonstyle);
 	    }
 	  }).addTo(map);
 	  
