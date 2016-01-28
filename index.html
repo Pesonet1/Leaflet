@@ -227,7 +227,7 @@
 
 
 	function addpoint() {
-	  map.on('click', function(ev) {
+	  map.once('click', function(ev) {
 	    var coord = ev.latlng;
 	
 	    //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
