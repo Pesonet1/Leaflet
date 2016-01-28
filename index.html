@@ -273,8 +273,12 @@
 	  
 	});
 	
-	document.getElementById('150').onclick = function () {
-	  
+	function 150_box(checkbox)
+	{
+	    if (checkbox.checked)
+	    {
+	        alert("a");
+	    }
 	}
 	
 	
@@ -432,11 +436,11 @@
     	  
     	<br>
     	  
-    	<input type="checkbox" id="150" value="150_box">150m bufferi
+    	<input type="checkbox" name="150_box" onclick="150_box()">150m bufferi
     	
     	<br>
     	
-	<input type="checkbox" id="300" value="300_box">300m buffer 
+	<input type="checkbox" name="300_box" onclick="300_box()">300m buffer 
     	   
       </div>
     </div>
