@@ -224,19 +224,8 @@
   	}
 
 
-	
-	//Piirrettavan bufferin "default" arvo
-	var radius = 100;
-
-	
-	
-	
-	//Bufferikoon valittavaksi tarvittavat eventlistenerit
-	box_150.addEventListener('change', function() {
-	  var checked = this.checked;
-	  if (checked) {
-	    radius = 150
-	    map.on('click', function(ev) {
+	function addpoint() {
+	  map.on('click', function(ev) {
 	  var coord = ev.latlng;
 	
 	  //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
@@ -272,9 +261,20 @@
 	    pisteet.clearLayers();
 	  });
 	  
-	});
+	});	
+		
+	}
+	
+	
+	//Bufferikoon valittavaksi tarvittavat eventlistenerit
+	box_150.addEventListener('change', function() {
+	  var checked = this.checked;
+	  if (checked) {
+	    radius = 150
+	    addpoint();
 	  } else {
 	    radius = 100
+	    addpoint();
 	  }
 	});
 	
@@ -282,8 +282,10 @@
 	  var checked = this.checked;
 	  if (checked) {
 	    radius = 300
+	    addpoint();
 	  } else {
 	    radius = 100
+	    addpoint();
 	  }
 	});
 	
