@@ -223,10 +223,10 @@
 	  var layer_geojson = layer.toGeoJSON();
 	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
 	  
-	  buffered.properties = {
-            "fill": "#6BC65F",
-            "stroke": "#25561F",
-            "stroke-width": 2
+	  buffer.properties = {
+            "fill": "red",
+            "stroke": "black",
+            "stroke-width": 3
 	  };
 	  
 	  L.geoJson(buffered).addTo(map);
