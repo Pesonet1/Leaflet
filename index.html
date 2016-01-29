@@ -259,28 +259,15 @@
 		
 	}
 	*/
-	
-	var fcLayer = L.mapbox.featureLayer().setGeoJSON(tasot);
+
 
 	function addBuffer(e) {
 	  var layer = e.target;
-
 	  var layer_geojson = layer.toGeoJSON();
-
-	  /*
-	  //Taman avulla saataisiin keinotekoinen bufferi
-	  layer.setStyle({
-	    weight: 20,
-	    opacity: 0.8,
-	    illOpacity: 0.9
-	  });
-	  */
 	  
 	  var unit = 'miles'
 	  var buffered = turf.buffer(layer_geojson, 1, unit);
-	  buff = L.mapbox.fcLayer(buffered);
-	  buff.addTo(map)
-	  //L.geoJson(buffered).addTo(map);
+	  L.geoJson(buffered).addTo(map);
 	}
 	
 	//Bufferikoon valittavaksi tarvittavat eventlistenerit
