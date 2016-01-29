@@ -20,20 +20,6 @@ html, body {
     	position: relative;
     	float: right;
 	}
-	
-      .leaflet-control-layers-toggle:after{ 
-	content:"Layer Control"; 
-	color:#000 ;
-      }
-      
-      .leaflet-control-layers-toggle{ 
-	width:50px;
-	background-position:3px 50% ;
-	padding:3px;
-	padding-left:36px;
-	text-decoration:none;
-	line-height:36px;
-      }
 
 /*
       .legend {
