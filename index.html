@@ -47,11 +47,11 @@
   	});
   	
   	
-  	//Layer control
-  	//WFS-tasot lisataan tahan grouppiin
+  	//WFS-tasot lisataan tasot grouppiin ja luodaan layerControl muuttuja, johon voidaan lisata tasoja ja ominaisuuksia
 	var tasot = new L.LayerGroup();
 	var layersControl = L.control.layers();
 	
+	//Layer control ja scale
 	L.control.scale().addTo(map);
 	layersControl.addOverlay(tasot,'Tasot');
 	layersControl.setPosition("bottomleft");
@@ -67,18 +67,11 @@
 	}).addTo(map);
 	
 	
-	
-	
-	
 	//WFS-tasot
-	//var viheralueet_wfs = "http://130.233.249.20:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=web_map_project:hkr_ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
 	var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
-	//var vaki_wfs = "http://130.233.249.20:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=WMS:vaki2014_1km_norm&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
 	var paavo_kartta = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
-	//postialue:pno_2015 //postialue:pno_tilasto_2015
 
 	//Viheralueet WFS
-	//var viheralueet = null;
 	var viheralueet_layer = $.ajax({ 
         	url: viheralueet_wfs,
 		datatype:"json",
@@ -153,7 +146,6 @@
 
 
 	//Paavo WFS
-	//var paavo = null;
 	var paavo_layer = $.ajax({ 
         	url: paavo_kartta,
 		datatype:"json",
@@ -210,7 +202,7 @@
 	
 	
 	
-	
+	//Tasojen funktioita: kohteeseen zoomaus ja kohteen korostus
 	function zoomToFeature(e) {
 	  map.fitBounds(e.target.getBounds());
 	}
