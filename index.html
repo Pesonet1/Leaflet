@@ -67,7 +67,7 @@
 		datatype:"json",
 		jsonCallback: 'getJson',
 		success : function (response) {
-        	  var viheralueet = L.geoJson(response, {
+        	  viheralueet = L.geoJson(response, {
                     style: function (feature) {
                       var fillColor, 
                       kaytto = feature.properties.kayttotarkoitus;
@@ -362,6 +362,9 @@
     
     <!-- CSS -->
     <link href='vihreahelsinki.css' rel='stylesheet' />
+    
+    <!-- Turf -->
+    <script src="https://pesonet1.github.io/Leaflet/turf.min.js"></script>
     
     
     <!-- Sivupalkin piilotus -->
