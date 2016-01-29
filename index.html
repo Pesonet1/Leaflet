@@ -197,13 +197,11 @@
                 }
 	}); 
 	
-	var overlays = {
-          "Tasot": tasot
-	};
-	
+
 	var layersControl = L.control.layers();
 	layersControl.addOverlay(tasot,'Tasot');
 	layersControl.setPosition("bottomleft");
+	layersControl.addTo(map);
 	
 	
 	
