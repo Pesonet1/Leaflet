@@ -264,16 +264,19 @@
 	function addBuffer(e) {
 	  var layer = e.target;
 	  
+	  /*
+	  //Taman avulla saataisiin keinotekoinen bufferi
 	  layer.setStyle({
 	    weight: 10,
 	    opacity: 0.3,
 	    illOpacity: 0.9
 	  });
+	  */
 	  
-	  //var unit = 'miles'
-	  //var buffered = turf.buffer(layer, 100, unit);
+	  var unit = 'miles'
+	  var buffered = turf.buffer(layer, 100, unit);
 	
-	  //L.geoJson(buffered).addTo(map);
+	  L.geoJson(buffered).addTo(map);
 	}
 	
 	//Bufferikoon valittavaksi tarvittavat eventlistenerit
