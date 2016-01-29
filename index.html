@@ -39,13 +39,22 @@
   	
   	//WFS-tasot lisataan tasot grouppiin ja luodaan layerControl muuttuja, johon voidaan lisata tasoja ja ominaisuuksia
 	var tasot = new L.LayerGroup();
-	var layersControl = L.control.layers();
+	//var layersControl = L.control.layers();
 	
 	//Layer control ja scale
 	L.control.scale().addTo(map);
-	layersControl.addOverlay(tasot,'Tasot');
-	layersControl.setPosition("bottomleft");
-	layersControl.addTo(map);
+	//layersControl.addOverlay(tasot,'Tasot');
+	//layersControl.setPosition("bottomleft");
+	//layersControl.addTo(map);
+	
+	tasot.addEventListener('change', function() {
+	  var checked = this.checked;
+	  if (checked) {
+	    tasot.addTo(map);
+	  } else {
+	    tasot.clearLayers();
+	  }
+	});
   	
   	
   	var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
@@ -376,6 +385,10 @@
     	<br>
     	
 	<label><input type="checkbox" id="box_300" value="1" name="fooby[1][]"/> 300m bufferi</label>
+    	  
+    	<br>
+    	
+    	<label><input type="checkbox" id="tasot" value="1" name="fooby[1][]"/> Karttatasot</label>
     	   
       </div>
     </div>
