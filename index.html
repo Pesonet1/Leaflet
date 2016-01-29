@@ -187,6 +187,7 @@
 	
 	
 	function change_layer() {
+		
 		if (taso_filter.value == testi1) {
 		  alert('testiääääää!');
 		}
@@ -345,9 +346,7 @@
     
     <!-- CSS -->
     <link href='vihreahelsinki.css' rel='stylesheet' />
-    
-    
-    
+ 
     
     <!-- Sivupalkin piilotus -->
     <script>
@@ -397,7 +396,7 @@
     	
     	<br>
     	
-    	<select id="taso_filter" onchange="change_layer()">
+    	<select id="taso_filter" onload="change_layer()">
           <option value="">testi1</option>
 	  <option value="">testi2</option>
         </select>
