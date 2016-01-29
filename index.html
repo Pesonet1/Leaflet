@@ -58,6 +58,7 @@
 		id: 'mapbox.light'
 	}).addTo(map);
 	
+	var tasot = new L.LayerGroup();
 	
 	//WFS-tasot
 	//var viheralueet_wfs = "http://130.233.249.20:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=web_map_project:hkr_ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
@@ -136,11 +137,10 @@
 		        //click: zoomToFeature
 		      });
                     }
-                  });//.addTo(map);
+                  }).addTo(tasot);//.addTo(map);
                 }
 	}); 
 
-	viheralueet.addTo(map);
 
 	//Paavo WFS
 	//var paavo = null;
@@ -193,11 +193,16 @@
 		      });    
                         
                     }
-                  }).addTo(map);
+                  }).addTo(tasot);//.addTo(map);
                 }
 	}); 
 	
+	var overlays = {
+          "Tasot": tasot
+	};
 	
+	var layersControl = L.control.layers();
+	layersControl.addOverlay(tasot,'Tasot');
 	
 	
 	function zoomToFeature(e) {
