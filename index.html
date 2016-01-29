@@ -73,7 +73,7 @@
 		datatype:"json",
 		jsonCallback: 'getJson',
 		success : function (response) {
-        	  var viheralueet = L.geoJson(response, {
+        	  viheralueet = L.geoJson(response, {
                     style: function (feature) {
                       var fillColor, 
                       kaytto = feature.properties.kayttotarkoitus;
@@ -140,7 +140,7 @@
                 }
 	}); 
 
-	map.addLayer(viheralueet);
+	map.addLayer(viheralueet_layer);
 
 	//Paavo WFS
 	//var paavo = null;
