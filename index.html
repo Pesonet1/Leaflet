@@ -222,6 +222,14 @@
 	  var layer = e.target;
 	  var layer_geojson = layer.toGeoJSON();
 	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
+	  
+	  buffered.setStyle({
+	    color: "black",
+	    weight: 2,
+	    opacity: 0.3,
+	    illOpacity: 0.9
+	  });
+	  
 	  L.geoJson(buffered).addTo(map);
 	}
 	
