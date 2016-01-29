@@ -261,7 +261,7 @@
 	*/
 	
 	function addbuffer() {
-	   viheralueet_layer.once('click', function(ev) {
+	   tasot.once('click', function(ev) {
 	    var coord = ev.latlng;
 	
 	    //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
@@ -286,7 +286,7 @@
 	    };
 	
 	
-	    var unit = 'meters'
+	    var unit = 'miles'
 	    var buffered = turf.buffer(pisteet, radius, unit);
 	
 	    L.geoJson(buffered).addTo(map);
