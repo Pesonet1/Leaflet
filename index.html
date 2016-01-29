@@ -291,16 +291,8 @@
 	    // 10 mile ring
 	    var buffered = turf.buffer(pisteet, radius, unit);
 	
-	    L.mapbox.featureLayer().setGeoJSON(buffered).addTo(map);
-	    /*
-	    var pisteet = L.geoJson(geojson, {
-	      pointToLayer: function (feature, latlng) {
-	        return L.circle(latlng, radius, geojsonstyle); //{radius: 100});
-  	      }
-	    }).addTo(map);
-	    */
-	    
-		
+	    L.geoJson(buffered).addTo(map);
+	  }	
 	}
 	
 	//Bufferikoon valittavaksi tarvittavat eventlistenerit
