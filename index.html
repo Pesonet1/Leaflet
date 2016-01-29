@@ -263,10 +263,17 @@
 
 	function addBuffer(e) {
 	  var layer = e.target;
-	  var unit = 'miles'
-	  var buffered = turf.buffer(layer, 100, unit);
+	  
+	  layer.setStyle({
+	    weight: 3,
+	    opacity: 0.3,
+	    illOpacity: 0.9
+	  });
+	  
+	  //var unit = 'miles'
+	  //var buffered = turf.buffer(layer, 100, unit);
 	
-	  L.geoJson(buffered).addTo(map);
+	  //L.geoJson(buffered).addTo(map);
 	}
 	
 	//Bufferikoon valittavaksi tarvittavat eventlistenerit
