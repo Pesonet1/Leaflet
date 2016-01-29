@@ -221,21 +221,25 @@
 	function addBuffer(e) {
 	  var layer = e.target;
 	  var layer_geojson = layer.toGeoJSON();
-	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
 	  
-	  buffered.properties = {
+	  layer_geojson.properties = {
             "fill": "red",
             "stroke": "black",
             "stroke-width": 3
 	  };
 	  
+	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
+	  
 	  L.geoJson(buffered).addTo(map);
-	}
-	
-	var removeButton = document.getElementById('remove');
+	  
+	  var removeButton = document.getElementById('remove');
 	    removeButton.addEventListener('click',function(event) {
 	    buffered.clearLayers();
 	  });
+	  
+	}
+	
+	
 	
 	//Bufferikoon valittavaksi tarvittavat eventlistenerit
 	box_150.addEventListener('change', function() {
