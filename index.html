@@ -224,9 +224,9 @@
 	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
 	  
 	  buffered.properties = {
-            "fill": "red",
-            "stroke": "black",
-            "stroke-width": 3
+            fill: "red",
+            stroke: "black",
+            stroke-width: 3
 	  };
 	  
 	  var buffer_layer = L.geoJson(buffered).addTo(map);
