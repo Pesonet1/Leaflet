@@ -58,6 +58,7 @@
 		id: 'mapbox.light'
 	}).addTo(map);
 	
+	//WFS-tasot lisataan tahan grouppiin
 	var tasot = new L.LayerGroup();
 	
 	//WFS-tasot
@@ -197,7 +198,7 @@
                 }
 	}); 
 	
-
+	//Layer control
 	var layersControl = L.control.layers();
 	layersControl.addOverlay(tasot,'Tasot');
 	layersControl.setPosition("bottomleft");
