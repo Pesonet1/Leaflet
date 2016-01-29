@@ -127,7 +127,7 @@
                       layer.on({
                       	mousemove: mousemove,
           	        mouseout: mouseout, 
-		        //click: zoomToFeature
+		        click: addBuffer
 		      });
                     }
                   }).addTo(tasot);//.addTo(map);
@@ -260,37 +260,13 @@
 	}
 	*/
 	
-	function addbuffer() {
-	   tasot.once('click', function(ev) {
-	    var coord = ev.latlng;
+
+	function addBuffer(e) {
+	  var layer = e.target;
+	  var unit = 'miles'
+	  var buffered = turf.buffer(layer, 100, unit);
 	
-	    //Muotoilun sateen koko pitaisi saada muutettua sellaiseksi, etta kayttaja voi sen valita
-	    var geojsonstyle = {
-	      //radius: 100,
-	      fillColor: "#ff7800",
-	      color: "#000",
-	      weight: 1,
-	      opacity: 1,
-	      fillOpacity: 0.8
-	    };
-	
-	    var geojson = {
-	      "type": "Feature",
-	      "properties": {
-	        "name": "geojson piste"
-	      },
-	      "geometry": {
-	        "type": "Point",
-	        "coordinates": [coord.lng, coord.lat]
-	      }
-	    };
-	
-	
-	    var unit = 'miles'
-	    var buffered = turf.buffer(pisteet, radius, unit);
-	
-	    L.geoJson(buffered).addTo(map);
-	  });	
+	  L.geoJson(buffered).addTo(map);
 	}
 	
 	//Bufferikoon valittavaksi tarvittavat eventlistenerit
