@@ -189,10 +189,10 @@
 	function change_layer() {
 		var valinta_arvo = document.getElementById("taso_filter").value;
 		
-		if (valinta_arvo == "testi1") {
+		if (valinta_arvo == testi1) {
 		  alert('testiääääää!');
 		}
-		else if (valinta_arvo == "testi2") {
+		else if (valinta_arvo == testi2) {
 		  alert('tää toimii :OOOOO');	
 		}
 	}
@@ -380,7 +380,7 @@
     	
     	<br>
     	  
-    	<button id="remove" class="btn btn-primary">Poista piste</button>
+    	<button id="remove" class="btn btn-primary">Poista bufferit</button>
     	  
     	<br>
     	<br>
@@ -397,7 +397,7 @@
     	
     	<br>
     	
-    	<select id="taso_filter" onselect="change_layer()">
+    	<select id="taso_filter" onchange="change_layer()">
           <option value="testi1">testi1</option>
 	  <option value="testi2">testi2</option>
         </select>
