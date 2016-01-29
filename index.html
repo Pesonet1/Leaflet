@@ -289,7 +289,7 @@
 	    var unit = 'meters'
 	
 	    // 10 mile ring
-	    var buffered = turf.buffer(pisteet, radius, unit)
+	    var buffered = turf.buffer(pisteet, radius, unit);
 	
 	    L.mapbox.featureLayer().setGeoJSON(buffered).addTo(map);
 	    /*
