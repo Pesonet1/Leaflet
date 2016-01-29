@@ -22,19 +22,20 @@ html, body {
 	}
 	
       .leaflet-control-layers-toggle:after{ 
-	content:"your text"; 
+	content:"Layer Control"; 
 	color:#000 ;
       }
       
       .leaflet-control-layers-toggle{ 
-	width:auto;
+	width:50px;
 	background-position:3px 50% ;
 	padding:3px;
 	padding-left:36px;
 	text-decoration:none;
 	line-height:36px;
       }
-	
+
+/*
       .legend {
         line-height: 18px;
         color: #555;
@@ -48,10 +49,12 @@ html, body {
 	 margin-right: 8px;
 	 opacity: 0.7;
       }
+*/
       
       .btn {
 	  margin:3px;
 	} 
+	
       .btn-round { 
 	font-weight: bold;
 	width: 19px;
