@@ -40,18 +40,8 @@
 	L.control.scale().addTo(map);
   	
   	
-  	
   	//WFS-tasot lisataan tasot grouppiin
 	var tasot = new L.LayerGroup();
-	
-	karttatasot.addEventListener('change', function() {
-	  var checked = this.checked;
-	  if (checked) {
-	    tasot.addTo(map);
-	  } else {
-	    tasot.clearLayers();
-	  }
-	});
 	
   
   	var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
@@ -196,6 +186,15 @@
 	}); 
 	
 	
+	function change_layer() {
+		if (taso_filter.value == testi1) {
+		  alert('testiääääää!');
+		}
+		if (taso_filter.value == testi2) {
+		  alert('tää toimii :OOOOO');	
+		}
+	}
+	
 	
 	
 	//Tasojen funktioita: kohteeseen zoomaus ja kohteen korostus
@@ -251,7 +250,7 @@
 	
 	
 	
-	//Bufferikoon valittavaksi tarvittavat eventlistenerit
+	//Bufferikoon ja layerin valittavaksi tarvittavat eventlistenerit
 	box_150.addEventListener('change', function() {
 	  var checked = this.checked;
 	  if (checked) {
@@ -267,6 +266,15 @@
 	    radius = 300 * 0.000621371192
 	  } else {
 	    radius = null
+	  }
+	});
+	
+	karttatasot.addEventListener('change', function() {
+	  var checked = this.checked;
+	  if (checked) {
+	    tasot.addTo(map);
+	  } else {
+	    tasot.clearLayers();
 	  }
 	});
 	
