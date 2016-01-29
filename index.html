@@ -260,6 +260,7 @@
 	}
 	*/
 	
+	var fcLayer = L.mapbox.featureLayer().setGeoJSON(tasot);
 
 	function addBuffer(e) {
 	  var layer = e.target;
@@ -277,7 +278,7 @@
 	  
 	  var unit = 'miles'
 	  var buffered = turf.buffer(layer_geojson, 1, unit);
-	  buff = L.mapbox.tasot(buffered);
+	  buff = L.mapbox.fcLayer(buffered);
 	  buff.addTo(map)
 	  //L.geoJson(buffered).addTo(map);
 	}
