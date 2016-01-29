@@ -221,20 +221,19 @@
 	function addBuffer(e) {
 	  var layer = e.target;
 	  var layer_geojson = layer.toGeoJSON();
+	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
 	  
-	  layer_geojson.properties = {
+	  buffered.properties = {
             "fill": "red",
             "stroke": "black",
             "stroke-width": 3
 	  };
 	  
-	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
-	  
-	  L.geoJson(buffered).addTo(map);
+	  var buffer_layer = L.geoJson(buffered).addTo(map);
 	  
 	  var removeButton = document.getElementById('remove');
 	    removeButton.addEventListener('click',function(event) {
-	    buffered.clearLayers();
+	    buffer_layer.clearLayers();
 	  });
 	  
 	}
