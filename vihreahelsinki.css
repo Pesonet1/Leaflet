@@ -21,21 +21,6 @@ html, body {
     	float: right;
 	}
 	
-      .leaflet-control-layers-toggle:after{ 
-	content:"Layerswitcher"; 
-	color:#000 ;
-      	
-      }
-	
-      .leaflet-control-layers-toggle{ 
-	width:auto;
-	background-position:3px 50% ;
-	padding:3px;
-	padding-left:36px;
-	text-decoration:none;
-        line-height:36px;
-      	
-      }
 	
 /*
       .legend {
@@ -81,6 +66,3 @@ html, body {
 	text-align:center;
 	z-index:80;
 	}
-      
-      
-      
