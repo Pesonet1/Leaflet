@@ -277,7 +277,7 @@
 	  
 	  var unit = 'miles'
 	  var buffered = turf.buffer(layer_geojson, 1, unit);
-	  buff = L.mapbox.featureLayer(buffered);
+	  buff = L.mapbox.tasot(buffered);
 	  buff.addTo(map)
 	  //L.geoJson(buffered).addTo(map);
 	}
