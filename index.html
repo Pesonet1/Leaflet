@@ -44,11 +44,10 @@
 		zoom: 13,
 		minZoom: 11,
 		maxZoom: 18,
-  	});//.setView([60.1708, 24.9375], 13);
+  	});
   	
   	L.control.scale().addTo(map);
   	
-  	//var layers = document.getElementById('menu-ui');
   	
   	var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
 		maxZoom: 18,
@@ -60,6 +59,8 @@
 	
 	//WFS-tasot lisataan tahan grouppiin
 	var tasot = new L.LayerGroup();
+	
+	
 	
 	//WFS-tasot
 	//var viheralueet_wfs = "http://130.233.249.20:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=web_map_project:hkr_ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
@@ -231,7 +232,7 @@
 
 
 
-
+	//Funktion avulla piste voidaan kerran lisata kartalle
 	function addpoint() {
 	  map.once('click', function(ev) {
 	    var coord = ev.latlng;
@@ -279,7 +280,6 @@
 	  if (checked) {
 	    radius = 150
 	    addpoint();
-	    this.unchecked
 	  } else {
 	    //tassa vaiheessa ei pitaisi pystya luomaan pisteita kartalle
 	  }
@@ -290,7 +290,6 @@
 	  if (checked) {
 	    radius = 300
 	    addpoint();
-	    this.unchecked
 	  } else {
 	    //tassa vaiheessa ei pitaisi pystya luomaan pisteita kartalle
 	  }
