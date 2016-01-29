@@ -22,7 +22,7 @@ html, body {
 	}
 	
       .leaflet-control-layers-toggle:after{ 
-	content:"your text"; 
+	content:"Layerswitcher"; 
 	color:#000 ;
       	
       }
