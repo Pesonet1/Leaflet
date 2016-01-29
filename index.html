@@ -217,7 +217,7 @@
   	}
 
 
-
+	/*
 	//Funktion avulla piste voidaan kerran lisata kartalle
 	function addpoint() {
 	  map.once('click', function(ev) {
@@ -258,14 +258,28 @@
 	  });	
 		
 	}
+	*/
 	
+	function addbuffer() {
+	  var fc = turf.featurecollection(fcLayer.getLayers().map(function(f){
+            return f.toGeoJSON()
+          }));
+          var buffer = turf.buffer(fc, 100, 'meters');
+          buffer.properties = {
+            "fill": "#6BC65F",
+            "stroke": "#25561F",
+            "stroke-width": 2
+          };
+          tasot.setGeoJSON(buffer);
+		
+	}
 	
 	//Bufferikoon valittavaksi tarvittavat eventlistenerit
 	box_150.addEventListener('change', function() {
 	  var checked = this.checked;
 	  if (checked) {
 	    radius = 150
-	    addpoint();
+	    addbuffer();
 	  } else {
 	    //tassa vaiheessa ei pitaisi pystya luomaan pisteita kartalle
 	  }
@@ -275,7 +289,7 @@
 	  var checked = this.checked;
 	  if (checked) {
 	    radius = 300
-	    addpoint();
+	    addbuffer();
 	  } else {
 	    //tassa vaiheessa ei pitaisi pystya luomaan pisteita kartalle
 	  }
