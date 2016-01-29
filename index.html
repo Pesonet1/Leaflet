@@ -218,7 +218,7 @@
 
 
 	/*
-	//Funktion avulla piste voidaan kerran lisata kartalle
+	//Funktion avulla piste voidaan kerran lisataan kartalle
 	function addpoint() {
 	  map.once('click', function(ev) {
 	    var coord = ev.latlng;
@@ -260,12 +260,11 @@
 	}
 	*/
 
-
+	var radius = null;
+	
 	function addBuffer(e) {
 	  var layer = e.target;
 	  var layer_geojson = layer.toGeoJSON();
-	  
-	  radius = 150 * 0.000621371192
 	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
 	  L.geoJson(buffered).addTo(map);
 	}
