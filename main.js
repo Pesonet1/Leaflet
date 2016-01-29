@@ -47,7 +47,14 @@ function init() {
   
   var promise = $.getJSON(all);
   promise.then(function(data) {
-    var allbusinesses = L.geoJson(data).addTo(map);
+    //var allbusinesses = L.geoJson(data).addTo(map);
+  
+    var others = L.geoJson(data, {
+      filter: function(feature, layer) {
+        return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
+      }
+    }).addTo(map);
+    
   });	
 	
 	
