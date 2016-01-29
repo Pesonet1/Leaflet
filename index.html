@@ -265,8 +265,8 @@
 	  var layer = e.target;
 	  var layer_geojson = layer.toGeoJSON();
 	  
-	  var unit = 'miles'
-	  var buffered = turf.buffer(layer_geojson, 1, unit);
+	  radius = 150 * 0.000621371192
+	  var buffered = turf.buffer(layer_geojson, radius, 'miles');
 	  L.geoJson(buffered).addTo(map);
 	}
 	
@@ -274,7 +274,7 @@
 	box_150.addEventListener('change', function() {
 	  var checked = this.checked;
 	  if (checked) {
-	    radius = 150
+	    radius = 150 * 0.000621371192
 	    //addbuffer();
 	  } else {
 	    //tassa vaiheessa ei pitaisi pystya luomaan pisteita kartalle
@@ -284,7 +284,7 @@
 	box_300.addEventListener('change', function() {
 	  var checked = this.checked;
 	  if (checked) {
-	    radius = 300
+	    radius = 300 * 0.000621371192
 	    //addbuffer();
 	  } else {
 	    //tassa vaiheessa ei pitaisi pystya luomaan pisteita kartalle
