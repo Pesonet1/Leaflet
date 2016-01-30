@@ -103,11 +103,10 @@ function init() {
             filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == filter);},
             onEachFeature: onEachFeature
             
-          });//.addTo(tasot);
+          }).addTo(tasot);
         }
   });
-  
-  viheralueet.addTo(tasot);
+ 
   	
   /*	
   //WFS-tasot
