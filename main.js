@@ -17,7 +17,7 @@
   };
 })();
 */
-
+var tasot = new L.LayerGroup();
  
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
@@ -46,10 +46,10 @@ function init() {
   //Scale
   L.control.scale().addTo(map);
   	
-  	
+  /*
   //WFS-tasot lisataan tasot grouppiin
   var tasot = new L.LayerGroup();
-  
+  */
   
   var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
     maxZoom: 18,
