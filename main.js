@@ -79,8 +79,7 @@ function init() {
     
     var leikkipaikka = L.geoJson(viheralueet, {
       filter: function(feature, layer) {
-      	kaytto = feature.properties.kayttotarkoitus;
-        return kaytto == "Yleiskaavan viheralue";
+        return feature.properties.kayttotarkoitus == "Yleiskaavan viheralue";
       } //,
       //onEachFeature: onEachFeature
     }).addTo(map);
