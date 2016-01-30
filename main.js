@@ -18,7 +18,7 @@
 })();
 */
 
-/*
+
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
   var valinta_arvo = valinta.value;
@@ -30,8 +30,8 @@ function change_layer() {
     tasot.addTo(map);
   }
 }
-*/
-  
+
+ 
   
 function init() {
     	
@@ -80,17 +80,18 @@ function init() {
     });
   }
   
+  var filter
+  var leikkipaikka = new L.LayerGroup();
   
   var leikkipaikka = $.ajax({
         url: all,
         type: 'GET',
-        //data: "kayttotarkoitus=" + "Leikkipaikka",
         success: function(response) {
           viheralueet = L.geoJson(response, {
             style: function (feature) {
               var fillColor, 
               kaytto = feature.properties.kayttotarkoitus;
-              if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#666699";
+              if ( kaytto == filter ) fillColor = "#666699";
                 
               return {
       	    	color: "black", 
@@ -100,10 +101,10 @@ function init() {
               };
             
             },
-            filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == "Yleiskaavan viheralue");},
+            filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == filter);},
             onEachFeature: onEachFeature
             
-          }).addTo(tasot);
+          }).addTo(leikkipaikka);
         }
   });
   
@@ -319,7 +320,9 @@ function init() {
   karttatasot.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      tasot.addTo(map);
+      //tasot.addTo(map);
+      filter = "Leikkipaikka"
+      leikkipaikka.addTo(map)
     } else {
       map.removeLayer(tasot);
     }
@@ -337,18 +340,6 @@ function init() {
       $box.prop("checked", false);
     }
   });
-
-  function change_layer() {
-  var valinta = document.getElementById('taso_filter');
-  var valinta_arvo = valinta.value;
-    
-  if (valinta_arvo == 'testi1') {
-    alert('testiääääää!');
-  }
-  else if (valinta_arvo == 'testi2') {
-    tasot.addTo(map);
-  }
-}
 
 	
 	
