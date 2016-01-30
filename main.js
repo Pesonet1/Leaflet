@@ -30,6 +30,8 @@ function change_layer() {
   }
 }
   
+  
+  
 function init() {
     	
   //BASEMAP
@@ -294,12 +296,12 @@ function init() {
 // Wait until the marker layer is loaded in order to build a list of possible
 // types. If you are doing this with another featureLayer, you should change
 // map.featureLayer to the variable you have assigned to your featureLayer.
-map.featureLayer.on('ready', function() {
+map.tasot.on('ready', function() {
   // Collect the types of symbols in this layer. you can also just
   // hardcode an array of types if you know what you want to filter on,
   // like var types = ['foo', 'bar'];
   var typesObj = {}, types = [];
-  var features = map.featureLayer.getGeoJSON().features;
+  var features = map.tasot.getGeoJSON().features;
   for (var i = 0; i < features.length; i++) {
     typesObj[features[i].properties['marker-symbol']] = true;
   }
@@ -332,7 +334,7 @@ map.featureLayer.on('ready', function() {
     for (var i = 0; i < checkboxes.length; i++) {
       if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
     }
-    map.featureLayer.setFilter(function(feature) {
+    map.tasot.setFilter(function(feature) {
       // If this symbol is in the list, return true. if not, return false.
       // The 'in' operator in javascript does exactly that: given a string
       // or number, it says if that is in a object.
