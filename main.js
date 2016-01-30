@@ -1,5 +1,4 @@
 //CORS:n aktivointi, mahdollistaa pyyntöjen tekemisen verkkopiirin ulkopuolelta (domain)
-
 (function() {
   var cors_api_host = 'cors-anywhere.herokuapp.com';
   var cors_api_url = 'https://' + cors_api_host + '/';
@@ -271,8 +270,8 @@ function init() {
   var taso = L.geoJson(tasot, {
     filter: function(feature, layer) {
         return feature.properties.kayttotarkoitus == "Leikkipaikka";
-    },
-    onEachFeature: onEachFeature
+    }//,
+    //onEachFeature: onEachFeature
   }).addTo(map);
   
   
