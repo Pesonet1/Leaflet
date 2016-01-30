@@ -113,9 +113,13 @@ function init() {
       	    	fillColor: fillColor, 
       	    	fillOpacity: 0.8 
               };
-                    	
+            
+            filter: function(feature, layer) {
+              return (feature.properties.kayttotarkoitus == "Yleiskaavan viheralue");
             },
+            
             onEachFeature: onEachFeature
+            
           }).addTo(map);
         }
   });
