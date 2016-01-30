@@ -80,7 +80,7 @@ function init() {
     });
   }
   
-  //var filter = "Leikkipaikka";
+  var filter = null;
   
   var viheralueet = $.ajax({
         url: all,
