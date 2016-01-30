@@ -80,8 +80,9 @@ function init() {
     });
   }
   
-  var filter = "Leikkipaikka"
+  var filter = null;
   
+  function update_layer() {
   var viheralueet = $.ajax({
         url: all,
         type: 'GET',
@@ -106,7 +107,7 @@ function init() {
           }).addTo(tasot);
         }
   });
- 
+  }
   	
   /*	
   //WFS-tasot
@@ -319,7 +320,8 @@ function init() {
     var checked = this.checked;
     if (checked) {
       //Tassa filterin asettamisella ei ole mitaan vaikutusta -> pitaisi asettaa filtteri ja uudestaan ladata featuret!
-      //filter = "Leikkipaikka"
+      filter = "Leikkipaikka"
+      update_layer();
       tasot.addTo(map)
     } else {
       map.removeLayer(tasot);
