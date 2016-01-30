@@ -75,7 +75,7 @@ function init() {
 
   var viheralueet = $.getJSON(all);
   viheralueet.then(function(data) {
-    var allbusinesses = L.geoJson(data, onEachFeature: onEachFeature).addTo(map);
+    var allbusinesses = L.geoJson(data, {onEachFeature: onEachFeature}).addTo(map);
     
     //En saa filterointia toimimaan jostain syysta...
     /*
@@ -88,6 +88,44 @@ function init() {
     */
   });	
   
+  var leikkipaikka = $.ajax({
+        url: all,
+        type: 'GET',
+        data: "kayttotarkoitus=" + "Leikkipaikka",
+        success: function(response) {
+          viheralueet = L.geoJson(response, {
+            style: function (feature) {
+              var fillColor, 
+                kaytto = feature.properties.kayttotarkoitus;
+                if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
+                
+          	return {
+      	    	  color: "black", 
+      	    	  weight: 1, 
+      	    	  fillColor: fillColor, 
+      	    	  fillOpacity: 0.8 
+          	};
+                    	
+          },
+          onEachFeature: function (feature, layer) {
+            popupOptions = {maxWidth: 200};
+            layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
+              "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
+              "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
+              "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
+              "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
+              ,popupOptions);
+      
+          //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
+          layer.on({
+      	    mousemove: mousemove,
+            mouseout: mouseout, 
+            click: addBuffer
+          });
+        }
+      }).addTo(map);
+    }
+  });
  
   
   	
@@ -319,6 +357,7 @@ function init() {
       $box.prop("checked", false);
     }
   });
+
 
 
 	
