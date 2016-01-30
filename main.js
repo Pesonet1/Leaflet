@@ -239,7 +239,7 @@ function init() {
           });    
                         
         }
-      }).addTo(tasot);//.addTo(map);
+      }).addTo(map);//.addTo(tasot);
     }
   }); 
   
