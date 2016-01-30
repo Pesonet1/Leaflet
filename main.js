@@ -267,9 +267,9 @@ function init() {
 
   
   
-  var taso = L.geoJson(viheralueet_layer, {
+  L.geoJson(viheralueet_layer, {
     filter: function(feature, layer) {
-        return feature.properties.kayttotarkoitus;// == "Leikkipaikka";
+        return feature.properties.kayttotarkoitus == "Leikkipaikka";
     }//,
     //onEachFeature: onEachFeature
   }).addTo(map);
@@ -281,7 +281,7 @@ function init() {
     var checked = this.checked;
     if (checked) {
       tasot.addTo(map);
-      taso.addTo(map);
+      //taso.addTo(map);
     } else {
       map.removeLayer(tasot);
       //tasot.clearLayers();
