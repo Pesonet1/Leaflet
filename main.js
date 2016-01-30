@@ -80,7 +80,7 @@ function init() {
     });
   }
   
-  var filter = null;
+  var filter = "Leikkipaikka";
   
   var viheralueet = $.ajax({
         url: all,
@@ -319,7 +319,7 @@ function init() {
   karttatasot.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Leikkipaikka"
+      //filter = "Leikkipaikka"
       tasot.addTo(map)
     } else {
       map.removeLayer(tasot);
