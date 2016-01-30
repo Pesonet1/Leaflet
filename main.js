@@ -58,6 +58,7 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 	
+	/*
   function onEachFeature(feature, layer) {
 	var popupContent = "<p>I started out as a GeoJSON " +
 			feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
@@ -69,18 +70,19 @@ function init() {
 	layer.bindPopup(popupContent);
   }
 
+*/
 var all = "https://pesonet1.github.io/Leaflet/all.json"
 
 var viheralueet = $.getJSON(all);
 viheralueet.then(function(data) {
   L.geoJson(viheralueet, {
     filter: function(feature, layer) {
-      if (feature.properties) {
+      //if (feature.properties) {
         return feature.properties.kayttotarkoitus == "Leikkipaikka";
-      }
+      //}
       //return false;
-    },
-    onEachFeature: onEachFeature
+    }//,
+    //onEachFeature: onEachFeature
   }).addTo(map);
 });	
   
