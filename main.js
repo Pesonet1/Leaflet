@@ -265,13 +265,26 @@ function init() {
   });
   
 
-  
+  function onEachFeature(feature, layer) {
+	var popupContent = "<p>I started out as a GeoJSON " +
+			feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+
+	if (feature.properties && feature.properties.popupContent) {
+		popupContent += feature.properties.popupContent;
+	}
+
+	layer.bindPopup(popupContent);
+  }
+
   
   L.geoJson(viheralueet_layer, {
     filter: function(feature, layer) {
-        return feature.properties.kayttotarkoitus == "Leikkipaikka";
-    }//,
-    //onEachFeature: onEachFeature
+    	if (feature.properties) {
+          return feature.properties.kayttotarkoitus == "Leikkipaikka";
+    	}
+    	return false;
+    },
+    onEachFeature: onEachFeature
   }).addTo(map);
   
   
