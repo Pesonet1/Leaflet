@@ -1,5 +1,5 @@
 //CORS:n aktivointi, mahdollistaa pyyntöjen tekemisen verkkopiirin ulkopuolelta (domain)
-/*
+
 (function() {
   var cors_api_host = 'cors-anywhere.herokuapp.com';
   var cors_api_url = 'https://' + cors_api_host + '/';
@@ -16,7 +16,7 @@
     return open.apply(this, args);
   };
 })();
-*/
+
 
 //var all = "https://pesonet1.github.io/Leaflet/all.json"
 //var viheralueet = $.getJSON(all);
@@ -33,7 +33,19 @@ viheralueet.then(function(data) {
 });	
 */
 
+/*
+$.getJSON(all, function(data) {
+    for (var i = 0; i < data.length; i++) {
+        if (data.properties.kayttotarkoitus == 'Ulkoilumetsä') {
+            geojsonLayer1.addGeoJSON(data);
+        };
+        if (data.properties.kayttotarkoitus == 'Leikkipaikka') {
+            geojsonLayer2.addGeoJSON(data);
+        };
+    }
 
+}
+*/
 
 
 function change_layer() {
@@ -44,9 +56,7 @@ function change_layer() {
     alert('testiääääää!');
   }
   else if (valinta_arvo == 'testi2') {
-    //L.geoJson(others).addTo(map);
-    //others.addTo(map);
-    alert('tää toimii :OOOOO');	
+    tasot.addTo(map);
   }
 }
 
@@ -216,58 +226,6 @@ function init() {
   */
 
 
-  
-/*
-$.getJSON(all, function(data) {
-    for (var i = 0; i < data.length; i++) {
-        if (data.properties.kayttotarkoitus == 'Ulkoilumetsä') {
-            geojsonLayer1.addGeoJSON(data);
-        };
-        if (data.properties.kayttotarkoitus == 'Leikkipaikka') {
-            geojsonLayer2.addGeoJSON(data);
-        };
-    }
-
-}
-*/
-
-var overlay = L.layerGroup().addTo(map);
-var layers; 
-
-$.getJSON(viheralueet_layer, function(dams) {   
-  map.on('ready', function(e) {
-    layers = e.target;
-    //call showDams function from checkbox onclick event
-    showDams();
-  });
-});
-
-var filters = document.getElementById('taso_filter').filters;
-var damsLayer = new L.geoJson();
-
-function showDams() {
-  //create an array to house the value strings from the inputs above, ie 'hydroelectricity', 'irrigation', etc
-  var list = [];
-  //console log keeps throwing an error:  Cannot read property 'length' of undefined
-  for (var i = 0; i < filters.length; i++) {
-    if (filters[i].checked) list.push(filters[i].value);
-  }
-
-  //clears previous timelines from the overlay
-  overlay.clearLayers();
- 
-  //add newly filtered data to the damsLayer geojson object, code based on clusterMarkerGroup example
-  layers.eachLayer(function(layer) {
-    if (list.indexOf(layer.feature.properties.kayttotarkoitus) !== -1) {
-      //addData method called on damsLayer    
-      damsLayer.addData(layer);
-    }
-  }).addTo(map);
-} 
-
-
-
-	
 	
   //Tasojen funktioita: kohteeseen zoomaus ja kohteen korostus
   function zoomToFeature(e) {
