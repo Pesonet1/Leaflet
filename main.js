@@ -61,18 +61,18 @@ function init() {
 	
   var all = "https://pesonet1.github.io/Leaflet/all.json"
   
-  /*
+  
   function onEachFeature(feature, layer) {
-    var popupContent = "<p>I started out as a GeoJSON " +
-      feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
-
-    if (feature.properties && feature.properties.popupContent) {
-      popupContent += feature.properties.popupContent;
-    }
-
-    layer.bindPopup(popupContent);
+    popupOptions = {maxWidth: 200};
+    layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
+      "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
+      "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
+      "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
+      "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
+      ,popupOptions);
   }
-
+  
+  /*
   var viheralueet = $.getJSON(all);
   viheralueet.then(function(data) {
     var allbusinesses = L.geoJson(data, {onEachFeature: onEachFeature}).addTo(map);
@@ -97,35 +97,28 @@ function init() {
           viheralueet = L.geoJson(response, {
             style: function (feature) {
               var fillColor, 
-                kaytto = feature.properties.kayttotarkoitus;
-                if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
+              kaytto = feature.properties.kayttotarkoitus;
+              if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
                 
-          	return {
-      	    	  color: "black", 
-      	    	  weight: 1, 
-      	    	  fillColor: fillColor, 
-      	    	  fillOpacity: 0.8 
-          	};
+              return {
+      	    	color: "black", 
+      	    	weight: 1, 
+      	    	fillColor: fillColor, 
+      	    	fillOpacity: 0.8 
+              };
                     	
-          },
-          onEachFeature: function (feature, layer) {
-            popupOptions = {maxWidth: 200};
-            layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
-              "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
-              "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
-              "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
-              "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
-              ,popupOptions);
+            },
+            onEachFeature: onEachFeature
       
-          //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
-          layer.on({
-      	    mousemove: mousemove,
-            mouseout: mouseout, 
-            click: addBuffer
-          });
-        }
-      }).addTo(map);
-    }
+            //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
+            layer.on({
+      	      mousemove: mousemove,
+              mouseout: mouseout, 
+              click: addBuffer
+            });
+          }
+        }).addTo(map);
+      }
   });
  
   
