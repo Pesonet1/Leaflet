@@ -58,33 +58,34 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 	
-	/*
+  /*	
   function onEachFeature(feature, layer) {
-	var popupContent = "<p>I started out as a GeoJSON " +
-			feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+    var popupContent = "<p>I started out as a GeoJSON " +
+      feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
 
-	if (feature.properties && feature.properties.popupContent) {
-		popupContent += feature.properties.popupContent;
-	}
+    if (feature.properties && feature.properties.popupContent) {
+      popupContent += feature.properties.popupContent;
+    }
 
-	layer.bindPopup(popupContent);
+    layer.bindPopup(popupContent);
   }
-
-*/
-var all = "https://pesonet1.github.io/Leaflet/all.json"
-
-var viheralueet = $.getJSON(all);
-viheralueet.then(function(data) {
-  var allbusinesses = L.geoJson(data).addTo(map);	
-  /*
-  var leikkipaikka = L.geoJson(viheralueet, {
-    filter: function(feature, layer) {
-      return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
-    } //,
-    //onEachFeature: onEachFeature
-  }).addTo(map);
   */
-});	
+  
+  var all = "https://pesonet1.github.io/Leaflet/all.json"
+
+  var viheralueet = $.getJSON(all);
+  viheralueet.then(function(data) {
+    var allbusinesses = L.geoJson(data).addTo(map);	
+    
+    var leikkipaikka = L.geoJson(viheralueet, {
+      filter: function(feature, layer) {
+      	kaytto = feature.properties.kayttotarkoitus;
+        return kaytto == "Yleiskaavan viheralue";
+      } //,
+      //onEachFeature: onEachFeature
+    }).addTo(map);
+    
+  });	
   
  
   
