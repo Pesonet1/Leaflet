@@ -282,7 +282,7 @@ function init() {
     	if (feature.properties) {
           return feature.properties.kayttotarkoitus == "Leikkipaikka";
     	}
-    	return false;
+    	//return false;
     },
     onEachFeature: onEachFeature
   }).addTo(map);
@@ -297,7 +297,6 @@ function init() {
       //taso.addTo(map);
     } else {
       map.removeLayer(tasot);
-      //tasot.clearLayers();
     }
   });
 	
