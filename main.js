@@ -27,7 +27,7 @@ function change_layer() {
     alert('testiääääää!');
   }
   else if (valinta_arvo == 'testi2') {
-    //tasot.addTo(map);
+    tasot.addTo(map);
   }
 }
   
