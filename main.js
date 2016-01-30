@@ -19,6 +19,43 @@
 
 
 
+  var all = "https://pesonet1.github.io/Leaflet/all.json"
+  
+  var filter = null;
+  var fillcolor = null;
+  function update_layer() {
+    var viheralueet = $.ajax({
+      url: all,
+      type: 'GET',
+      success: function(response) {
+        viheralueet = L.geoJson(response, {
+          style: function (feature) {
+            var fillColor, 
+            kaytto = feature.properties.kayttotarkoitus;
+            if ( kaytto == filter ) fillColor = "#666699";
+                
+            return {
+      	      color: "black", 
+      	      weight: 1, 
+      	      fillColor: fillColor, 
+      	      fillOpacity: 0.8 
+            };
+            
+          },
+          filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == filter);},
+          onEachFeature: onEachFeature_viheralueet
+            
+        }).addTo(tasot);
+      }
+    });
+  }
+  
+
+
+
+
+
+
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
   var valinta_arvo = valinta.value;
@@ -27,6 +64,9 @@ function change_layer() {
     alert('testiääääää!');
   }
   else if (valinta_arvo == 'testi2') {
+    filter = "Leikkipaikka"
+    fillcolor = "#666699"
+    update_layer();
     tasot.addTo(map);
   }
 }
@@ -59,11 +99,8 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 	
-  
+  /*
   var all = "https://pesonet1.github.io/Leaflet/all.json"
-  
-  
-  
   
   var filter = null;
   var fillcolor = null;
@@ -93,7 +130,7 @@ function init() {
       }
     });
   }
-  	
+  */	
   	
   //WFS-tasot
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
