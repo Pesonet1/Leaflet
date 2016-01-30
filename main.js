@@ -17,8 +17,8 @@
   };
 })();
 */
-var tasot = new L.LayerGroup();
- 
+
+/*
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
   var valinta_arvo = valinta.value;
@@ -30,7 +30,7 @@ function change_layer() {
     tasot.addTo(map);
   }
 }
-  
+*/
   
   
 function init() {
@@ -46,10 +46,10 @@ function init() {
   //Scale
   L.control.scale().addTo(map);
   	
-  /*
+  
   //WFS-tasot lisataan tasot grouppiin
   var tasot = new L.LayerGroup();
-  */
+  
   
   var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
     maxZoom: 18,
@@ -338,7 +338,17 @@ function init() {
     }
   });
 
-
+  function change_layer() {
+  var valinta = document.getElementById('taso_filter');
+  var valinta_arvo = valinta.value;
+    
+  if (valinta_arvo == 'testi1') {
+    alert('testiääääää!');
+  }
+  else if (valinta_arvo == 'testi2') {
+    tasot.addTo(map);
+  }
+}
 
 	
 	
