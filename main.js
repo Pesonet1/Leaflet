@@ -81,9 +81,8 @@ function init() {
   }
   
   var filter
-  var leikkipaikka = new L.LayerGroup();
   
-  var leikkipaikka = $.ajax({
+  var viheralueet = $.ajax({
         url: all,
         type: 'GET',
         success: function(response) {
@@ -104,7 +103,7 @@ function init() {
             filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == filter);},
             onEachFeature: onEachFeature
             
-          }).addTo(leikkipaikka);
+          }).addTo(tasot);
         }
   });
   
@@ -320,9 +319,8 @@ function init() {
   karttatasot.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      //tasot.addTo(map);
       filter = "Leikkipaikka"
-      leikkipaikka.addTo(map)
+      tasot.addTo(map)
     } else {
       map.removeLayer(tasot);
     }
