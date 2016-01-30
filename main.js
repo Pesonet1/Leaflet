@@ -108,7 +108,7 @@ function init() {
   });
   
   
-  leikkipaikka.addTo(map);
+  viheralueet.addTo(map);
   	
   /*	
   //WFS-tasot
