@@ -19,32 +19,66 @@
 */
 
 var all = "https://pesonet1.github.io/Leaflet/all.json"
+
+/*
+var viheralueet = $.getJSON(all);
+viheralueet.then(function(data) {
+  //var allbusinesses = L.geoJson(data).addTo(map);
   
-  var viheralueet = $.getJSON(all);
-  viheralueet.then(function(data) {
-    //var allbusinesses = L.geoJson(data).addTo(map);
-  
-    var others = L.geoJson(data, {
-      filter: function(feature, layer) {
-        return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
-      }
-    });//.addTo(map);
-    
-  });	
-	
-	
-  function change_layer() {
-    var valinta = document.getElementById('taso_filter');
-    var valinta_arvo = valinta.value;
-    
-    if (valinta_arvo == 'testi1') {
-      alert('testiääääää!');
+  var others = L.geoJson(data, {
+    filter: function(feature, layer) {
+      return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
     }
-    else if (valinta_arvo == 'testi2') {
-      others.addTo(map);
-      alert('tää toimii :OOOOO');	
+  });//.addTo(map);
+ 
+});	
+*/
+
+//array to store layers for each feature type
+var mapLayerGroups = [];
+
+//draw GEOJSON - don't add the GEOJSON layer to the map here
+L.geoJson(all, {onEachFeature: onEachFeature})//.addTo(map);
+
+/*
+ *for all features create a layerGroup for each feature type and add the feature to the    layerGroup
+*/
+function onEachFeature(feature, featureLayer) {
+
+    //does layerGroup already exist? if not create it and add to map
+    var kaytto = mapLayerGroups[feature.properties.kayttotarkoitus];
+
+    if (kaytto == "Ulkoilumetsä") {
+        kaytto = new L.layerGroup();
+        //add the layer to the map
+        kaytto.addTo(map);
+        //store layer
+        mapLayerGroups[feature.properties.kayttotarkoitus] = l;
     }
+
+    //add the feature to the layer
+    kaytto.addLayer(featureLayer);      
+}
+	
+function showLayer(id) {
+    var kaytto = mapLayerGroups[id];
+    map.addLayer(kaytto);   
+}
+
+
+
+function change_layer() {
+  var valinta = document.getElementById('taso_filter');
+  var valinta_arvo = valinta.value;
+    
+  if (valinta_arvo == 'testi1') {
+    alert('testiääääää!');
   }
+  else if (valinta_arvo == 'testi2') {
+    //others.addTo(map);
+    alert('tää toimii :OOOOO');	
+  }
+}
 
 
     
