@@ -55,7 +55,7 @@ $.getJSON(all, function(dams) {
     layers = e.target;
     //call showDams function from checkbox onclick event
     showDams();
-  }
+  });
 });
 
 var filters = document.getElementById('taso_filter').filters;
