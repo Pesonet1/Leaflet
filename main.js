@@ -276,8 +276,10 @@ function init() {
 	layer.bindPopup(popupContent);
   }
 
+  var all = "https://pesonet1.github.io/Leaflet/all.json"
+  var viheralueet = $.getJSON(all);
   
-  L.geoJson(tasot, {
+  L.geoJson(viheralueet, {
     filter: function(feature, layer) {
     	if (feature.properties) {
           return feature.properties.kayttotarkoitus == "Leikkipaikka";
