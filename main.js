@@ -103,7 +103,7 @@ function init() {
             filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == "Yleiskaavan viheralue");},
             onEachFeature: onEachFeature
             
-          }).addTo(map);
+          });//.addTo(map);
         }
   });
   
