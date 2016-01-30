@@ -277,7 +277,7 @@ function init() {
   }
 
   
-  L.geoJson(viheralueet_layer, {
+  L.geoJson(tasot, {
     filter: function(feature, layer) {
     	if (feature.properties) {
           return feature.properties.kayttotarkoitus == "Leikkipaikka";
