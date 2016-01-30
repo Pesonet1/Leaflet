@@ -116,9 +116,8 @@ function init() {
                     	
             },
             onEachFeature: onEachFeature
-          }
-        }).addTo(map);
-      }
+          }).addTo(map);
+        }
   });
  
   
