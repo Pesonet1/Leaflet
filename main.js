@@ -75,12 +75,15 @@ var all = "https://pesonet1.github.io/Leaflet/all.json"
 
 var viheralueet = $.getJSON(all);
 viheralueet.then(function(data) {
+  var allbusinesses = L.geoJson(data).addTo(map);	
+  /*
   var leikkipaikka = L.geoJson(viheralueet, {
     filter: function(feature, layer) {
       return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
-    }//,
+    } //,
     //onEachFeature: onEachFeature
   }).addTo(map);
+  */
 });	
   
  
