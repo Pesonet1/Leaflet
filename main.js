@@ -29,13 +29,8 @@ function change_layer() {
     tasot.addTo(map);
   }
 }
-
-
-
-
-    
   
-//function init() {
+function init() {
     	
   //BASEMAP
   var map = L.map('map', {
@@ -316,4 +311,4 @@ function change_layer() {
 	legend.addTo(map);
 	*/
 	
-//}
+}
