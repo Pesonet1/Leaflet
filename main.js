@@ -18,7 +18,7 @@
 })();
 
 
-
+/*
   var all = "https://pesonet1.github.io/Leaflet/all.json"
   
   var filter = null;
@@ -49,7 +49,7 @@
       }
     });
   }
-  
+*/  
 
 
 
@@ -99,7 +99,7 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 	
-  /*
+  
   var all = "https://pesonet1.github.io/Leaflet/all.json"
   
   var filter = null;
@@ -130,7 +130,7 @@ function init() {
       }
     });
   }
-  */	
+  	
   	
   //WFS-tasot
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
@@ -357,9 +357,9 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      //filter = "Leikkipaikka"
-      //fillcolor = "#666699"
-      //update_layer();
+      filter = "Leikkipaikka"
+      fillcolor = "#666699"
+      update_layer();
       tasot.addTo(map)
     } else {
       map.removeLayer(tasot);
