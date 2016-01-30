@@ -19,6 +19,54 @@
 */
 
 
+var all = "https://pesonet1.github.io/Leaflet/all.json"
+  
+  
+  function onEachFeature(feature, layer) {
+    popupOptions = {maxWidth: 200};
+    layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
+      "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
+      "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
+      "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
+      "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
+      ,popupOptions);
+      
+    //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
+    layer.on({
+      mousemove: mousemove,
+      mouseout: mouseout, 
+      click: addBuffer
+    });
+  }
+  
+  
+  var leikkipaikka = $.ajax({
+        url: all,
+        type: 'GET',
+        //data: "kayttotarkoitus=" + "Leikkipaikka",
+        success: function(response) {
+          viheralueet = L.geoJson(response, {
+            style: function (feature) {
+              var fillColor, 
+              kaytto = feature.properties.kayttotarkoitus;
+              if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
+                
+              return {
+      	    	color: "black", 
+      	    	weight: 1, 
+      	    	fillColor: fillColor, 
+      	    	fillOpacity: 0.8 
+              };
+            
+            },
+            filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == "Yleiskaavan viheralue");},
+            onEachFeature: onEachFeature
+            
+          });//.addTo(map);
+        }
+  });
+
+ 
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
   var valinta_arvo = valinta.value;
@@ -59,6 +107,7 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 	
+  /*
   var all = "https://pesonet1.github.io/Leaflet/all.json"
   
   
@@ -79,27 +128,11 @@ function init() {
     });
   }
   
-  /*
-  var viheralueet = $.getJSON(all);
-  viheralueet.then(function(data) {
-    var allbusinesses = L.geoJson(data, {onEachFeature: onEachFeature}).addTo(map);
-    
-    //En saa filterointia toimimaan jostain syysta...
-    
-    var leikkipaikka = L.geoJson(viheralueet, {
-      filter: function(feature, layer) {
-        return (feature.properties.kayttotarkoitus == "Yleiskaavan viheralue");
-      },
-      onEachFeature: onEachFeature
-    }).addTo(map);
-    
-  });	
-  */
   
   var leikkipaikka = $.ajax({
         url: all,
         type: 'GET',
-        data: "kayttotarkoitus=" + "Leikkipaikka",
+        //data: "kayttotarkoitus=" + "Leikkipaikka",
         success: function(response) {
           viheralueet = L.geoJson(response, {
             style: function (feature) {
@@ -121,8 +154,9 @@ function init() {
           }).addTo(map);
         }
   });
- 
+  */
   
+  leikkipaikka.addTo(map);
   	
   /*	
   //WFS-tasot
