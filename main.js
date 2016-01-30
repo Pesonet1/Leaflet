@@ -77,10 +77,7 @@ var viheralueet = $.getJSON(all);
 viheralueet.then(function(data) {
   var leikkipaikka = L.geoJson(viheralueet, {
     filter: function(feature, layer) {
-      //if (feature.properties) {
-        return feature.properties.kayttotarkoitus == "Leikkipaikka";
-      //}
-      //return false;
+      return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
     }//,
     //onEachFeature: onEachFeature
   }).addTo(map);
