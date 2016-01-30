@@ -20,8 +20,9 @@
 
 var all = "https://pesonet1.github.io/Leaflet/all.json"
 
-/*
+
 var viheralueet = $.getJSON(all);
+/*
 viheralueet.then(function(data) {
   //var allbusinesses = L.geoJson(data).addTo(map);
   
@@ -38,7 +39,7 @@ viheralueet.then(function(data) {
 var mapLayerGroups = [];
 
 //draw GEOJSON - don't add the GEOJSON layer to the map here
-L.geoJson(all, {onEachFeature: onEachFeature})//.addTo(map);
+L.geoJson(viheralueet, {onEachFeature: onEachFeature})//.addTo(map);
 
 /*
  *for all features create a layerGroup for each feature type and add the feature to the    layerGroup
