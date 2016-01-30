@@ -22,7 +22,6 @@ var all = "https://pesonet1.github.io/Leaflet/all.json"
 
 
 var viheralueet = $.getJSON(all);
-/*
 viheralueet.then(function(data) {
   //var allbusinesses = L.geoJson(data).addTo(map);
   
@@ -33,40 +32,6 @@ viheralueet.then(function(data) {
   });//.addTo(map);
  
 });	
-*/
-
-//array to store layers for each feature type
-var mapLayerGroups = [];
-
-//draw GEOJSON - don't add the GEOJSON layer to the map here
-L.geoJson(viheralueet, {onEachFeature: onEachFeature})//.addTo(map);
-
-/*
- *for all features create a layerGroup for each feature type and add the feature to the    layerGroup
-*/
-function onEachFeature(feature, featureLayer) {
-
-    //does layerGroup already exist? if not create it and add to map
-    var kaytto = mapLayerGroups[feature.properties.kayttotarkoitus];
-
-    if (kaytto == "Ulkoilumetsä") {
-        kaytto = new L.layerGroup();
-        //add the layer to the map
-        kaytto.addTo(map);
-        //store layer
-        mapLayerGroups[feature.properties.kayttotarkoitus] = l;
-    }
-
-    //add the feature to the layer
-    kaytto.addLayer(featureLayer);      
-}
-	
-function showLayer(id) {
-    var kaytto = mapLayerGroups[id];
-    map.addLayer(kaytto);   
-}
-
-
 
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
@@ -76,6 +41,7 @@ function change_layer() {
     alert('testiääääää!');
   }
   else if (valinta_arvo == 'testi2') {
+    L.geoJson(others).addTo(map);
     //others.addTo(map);
     alert('tää toimii :OOOOO');	
   }
