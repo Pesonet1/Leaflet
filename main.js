@@ -75,7 +75,7 @@ var all = "https://pesonet1.github.io/Leaflet/all.json"
 
 var viheralueet = $.getJSON(all);
 viheralueet.then(function(data) {
-  L.geoJson(viheralueet, {
+  var leikkipaikka = L.geoJson(viheralueet, {
     filter: function(feature, layer) {
       //if (feature.properties) {
         return feature.properties.kayttotarkoitus == "Leikkipaikka";
@@ -86,8 +86,7 @@ viheralueet.then(function(data) {
   }).addTo(map);
 });	
   
-  
-  
+ 
   
   	
   /*	
