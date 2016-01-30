@@ -116,7 +116,7 @@ function change_layer() {
 
     
   
-function init() {
+//function init() {
     	
   //BASEMAP
   var map = L.map('map', {
@@ -397,4 +397,4 @@ function init() {
 	legend.addTo(map);
 	*/
 	
-}
+//}
