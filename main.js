@@ -80,7 +80,7 @@ function init() {
     });
   }
   
-  var filter = null;
+  var filter
   
   var viheralueet = $.ajax({
         url: all,
