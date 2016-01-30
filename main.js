@@ -70,6 +70,13 @@ function init() {
       "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
       "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
       ,popupOptions);
+      
+    //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
+    layer.on({
+      mousemove: mousemove,
+      mouseout: mouseout, 
+      click: addBuffer
+    });
   }
   
   /*
@@ -109,13 +116,6 @@ function init() {
                     	
             },
             onEachFeature: onEachFeature
-      
-            //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
-            layer.on({
-      	      mousemove: mousemove,
-              mouseout: mouseout, 
-              click: addBuffer
-            });
           }
         }).addTo(map);
       }
