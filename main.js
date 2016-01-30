@@ -59,7 +59,9 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 	
-  	
+  var all = "https://pesonet1.github.io/Leaflet/all.json"
+  
+  /*
   function onEachFeature(feature, layer) {
     var popupContent = "<p>I started out as a GeoJSON " +
       feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
@@ -70,24 +72,22 @@ function init() {
 
     layer.bindPopup(popupContent);
   }
-  
-  
-  var all = "https://pesonet1.github.io/Leaflet/all.json"
 
   var viheralueet = $.getJSON(all);
   viheralueet.then(function(data) {
     var allbusinesses = L.geoJson(data, {onEachFeature: onEachFeature}).addTo(map);
     
     //En saa filterointia toimimaan jostain syysta...
-    /*
+    
     var leikkipaikka = L.geoJson(viheralueet, {
       filter: function(feature, layer) {
         return (feature.properties.kayttotarkoitus == "Yleiskaavan viheralue");
       },
       onEachFeature: onEachFeature
     }).addTo(map);
-    */
+    
   });	
+  */
   
   var leikkipaikka = $.ajax({
         url: all,
