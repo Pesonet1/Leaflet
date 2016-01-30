@@ -17,83 +17,12 @@
   };
 })();
 
-
-//var all = "https://pesonet1.github.io/Leaflet/all.json"
-//var viheralueet = $.getJSON(all);
-/*
-viheralueet.then(function(data) {
-  //var allbusinesses = L.geoJson(data).addTo(map);
-  
-  var others = L.geoJson(data, {
-    filter: function(feature, layer) {
-      return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
-    }
-  });//.addTo(map);
- 
-});	
-*/
-
-/*
-$.getJSON(all, function(data) {
-    for (var i = 0; i < data.length; i++) {
-        if (data.properties.kayttotarkoitus == 'Ulkoilumetsä') {
-            geojsonLayer1.addGeoJSON(data);
-        };
-        if (data.properties.kayttotarkoitus == 'Leikkipaikka') {
-            geojsonLayer2.addGeoJSON(data);
-        };
-    }
-
-}
-*/
-
-
-function change_layer() {
-  var valinta = document.getElementById('taso_filter');
-  var valinta_arvo = valinta.value;
-    
-  if (valinta_arvo == 'testi1') {
-    alert('testiääääää!');
-  }
-  else if (valinta_arvo == 'testi2') {
-    tasot.addTo(map);
-  }
-}
-
-
-    
-  
-function init() {
-    	
-  //BASEMAP
-  var map = L.map('map', {
-    center: new L.LatLng(60.1708, 24.9375),
-    zoom: 13,
-    minZoom: 11,
-    maxZoom: 18,
-  });
-  	
-  //Scale
-  L.control.scale().addTo(map);
-  	
-  	
-  //WFS-tasot lisataan tasot grouppiin
+//WFS-tasot lisataan tasot grouppiin
   var tasot = new L.LayerGroup();
-	
   
-  var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
-    maxZoom: 18,
-    /*attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-      'Imagery © <a href="http://mapbox.com">Mapbox</a>',*/
-    id: 'mapbox.light'
-  }).addTo(map);
-	
-  	
-  	
-  //WFS-tasot
+ //WFS-tasot
   var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
-  var paavo_kartta = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
+  //var paavo_kartta = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
 
   //Viheralueet WFS
   var viheralueet_layer = $.ajax({ 
@@ -167,8 +96,132 @@ function init() {
       }).addTo(tasot);//.addTo(map);
     }
   	
-  }); 
+  });
 
+
+function change_layer() {
+  var valinta = document.getElementById('taso_filter');
+  var valinta_arvo = valinta.value;
+    
+  if (valinta_arvo == 'testi1') {
+    alert('testiääääää!');
+  }
+  else if (valinta_arvo == 'testi2') {
+    tasot.addTo(map);
+  }
+}
+
+
+
+
+    
+  
+function init() {
+    	
+  //BASEMAP
+  var map = L.map('map', {
+    center: new L.LatLng(60.1708, 24.9375),
+    zoom: 13,
+    minZoom: 11,
+    maxZoom: 18,
+  });
+  	
+  //Scale
+  L.control.scale().addTo(map);
+  	
+  /*	
+  //WFS-tasot lisataan tasot grouppiin
+  var tasot = new L.LayerGroup();
+  */
+  
+  var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
+    maxZoom: 18,
+    /*attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="http://mapbox.com">Mapbox</a>',*/
+    id: 'mapbox.light'
+  }).addTo(map);
+	
+  	
+  	
+  //WFS-tasot
+  //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
+  //var paavo_kartta = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
+  /*
+  //Viheralueet WFS
+  var viheralueet_layer = $.ajax({ 
+    url: viheralueet_wfs,
+    datatype:"json",
+    jsonCallback: 'getJson',
+    success : function (response) {
+      viheralueet = L.geoJson(response, {
+        style: function (feature) {
+          var fillColor, 
+          kaytto = feature.properties.kayttotarkoitus;
+      
+          if ( kaytto.indexOf("semakaavoitettu") > -1) fillColor = "#336666";
+          else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#336666";
+          else if ( kaytto == "Ulkoilumetsä" ) fillColor = "#336666";
+          else if ( kaytto == "Kartano- ja huvila-alue" ) fillColor = "#996699";
+          else if ( kaytto == "Kesämaja-alue" || kaytto == "Siirtolapuutarha" || kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue") fillColor = "#666699";
+          else if ( kaytto == "Koira-aitaus" ) fillColor = "#666699";
+          else if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
+          else if ( kaytto == "Luonnonsuojelualue" ) fillColor = "#336666";
+          else if ( kaytto.indexOf("luonnonsuojelualue") > -1 ) fillColor = "#336666";
+          else if ( kaytto == "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama" ) fillColor = "#336699";
+          else if ( kaytto.indexOf("Haudat") > -1 ) fillColor = "#666666";
+          else if ( kaytto == "Muut viheralueet" ) fillColor = "#fff";
+      
+          //else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#ff0000";
+          else fillColor = "#999";  // no data
+		      
+          //Muu toimiluokka
+          //Yleiskaavan viheralue / luonnonsuojelualue
+          //Yleiskaavan viheralue / kesämaja-alue
+          //Yleiskaavan viheralue / kartanoalue
+          //Yleiskaavan viheralue / leikkipuisto
+          //Yleiskaavan viheralue
+          //Yleiskaavan viheralue / erityiskohteet
+          //Yleiskaavan viheralue / koira-aitaus
+          //Ulkoilumetsä
+          //Tontti (rakentamattomat / sopimus)
+          //Erityiskohteet, asemakaavoitettu viheralue
+          //Viljelypalsta-alue
+          //Haudat (hautausmaat)
+          //Suojaviheralue
+          //Katualue
+          //Rata-alue
+          //Saari (saaret ilman siltayhteyttä)
+      
+          return {
+      	    color: "black", 
+      	    weight: 1, 
+      	    fillColor: fillColor, 
+      	    fillOpacity: 0.8 
+          };
+                    	
+          },
+          onEachFeature: function (feature, layer) {
+            popupOptions = {maxWidth: 200};
+            layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
+              "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
+              "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
+              "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
+              "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
+              ,popupOptions);
+      
+          //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
+          layer.on({
+      	    mousemove: mousemove,
+            mouseout: mouseout, 
+            click: addBuffer
+          });
+        }
+      }).addTo(tasot);//.addTo(map);
+    }
+  	
+  }); 
+  */
   /*
   //Paavo WFS
   var paavo_layer = $.ajax({ 
