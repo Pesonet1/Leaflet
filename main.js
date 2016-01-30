@@ -103,12 +103,11 @@ function init() {
             filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == "Yleiskaavan viheralue");},
             onEachFeature: onEachFeature
             
-          });//.addTo(map);
+          }).addTo(tasot);
         }
   });
   
-  
-  viheralueet.addTo(map);
+ 
   	
   /*	
   //WFS-tasot
@@ -280,6 +279,7 @@ function init() {
       var layer_geojson = layer.toGeoJSON();
       var buffered = turf.buffer(layer_geojson, radius, 'miles');
     
+      //Jostain syysta ei vaihda muotoilua, vaikka sen pitaisi
       buffered.properties = {
         "fill": "#a63603",
         "stroke": "#a63603",
@@ -320,7 +320,6 @@ function init() {
     var checked = this.checked;
     if (checked) {
       tasot.addTo(map);
-      //taso.addTo(map);
     } else {
       map.removeLayer(tasot);
     }
