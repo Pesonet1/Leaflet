@@ -269,7 +269,7 @@ function init() {
   
   var taso = L.geoJson(viheralueet_layer, {
     filter: function(feature, layer) {
-        return feature.properties.kayttotarkoitus == "Leikkipaikka";
+        return feature.properties.kayttotarkoitus;// == "Leikkipaikka";
     }//,
     //onEachFeature: onEachFeature
   }).addTo(map);
