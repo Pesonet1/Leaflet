@@ -43,23 +43,8 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 	
-	
+  	
   /*	
-  var all = "https://pesonet1.github.io/Leaflet/all.json"
-  
-  var promise = $.getJSON(all);
-  promise.then(function(data) {
-    //var allbusinesses = L.geoJson(data).addTo(map);
-  
-    var others = L.geoJson(data, {
-      filter: function(feature, layer) {
-        return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
-      }
-    }).addTo(map);
-    
-  });	
-  */	
-	
   //WFS-tasot
   var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
   var paavo_kartta = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
@@ -191,14 +176,32 @@ function init() {
       }).addTo(tasot);//.addTo(map);
     }
   }); 
+  */
+  
+  var all = "https://pesonet1.github.io/Leaflet/all.json"
+  
+  var viheralueet = $.getJSON(all);
+  viheralueet.then(function(data) {
+    //var allbusinesses = L.geoJson(data).addTo(map);
+  
+    var others = L.geoJson(data, {
+      filter: function(feature, layer) {
+        return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
+      }
+    });//.addTo(map);
+    
+  });	
 	
 	
   function change_layer() {
-    var valinta_arvo = document.getElementById('taso_filter').value;
+    var valinta = document.getElementById('taso_filter');
+    var valinta_arvo = valinta.value;
+    
     if (valinta_arvo == 'testi1') {
       alert('testiääääää!');
     }
     else if (valinta_arvo == 'testi2') {
+      others.addTo(map);
       alert('tää toimii :OOOOO');	
     }
   }
