@@ -18,35 +18,6 @@
 
 
 
-function onEachFeature(feature, layer) {
-	var popupContent = "<p>I started out as a GeoJSON " +
-			feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
-
-	if (feature.properties && feature.properties.popupContent) {
-		popupContent += feature.properties.popupContent;
-	}
-
-	layer.bindPopup(popupContent);
-  }
-
-var all = "https://pesonet1.github.io/Leaflet/all.json"
-
-var viheralueet = $.getJSON(all);
-viheralueet.then(function(data) {
-  L.geoJson(viheralueet, {
-    filter: function(feature, layer) {
-      if (feature.properties) {
-        return feature.properties.kayttotarkoitus == "Leikkipaikka";
-      }
-      //return false;
-    },
-    onEachFeature: onEachFeature
-  }).addTo(map);
-});	
-
-
-
-
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
   var valinta_arvo = valinta.value;
@@ -87,6 +58,35 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 	
+  function onEachFeature(feature, layer) {
+	var popupContent = "<p>I started out as a GeoJSON " +
+			feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+
+	if (feature.properties && feature.properties.popupContent) {
+		popupContent += feature.properties.popupContent;
+	}
+
+	layer.bindPopup(popupContent);
+  }
+
+var all = "https://pesonet1.github.io/Leaflet/all.json"
+
+var viheralueet = $.getJSON(all);
+viheralueet.then(function(data) {
+  L.geoJson(viheralueet, {
+    filter: function(feature, layer) {
+      if (feature.properties) {
+        return feature.properties.kayttotarkoitus == "Leikkipaikka";
+      }
+      //return false;
+    },
+    onEachFeature: onEachFeature
+  }).addTo(map);
+});	
+  
+  
+  
+  
   	
   /*	
   //WFS-tasot
