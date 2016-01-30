@@ -62,22 +62,7 @@ function init() {
   
   var all = "https://pesonet1.github.io/Leaflet/all.json"
   
-  function onEachFeature(feature, layer) {
-    popupOptions = {maxWidth: 200};
-    layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
-      "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
-      "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
-      "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
-      "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
-      ,popupOptions);
-      
-    //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
-    layer.on({
-      mousemove: mousemove,
-      mouseout: mouseout, 
-      click: addBuffer
-    });
-  }
+  
   
   
   var filter = null;
@@ -102,7 +87,7 @@ function init() {
             
           },
           filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == filter);},
-          onEachFeature: onEachFeature
+          onEachFeature: onEachFeature_viheralueet
             
         }).addTo(tasot);
       }
@@ -243,9 +228,25 @@ function init() {
     }
   }); 
   
+  
+  
+  function onEachFeature_viheralueet(feature, layer) {
+    popupOptions = {maxWidth: 200};
+    layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
+      "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
+      "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
+      "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
+      "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
+      ,popupOptions);
+      
+    //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
+    layer.on({
+      mousemove: mousemove,
+      mouseout: mouseout, 
+      click: addBuffer
+    });
+  }
 
-
-	
   //Tasojen funktioita: kohteeseen zoomaus ja kohteen korostus
   function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
@@ -316,7 +317,7 @@ function init() {
     }
   });
 	
-  karttatasot.addEventListener('change', function() {
+  leikkipaikat.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
       filter = "Leikkipaikka"
@@ -327,8 +328,33 @@ function init() {
       map.removeLayer(tasot);
     }
   });
-	
-	
+
+  uimaranta_alue.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Uimaranta-alue"
+      fillcolor = "#336699"
+      update_layer();
+      tasot.addTo(map)
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+
+  koira_aitaus.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Koira-aitaus"
+      fillcolor = "#666699"
+      update_layer();
+      tasot.addTo(map)
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+
+
+
   //Tama scripti hoitaa sen, etta yksi laatikoista voi vain olla kerrallaan valittuna
   $("input:checkbox").on('click', function() {
     var $box = $(this);
