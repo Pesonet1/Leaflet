@@ -15,6 +15,37 @@
     return open.apply(this, args);
   };
 })();
+
+
+var all = "https://pesonet1.github.io/Leaflet/all.json"
+  
+  var viheralueet = $.getJSON(all);
+  viheralueet.then(function(data) {
+    //var allbusinesses = L.geoJson(data).addTo(map);
+  
+    var others = L.geoJson(data, {
+      filter: function(feature, layer) {
+        return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
+      }
+    });//.addTo(map);
+    
+  });	
+	
+	
+  function change_layer() {
+    var valinta = document.getElementById('taso_filter');
+    var valinta_arvo = valinta.value;
+    
+    if (valinta_arvo == 'testi1') {
+      alert('testiääääää!');
+    }
+    else if (valinta_arvo == 'testi2') {
+      others.addTo(map);
+      alert('tää toimii :OOOOO');	
+    }
+  }
+
+
     
   
 function init() {
@@ -177,34 +208,6 @@ function init() {
     }
   }); 
   */
-  
-  var all = "https://pesonet1.github.io/Leaflet/all.json"
-  
-  var viheralueet = $.getJSON(all);
-  viheralueet.then(function(data) {
-    //var allbusinesses = L.geoJson(data).addTo(map);
-  
-    var others = L.geoJson(data, {
-      filter: function(feature, layer) {
-        return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
-      }
-    });//.addTo(map);
-    
-  });	
-	
-	
-  function change() {
-    var valinta = document.getElementById('taso_filter');
-    var valinta_arvo = valinta.value;
-    
-    if (valinta_arvo == 'testi1') {
-      alert('testiääääää!');
-    }
-    else if (valinta_arvo == 'testi2') {
-      others.addTo(map);
-      alert('tää toimii :OOOOO');	
-    }
-  }
 	
 	
 	
