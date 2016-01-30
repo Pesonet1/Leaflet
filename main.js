@@ -1,5 +1,5 @@
 //CORS:n aktivointi, mahdollistaa pyyntöjen tekemisen verkkopiirin ulkopuolelta (domain)
-/*
+
 (function() {
   var cors_api_host = 'cors-anywhere.herokuapp.com';
   var cors_api_url = 'https://' + cors_api_host + '/';
@@ -16,7 +16,7 @@
     return open.apply(this, args);
   };
 })();
-*/
+
 
 
 function change_layer() {
