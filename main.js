@@ -193,7 +193,7 @@ function init() {
   });	
 	
 	
-  function change_layer() {
+  function change() {
     var valinta = document.getElementById('taso_filter');
     var valinta_arvo = valinta.value;
     
