@@ -18,7 +18,20 @@
 })();
 */
 
-
+//var all = "https://pesonet1.github.io/Leaflet/all.json"
+//var viheralueet = $.getJSON(all);
+/*
+viheralueet.then(function(data) {
+  //var allbusinesses = L.geoJson(data).addTo(map);
+  
+  var others = L.geoJson(data, {
+    filter: function(feature, layer) {
+      return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
+    }
+  });//.addTo(map);
+ 
+});	
+*/
 
 
 
@@ -203,20 +216,7 @@ function init() {
   */
 
 
-  var all = "https://pesonet1.github.io/Leaflet/all.json"
-//var viheralueet = $.getJSON(all);
-/*
-viheralueet.then(function(data) {
-  //var allbusinesses = L.geoJson(data).addTo(map);
   
-  var others = L.geoJson(data, {
-    filter: function(feature, layer) {
-      return feature.properties.kayttotarkoitus == "Ulkoilumetsä";
-    }
-  });//.addTo(map);
- 
-});	
-*/
 /*
 $.getJSON(all, function(data) {
     for (var i = 0; i < data.length; i++) {
@@ -234,7 +234,7 @@ $.getJSON(all, function(data) {
 var overlay = L.layerGroup().addTo(map);
 var layers; 
 
-$.getJSON(all, function(dams) {   
+$.getJSON(viheralueet_layer, function(dams) {   
   map.on('ready', function(e) {
     layers = e.target;
     //call showDams function from checkbox onclick event
@@ -262,7 +262,7 @@ function showDams() {
       //addData method called on damsLayer    
       damsLayer.addData(layer);
     }
-  }); //.addTo(map);
+  }).addTo(map);
 } 
 
 
