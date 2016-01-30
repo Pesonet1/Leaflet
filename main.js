@@ -67,7 +67,7 @@ function change_layer() {
     filter = "Leikkipaikka"
     fillcolor = "#666699"
     update_layer();
-    tasot.addTo(map);
+    //tasot.addTo(map);
   }
 }
 
@@ -354,36 +354,12 @@ function init() {
     }
   });
 	
-  leikkipaikat.addEventListener('change', function() {
+  karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Leikkipaikka"
-      fillcolor = "#666699"
-      update_layer();
-      tasot.addTo(map)
-    } else {
-      map.removeLayer(tasot);
-    }
-  });
-
-  uimaranta_alue.addEventListener('change', function() {
-    var checked = this.checked;
-    if (checked) {
-      filter = "Uimaranta-alue"
-      fillcolor = "#336699"
-      update_layer();
-      tasot.addTo(map)
-    } else {
-      map.removeLayer(tasot);
-    }
-  });
-
-  koira_aitaus.addEventListener('change', function() {
-    var checked = this.checked;
-    if (checked) {
-      filter = "Koira-aitaus"
-      fillcolor = "#666699"
-      update_layer();
+      //filter = "Leikkipaikka"
+      //fillcolor = "#666699"
+      //update_layer();
       tasot.addTo(map)
     } else {
       map.removeLayer(tasot);
