@@ -60,8 +60,7 @@ function init() {
   }).addTo(map);
 	
   
-  //var all = "https://pesonet1.github.io/Leaflet/all.json"
-  var all = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
+  var all = "https://pesonet1.github.io/Leaflet/all.json"
   
   function onEachFeature(feature, layer) {
     popupOptions = {maxWidth: 200};
@@ -110,11 +109,11 @@ function init() {
     });
   }
   	
-  /*	
+  	
   //WFS-tasot
-  var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
-  //var paavo_kartta = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
-  
+  //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
+  var paavo_kartta = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
+  /*
   //Viheralueet WFS
   var viheralueet_layer = $.ajax({ 
     url: viheralueet_wfs,
@@ -189,7 +188,7 @@ function init() {
   	
   }); 
   */
-  /*
+  
   //Paavo WFS
   var paavo_layer = $.ajax({ 
     url: paavo_kartta,
@@ -243,7 +242,7 @@ function init() {
       }).addTo(tasot);//.addTo(map);
     }
   }); 
-  */
+  
 
 
 	
