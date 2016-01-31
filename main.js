@@ -272,7 +272,7 @@ function init() {
       buffer_layer.setStyle({
       	color: "red",
         weight: 2,
-        fillColor: "green",
+        fillColor: "orange",
         opacity: 1,
         fillOpacity: 0.5
       });
