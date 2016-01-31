@@ -66,6 +66,7 @@ function change_layer() {
   else if (valinta_arvo == 'testi2') {
     filter = "Leikkipaikka"
     fillcolor = "#666699"
+    //Ei saa suoraan kutsuttua funktiota init()-funktion sisältä...
     update_layer();
     //tasot.addTo(map);
   }
@@ -85,10 +86,6 @@ function init() {
   	
   //Scale
   L.control.scale().addTo(map);
-  	
-  
-  //WFS-tasot lisataan tasot grouppiin
-  var tasot = new L.LayerGroup();
   
   
   var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
@@ -98,12 +95,18 @@ function init() {
       'Imagery © <a href="http://mapbox.com">Mapbox</a>',*/
     id: 'mapbox.light'
   }).addTo(map);
+
+  //WFS-layerit lisataan tasot grouppiin
+  var tasot = new L.LayerGroup();
 	
-  
+	
+  //Kaytetaan valmiiksi ladattua aineistoa -> on huomattavasti nopeampi kuin aina ladata aineisto uudestaan
   var all = "https://pesonet1.github.io/Leaflet/all.json"
   
   var filter = null;
   var fillcolor = null;
+  
+  //Taman funktion avulla uusi karttataso voidaan kutsua kayttaen haluttua filteria ja tason varia
   function update_layer() {
     var viheralueet = $.ajax({
       url: all,
@@ -113,6 +116,7 @@ function init() {
           style: function (feature) {
             var fillColor, 
             kaytto = feature.properties.kayttotarkoitus;
+            
             if ( kaytto == filter ) fillColor = "#666699";
                 
             return {
@@ -129,13 +133,14 @@ function init() {
         }).addTo(tasot);
       }
     });
+    
     tasot.addTo(map);
   }
   	
   	
   //WFS-tasot
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
-  var paavo_kartta = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
+  
   /*
   //Viheralueet WFS
   var viheralueet_layer = $.ajax({ 
@@ -212,9 +217,11 @@ function init() {
   }); 
   */
   
+  var paavo_wfs = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
+  
   //Paavo WFS
   var paavo_layer = $.ajax({ 
-    url: paavo_kartta,
+    url: paavo_wfs,
     datatype:"json",
     jsonCallback: 'getJson',
     success : function (response) {
@@ -280,7 +287,7 @@ function init() {
     //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
     layer.on({
       mousemove: mousemove,
-      mouseout: mouseout, 
+      //mouseout: mouseout, 
       click: addBuffer
     });
   }
