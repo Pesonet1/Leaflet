@@ -148,6 +148,7 @@ function init() {
       success: function(response) {
         viheralueet = L.geoJson(response, {
           style: function (feature) {
+            var fillColor = fillcolor
             return {
       	      color: "black", 
       	      weight: 1, 
