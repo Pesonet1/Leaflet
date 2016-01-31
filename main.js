@@ -60,8 +60,8 @@ function change_layer() {
     alert('testiääääää!');
   }
   else if (valinta_arvo == 'testi2') {
-    filter = "Leikkipaikka"
-    fillcolor = "#666699"
+    filter = "Ulkoilumetsä"
+    fillcolor = "red"
     //Ei saa suoraan kutsuttua funktiota init()-funktion sisältä...
     //init.update_layer();
     //tasot.addTo(map);
@@ -361,8 +361,8 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Leikkipaikka"
-      fillcolor = "#666699"
+      //filter = "Leikkipaikka"
+      //fillcolor = "#666699"
       update_layer();
       //tasot.addTo(map)
     } else {
