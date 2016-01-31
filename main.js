@@ -19,43 +19,6 @@
 */
 
 
-/*
-  //WFS-layerit lisataan tasot grouppiin
-  var tasot = new L.LayerGroup();
-
-  var all = "https://pesonet1.github.io/Leaflet/all.json"
-  
-  var filter = null;
-  var fillcolor = null;
-  function update_layer() {
-    var viheralueet = $.ajax({
-      url: all,
-      type: 'GET',
-      success: function(response) {
-        viheralueet = L.geoJson(response, {
-          style: function (feature) {
-            var fillColor, 
-            kaytto = feature.properties.kayttotarkoitus;
-            if ( kaytto == filter ) fillColor = "#666699";
-                
-            return {
-      	      color: "black", 
-      	      weight: 1, 
-      	      fillColor: fillColor, 
-      	      fillOpacity: 0.8 
-            };
-            
-          },
-          filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == filter);} //,
-          //onEachFeature: onEachFeature_viheralueet
-            
-        }).addTo(tasot);
-      }
-    });
-  }
- */
-
-
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
   var valinta_arvo = valinta.value;
@@ -394,8 +357,11 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
+      //fillcolor = "blue"
+      //update_all();
+      filter = "%"
       fillcolor = "blue"
-      update_all();
+      update_layer();
       //tasot.addTo(map)
     } else {
       map.removeLayer(kaikki);
