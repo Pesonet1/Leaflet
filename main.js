@@ -359,7 +359,7 @@ function init() {
     if (checked) {
       //fillcolor = "blue"
       //update_all();
-      filter = "%"
+      filter = filter.querySelector("%")
       fillcolor = "blue"
       update_layer();
       //tasot.addTo(map)
