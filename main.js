@@ -250,7 +250,7 @@ function init() {
   function mouseout(e) {
     //Jostain syysta ei tunnista enaan viheralueet tasoa -> funktion sisalla, mutta silti poistaa stylen?!
     var layer = e.target;
-    layer.resetStyle(e.target);
+    layer.resetStyle();
     //viheralueet.resetStyle(e.target);
   }
 
