@@ -44,7 +44,6 @@ function init() {
   //WFS-layerit lisataan tasot grouppiin
   var tasot = new L.LayerGroup();
   var kaikki = new L.LayerGroup();
-  var ulkoilumetsat = new L.LayerGroup();
 	
   //Kaytetaan valmiiksi ladattua aineistoa -> on huomattavasti nopeampi kuin aina ladata aineisto uudestaan
   var all = "https://pesonet1.github.io/Leaflet/all.json"
@@ -79,11 +78,11 @@ function init() {
           filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == filter);},
           onEachFeature: onEachFeature_viheralueet
             
-        });//.addTo(tasot);
+        }).addTo(tasot);
       }
     });
     
-    //tasot.addTo(map);
+    tasot.addTo(map);
   }
  
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
@@ -326,9 +325,7 @@ function init() {
     if (checked) {
       filter = "Ulkoilumetsä"
       fillcolor = "red"
-      var testi = update_layer();
-      testi.addTo(ulkoilumetsat);
-      ulkoilumetsat.addTo(map);
+      update_layer();
     } else {
       map.removeLayer(tasot);
     }
