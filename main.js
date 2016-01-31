@@ -269,9 +269,9 @@ function init() {
     
       //Jostain syysta ei vaihda muotoilua, vaikka sen pitaisi
       buffered.properties = {
-        fill: "#a63603",
-        stroke: "red",
-        stroke-width: 2
+        "fill": "black",
+        "stroke": "red",
+        "stroke-width": 2
       };
     
       var buffer_layer = L.geoJson(buffered).addTo(map);
