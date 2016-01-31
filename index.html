@@ -45,14 +45,14 @@
         }
       }
       
-      var checkboxes = document.getElementsByName('layers');
-      var selected = [];
-      for (var i=0; i<checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-          selected.push(checkboxes[i].value);
+      function validateChecked() {
+  	chkIdx = 0;
+  	numChecked = 0;
+  	while (document.getElementById('layers'+chkIdx)) {
+    	  if (document.getElementById('layers'+chkIdx).checked) numChecked++;
+    	  chkIdx++;
         }
       }
-      
     </script>
     
     <div class="span9" style="height:100%">
