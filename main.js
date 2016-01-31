@@ -369,7 +369,8 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = (feature.properties.type == "Polygon")
+      kaytto = feature.type
+      filter = "Polygon"
       fillcolor = "blue"
       update_layer();
       //tasot.addTo(map)
