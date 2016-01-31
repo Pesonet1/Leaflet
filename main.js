@@ -52,10 +52,6 @@
 */  
 
 
-
-init = init()
-
-
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
   var valinta_arvo = valinta.value;
@@ -67,7 +63,7 @@ function change_layer() {
     filter = "Leikkipaikka"
     fillcolor = "#666699"
     //Ei saa suoraan kutsuttua funktiota init()-funktion sisältä...
-    init.update_layer();
+    //init.update_layer();
     //tasot.addTo(map);
   }
 }
