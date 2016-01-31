@@ -51,7 +51,7 @@
       }
     });
   }
-*/ 
+ */
 
 
 function change_layer() {
@@ -62,11 +62,11 @@ function change_layer() {
     alert('testiääääää!');
   }
   else if (valinta_arvo == 'testi2') {
-    filter = "Ulkoilumetsä"
-    fillcolor = "red"
-    window.init = init();
+    //filter = "Ulkoilumetsä"
+    //fillcolor = "red"
+    //window.init = init();
     //Ei saa suoraan kutsuttua funktiota init()-funktion sisältä...
-    window.init.update_layer();
+    //window.init.update_layer();
     //tasot.addTo(map);
   }
 }
