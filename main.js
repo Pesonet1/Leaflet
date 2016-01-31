@@ -274,15 +274,16 @@ function init() {
         "stroke-width": 2
       };
       */
-      buffered.setStyle({
+    
+      var buffer_layer = L.geoJson(buffered).addTo(map);
+      buffer_layer.setStyle({
       	color: "red",
         weight: 3,
         fillColor: "black"
         //opacity: 0.3,
         //illOpacity: 0.9
       });
-    
-      var buffer_layer = L.geoJson(buffered).addTo(map);
+      
     }
   
     var removeButton = document.getElementById('remove');
