@@ -252,8 +252,8 @@ function init() {
     var layer = e.target;
     layer.setStyle({
       weight: 1,
-      opacity: 1,
-      illOpacity: 1
+      //opacity: 1,
+      illOpacity: 0.8
     });
     //viheralueet.resetStyle(e.target);
   }
