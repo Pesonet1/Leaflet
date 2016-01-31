@@ -34,7 +34,7 @@
  
     
     <!-- Sivupalkin piilotus -->
-    <script>
+    <!--<script>
       function toggleControlPanel(){
         var sidebar = document.getElementById("sidebar");
         if (sidebar.style.display == "none") {
@@ -44,24 +44,14 @@
           sidebar.style.display = "none";
         }
       }
-    </script>
+    </script>-->
     
     <div class="span9" style="height:100%">
       <div id="map-wrapper">
     	<div id="map"></div>
-    	<!--
-  	<div id="button-wrapper">  
-	    <button class="btn btn-primary" title="Sivupalkki" onClick="toggleControlPanel()" href="#toggle">Valikko</button>   
-    	</div>
-    	-->
       </div>
     
-      <div id='sidebar' class='sidebar'> <!-- style="display: none;">-->
-      	<!--
-    	<button class="btn btn-primary" title="Sivupalkki" onClick="toggleControlPanel()" href="#toggle">Sulje valikko</button>
-  
-    	<br>
-    	-->
+      <div id='sidebar' class='sidebar'>
     	
     	<h1>Helsingin vihertiheys</h1>
     	<p>Helsingin viherverkosto perustuu <a href="http://www.yleiskaava.fi/2013/miten-rakentaminen-ja-virkistysalueet-sovitetaan-yhteen/" target="_blank">laajoihin viheralueisiin eli vihersormiin</a>. Kaupungin pinta-alasta 40 % on viher- tai virkistysaluetta ja metsän osuus on noin 20 %. Kaupunkirakenteen tiivistyessä osa täydennysrakentamisen paineesta kohdistuu viheralueille.</p>
@@ -71,8 +61,9 @@
     	<p>
     	
  	<label><input type="checkbox" id="karttataso" value="12" name="layers[]"/> Kaikki viheralueet</label><br/>
+ 	
  	<p>
- 	<form action="">
+
     	<label><input type="checkbox" id="ulkoilumetsa" value="1" name="layers[]"/> Ulkoilumetsät</label><br/>
 	<label><input type="checkbox" id="kartano" value="2" name="layers[]"/> Kartano- ja huvila-alueet</label><br/>
 	<label><input type="checkbox" id="siirtola" value="3" name="layers[]"/> Siirtolapuutarhat, viljelypalsta-alueet ja kesämaja-alueet</label><br/>
@@ -84,7 +75,6 @@
     	<label><input type="checkbox" id="muut_asema" value="9" name="layers[]"/> Muut asemakaavoitetut viheralueet</label><br/>	
 	<label><input type="checkbox" id="yleiskaava" value="10" name="layers[]"/> Yleiskaavan viheralueet</label><br/>
 	<label><input type="checkbox" id="muut" value="11" name="layers[]"/> Muut viheralueet</label><br/>
-	</form>
 
     	<p>
  
@@ -97,14 +87,6 @@
 	  <a href="http://www.hri.fi/fi/dataset/helsingin-kaupungin-yleisten-alueiden-rekisteri" target="_blank">Helsingin kaupungin yleisten alueiden rekisteri</a><br/>
 	  <a href="http://www.tilastokeskus.fi/tup/rajapintapalvelut/paavo.html" target="_blank">Tilastokeskuksen Paavo-rajapinta</a>
 	</p>
- 
- 	<!--
-    	<select id="taso_filter" onchange="change_layer()">
-    	  <option value="Valitse arvo">Valitse arvo</option>
-          <option value="testi1">testi1</option>
-	  <option value="testi2">testi2</option>
-        </select>
-    	-->
   
       </div>
     </div>
