@@ -157,14 +157,14 @@ function init() {
       	      fillOpacity: 0.8 
             };
                     	
-            },
-            onEachFeature: onEachFeature_viheralueet
+          },
+          onEachFeature: onEachFeature_viheralueet
         
-        }).addTo(tasot);//.addTo(map);
+        }).addTo(kaikki);//.addTo(map);
       }
     });
     
-    tasot.addTo(map);
+    kaikki.addTo(map);
   }
   
   
