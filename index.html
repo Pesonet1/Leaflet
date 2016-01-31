@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Leaflet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
   </head>  
     
   <body onload="init()">
@@ -50,14 +49,17 @@
     <div class="span9" style="height:100%">
       <div id="map-wrapper">
     	<div id="map"></div>
+    	<!--
   	<div id="button-wrapper">  
 	    <button class="btn btn-primary" title="Sivupalkki" onClick="toggleControlPanel()" href="#toggle">Valikko</button>   
     	</div>
+    	-->
       </div>
     
-      <div id='sidebar' class='sidebar' style="display: none;">
+      <div id='sidebar' class='sidebar'> <!-- style="display: none;">-->
+      	<!--
     	<button class="btn btn-primary" title="Sivupalkki" onClick="toggleControlPanel()" href="#toggle">Sulje valikko</button>
-    	  
+    	-->  
     	<br>
     	
     	<h1>Vihreä Helsinki?</h1>
@@ -83,18 +85,16 @@
     
     	<br>
  
+ 	<!--
     	<select id="taso_filter" onchange="change_layer()">
     	  <option value="Valitse arvo">Valitse arvo</option>
           <option value="testi1">testi1</option>
 	  <option value="testi2">testi2</option>
         </select>
-    	
+    	-->
   
       </div>
     </div>
-    <!--	
-    <nav id='menu-ui' class='menu-ui'></nav>
-    <nav id='filters' class='filter-ui'></nav>-->
     
   </body>
 </html>
