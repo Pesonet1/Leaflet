@@ -101,40 +101,13 @@ function init() {
     
     tasot.addTo(map);
   }
-  
-  
-  //Taman funktion avulla uusi karttataso voidaan kutsua kayttaen haluttua filteria ja tason varia
-  function update_all() {
-    var viheralueet = $.ajax({
-      url: all,
-      type: 'GET',
-      success: function(response) {
-        viheralueet = L.geoJson(response, {
-          style: function (feature) {
-            var fillColor = fillcolor
-            return {
-      	      color: "black", 
-      	      weight: 1, 
-      	      fillColor: fillColor, 
-      	      fillOpacity: 0.8 
-            };
-            
-          },
-          onEachFeature: onEachFeature_viheralueet
-            
-        }).addTo(kaikki);
-      }
-    });
-    kaikki.addTo(map);
-  }	
+ 
   	
-  //WFS-tasot
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
-  
-  /*
   //Viheralueet WFS
+  function update_all() {
   var viheralueet_layer = $.ajax({ 
-    url: viheralueet_wfs,
+    url: all,
     datatype:"json",
     jsonCallback: 'getJson',
     success : function (response) {
@@ -185,27 +158,14 @@ function init() {
           };
                     	
           },
-          onEachFeature: function (feature, layer) {
-            popupOptions = {maxWidth: 200};
-            layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
-              "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
-              "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
-              "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
-              "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
-              ,popupOptions);
-      
-          //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
-          layer.on({
-      	    mousemove: mousemove,
-            mouseout: mouseout, 
-            click: addBuffer
-          });
+          onEachFeature: onEachFeature_viheralueet
         }
       }).addTo(tasot);//.addTo(map);
     }
   	
-  }); 
-  */
+  });
+  }
+  
   
   //var paavo_wfs = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
   var paavo_wfs = "https://pesonet1.github.io/Leaflet/paavo.json"
@@ -357,7 +317,6 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      fillcolor = "green"
       update_all();
       //tasot.addTo(map)
     } else {
