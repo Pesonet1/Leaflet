@@ -246,7 +246,7 @@ function init() {
 
   function mouseout(e) {
     //Jostain syysta ei tunnista enaan viheralueet tasoa -> funktion sisalla, mutta silti poistaa stylen?!
-    viheralueet.resetStyle(e.target);
+    update_layer().viheralueet.resetStyle(e.target);
   }
 
   //Funktio bufferin luonnista, joka luodaan viheralueetta klikatessa
