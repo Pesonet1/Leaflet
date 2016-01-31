@@ -251,7 +251,9 @@ function init() {
     //Jostain syysta ei tunnista enaan viheralueet tasoa -> funktion sisalla, mutta silti poistaa stylen?!
     var layer = e.target;
     layer.setStyle({
-      null	
+      weight: 1,
+      opacity: 1,
+      illOpacity: 1
     });
     //viheralueet.resetStyle(e.target);
   }
