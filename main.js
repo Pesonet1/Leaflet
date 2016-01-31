@@ -103,8 +103,8 @@ function init() {
   //Kaytetaan valmiiksi ladattua aineistoa -> on huomattavasti nopeampi kuin aina ladata aineisto uudestaan
   var all = "https://pesonet1.github.io/Leaflet/all.json"
   
-  //var filter = null;
-  //var fillcolor = null;
+  var filter = null;
+  var fillcolor = null;
   
   //Taman funktion avulla uusi karttataso voidaan kutsua kayttaen haluttua filteria ja tason varia
   function update_layer() {
