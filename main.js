@@ -117,7 +117,7 @@ function init() {
             var fillColor, 
             kaytto = feature.properties.kayttotarkoitus;
             
-            if ( kaytto == filter ) fillColor = "#666699";
+            if ( kaytto == filter ) fillColor = fillcolor;
                 
             return {
       	      color: "black", 
@@ -365,8 +365,8 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Leikkipaikka"
-      fillcolor = "#666699"
+      filter = "Ulkoilumetsä"
+      fillcolor = "red"
       update_layer();
       //tasot.addTo(map)
     } else {
