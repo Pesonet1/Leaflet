@@ -129,6 +129,7 @@ function init() {
         }).addTo(tasot);
       }
     });
+    tasot.addTo(map);
   }
   	
   	
@@ -360,7 +361,7 @@ function init() {
       filter = "Leikkipaikka"
       fillcolor = "#666699"
       update_layer();
-      tasot.addTo(map)
+      //tasot.addTo(map)
     } else {
       map.removeLayer(tasot);
     }
