@@ -266,13 +266,21 @@ function init() {
       var layer = e.target;
       var layer_geojson = layer.toGeoJSON();
       var buffered = turf.buffer(layer_geojson, radius, 'miles');
-    
+    	/*
       //Jostain syysta ei vaihda muotoilua, vaikka sen pitaisi
       buffered.properties = {
         "fill": "black",
         "stroke": "red",
         "stroke-width": 2
       };
+      */
+      buffered.setStyle({
+      	color: "red",
+      	fillColor: "black",
+        weight: 3,
+        opacity: 0.3,
+        illOpacity: 0.9
+      });
     
       var buffer_layer = L.geoJson(buffered).addTo(map);
     }
