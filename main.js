@@ -100,7 +100,7 @@ function init() {
   
   //WFS-layerit lisataan tasot grouppiin
   var tasot = new L.LayerGroup();
-	
+  var kaikki = new L.LayerGroup();
 	
   //Kaytetaan valmiiksi ladattua aineistoa -> on huomattavasti nopeampi kuin aina ladata aineisto uudestaan
   var all = "https://pesonet1.github.io/Leaflet/all.json"
@@ -138,7 +138,31 @@ function init() {
     
     tasot.addTo(map);
   }
-  	
+  
+  
+  //Taman funktion avulla uusi karttataso voidaan kutsua kayttaen haluttua filteria ja tason varia
+  function update_all() {
+    var viheralueet = $.ajax({
+      url: all,
+      type: 'GET',
+      success: function(response) {
+        viheralueet = L.geoJson(response, {
+          style: function (feature) {
+            return {
+      	      color: "black", 
+      	      weight: 1, 
+      	      fillColor: fillColor, 
+      	      fillOpacity: 0.8 
+            };
+            
+          },
+          onEachFeature: onEachFeature_viheralueet
+            
+        }).addTo(kaikki);
+      }
+    });
+    kaikki.addTo(map);
+  }	
   	
   //WFS-tasot
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
@@ -369,12 +393,11 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Leikkipaikka"
       fillcolor = "blue"
-      update_layer();
+      update_all();
       //tasot.addTo(map)
     } else {
-      map.removeLayer(tasot);
+      map.removeLayer(kaikki);
     }
   });
 	
