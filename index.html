@@ -44,12 +44,6 @@
           sidebar.style.display = "none";
         }
       }
-      
-      function checkstatus()
-	{for(count=0;count<4;count++)
-	{if (MyForm.MyCheckbox[count].checked)
-	  alert(MyForm.MyCheckbox[count].value+” is selected”);
-      }
     </script>
     
     <div class="span9" style="height:100%">
@@ -75,7 +69,7 @@
     	<h2>Näytä kartalla:</h2>
     	
     	<p>
-    	<form name="MyForm">
+    		
  	<label><input type="checkbox" id="karttataso" value="12" name="layers"/> Kaikki viheralueet</label><br/>
  	<p>
     	<label><input type="checkbox" id="ulkoilumetsa" value="1" name="layers"/> Ulkoilumetsät</label><br/>
@@ -89,7 +83,6 @@
     	<label><input type="checkbox" id="muut_asema" value="9" name="layers"/> Muut asemakaavoitetut viheralueet</label><br/>	
 	<label><input type="checkbox" id="yleiskaava" value="10" name="layers"/> Yleiskaavan viheralueet</label><br/>
 	<label><input type="checkbox" id="muut" value="11" name="layers"/> Muut viheralueet</label><br/>
-    	</form>
     	<p>
  
     	<label><input type="checkbox" id="box_150" value="1" name="fooby[1][]"/> 150m bufferi</label>
