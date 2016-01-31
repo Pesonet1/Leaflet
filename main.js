@@ -296,7 +296,7 @@ function init() {
 	
 	
 	
-  //Bufferikoon ja layerin valittavaksi tarvittavat eventlistenerit
+  //Bufferikoon eventlistenerit
   box_150.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
@@ -315,11 +315,13 @@ function init() {
     }
   });
 
+
+
+  //Layereiden eventlistenerit
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
       update_all();
-      //tasot.addTo(map)
     } else {
       map.removeLayer(kaikki);
     }
@@ -337,6 +339,115 @@ function init() {
     }
   });
 
+  kartano.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Kartano- ja huvila-alue"
+      fillcolor = "#996699"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  siirtola.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Kesämaja-alue" || kaytto == "Siirtolapuutarha" || kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue"
+      fillcolor = "#666699"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  koira.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Koira-aitaus"
+      fillcolor = "#666699"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  leikki.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Leikkipaikka" || kaytto == "Leikkipuisto"
+      fillcolor = "#666699"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  luonto.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Luonnonsuojelualue"
+      fillcolor = "#336666"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  uima.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama"
+      fillcolor = "#336699"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  hauta.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = kaytto.indexOf("Haudat") > -1 )
+      fillcolor = "#666666"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  muut_asema.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = kaytto.indexOf("semakaavoitettu") > -1)
+      fillcolor = "#336666"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  yleiskaava.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Yleiskaavan viheralue"
+      fillcolor = "#336666"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+  
+  muut.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      filter = "Muut viheralueet"
+      fillcolor = "#fff"
+      update_layer();
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
   
 
   //Tama scripti hoitaa sen, etta yksi laatikoista voi vain olla kerrallaan valittuna
