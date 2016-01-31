@@ -18,7 +18,7 @@
 })();
 */
 
-
+/*
 function change_layer() {
   var valinta = document.getElementById('taso_filter');
   var valinta_arvo = valinta.value;
@@ -35,7 +35,7 @@ function change_layer() {
     //tasot.addTo(map);
   }
 }
-
+*/
  
   
 function init() {
@@ -357,11 +357,8 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      //fillcolor = "blue"
-      //update_all();
-      filter = "id=*"
-      fillcolor = "blue"
-      update_layer();
+      fillcolor = "green"
+      update_all();
       //tasot.addTo(map)
     } else {
       map.removeLayer(kaikki);
