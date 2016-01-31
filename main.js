@@ -271,8 +271,8 @@ function init() {
       //Asetetaan bufferin tyyli
       buffer_layer.setStyle({
       	color: "red",
-        weight: 3,
-        fillColor: "black"
+        weight: 5,
+        fillColor: "black",
         opacity: 0.5,
         illOpacity: 0.9
       });
