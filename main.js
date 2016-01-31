@@ -359,8 +359,7 @@ function init() {
     if (checked) {
       //fillcolor = "blue"
       //update_all();
-      var s = filter
-      filter = s.match(/ */)
+      filter = "id=*"
       fillcolor = "blue"
       update_layer();
       //tasot.addTo(map)
