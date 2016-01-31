@@ -60,7 +60,7 @@ function init() {
       //datatype:"json",
       //jsonCallback: 'getJson',
       success: function(response) {
-        viheralueet = L.geoJson(response, {
+        var viheralueet = L.geoJson(response, {
           style: function (feature) {
             var fillColor, 
             kaytto = feature.properties.kayttotarkoitus;
@@ -94,7 +94,7 @@ function init() {
       //datatype:"json",
       //jsonCallback: 'getJson',
       success : function (response) {
-        viheralueet = L.geoJson(response, {
+        var viheralueet = L.geoJson(response, {
           style: function (feature) {
             var fillColor, 
             kaytto = feature.properties.kayttotarkoitus;
