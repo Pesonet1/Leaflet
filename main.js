@@ -17,6 +17,7 @@
   };
 })();
 
+/*
   //WFS-layerit lisataan tasot grouppiin
   var tasot = new L.LayerGroup();
 
@@ -50,7 +51,7 @@
       }
     });
   }
- 
+*/ 
 
 
 function change_layer() {
@@ -93,7 +94,7 @@ function init() {
     id: 'mapbox.light'
   }).addTo(map);
 
-  /*
+  
   //WFS-layerit lisataan tasot grouppiin
   var tasot = new L.LayerGroup();
 	
@@ -134,7 +135,7 @@ function init() {
     
     tasot.addTo(map);
   }
-  */	
+  	
   	
   //WFS-tasot
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
@@ -363,10 +364,10 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      //filter = "Leikkipaikka"
-      //fillcolor = "#666699"
-      //update_layer();
-      tasot.addTo(map)
+      filter = "Leikkipaikka"
+      fillcolor = "#666699"
+      update_layer();
+      //tasot.addTo(map)
     } else {
       map.removeLayer(tasot);
     }
