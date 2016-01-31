@@ -53,7 +53,7 @@
 
 
 
-
+init = init()
 
 
 function change_layer() {
@@ -67,7 +67,7 @@ function change_layer() {
     filter = "Leikkipaikka"
     fillcolor = "#666699"
     //Ei saa suoraan kutsuttua funktiota init()-funktion sisältä...
-    init().update_layer();
+    init.update_layer();
     //tasot.addTo(map);
   }
 }
