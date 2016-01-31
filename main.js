@@ -313,8 +313,8 @@ function init() {
   }
 
   function mouseout(e) {
-    //viheralueet.resetStyle(e.target);
-    resetStyle(e.target);
+    //Jostain syysta ei tunnista enaan viheralueet tasoa -> funktion sisalla, mutta silti poistaa stylen?!
+    viheralueet.resetStyle(e.target);
   }
 
   //Funktio bufferin luonnista, joka luodaan viheralueetta klikatessa
@@ -362,8 +362,18 @@ function init() {
       radius = null
     }
   });
-	
+
   karttataso.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      update_layer();
+      //tasot.addTo(map)
+    } else {
+      map.removeLayer(tasot);
+    }
+  });
+	
+  ulkoilumetsa.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
       filter = "Ulkoilumetsä"
@@ -375,7 +385,7 @@ function init() {
     }
   });
 
-
+  
 
   //Tama scripti hoitaa sen, etta yksi laatikoista voi vain olla kerrallaan valittuna
   $("input:checkbox").on('click', function() {
