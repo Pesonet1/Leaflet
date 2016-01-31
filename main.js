@@ -268,9 +268,9 @@ function init() {
       var buffered = turf.buffer(layer_geojson, radius, 'miles');
     
       //Jostain syysta ei vaihda muotoilua, vaikka sen pitaisi
-      buffered.properties = {
+      buffer.properties = {
         //"fill": "#a63603",
-        stroke: "#a63603"
+        stroke: "red"
         //"stroke-width": 2
       };
     
