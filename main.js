@@ -239,7 +239,7 @@ function init() {
     layer.setStyle({
       weight: 3,
       opacity: 0.3,
-      illOpacity: 0.9
+      fillOpacity: 0.9
     });
 	
     if (!L.Browser.ie && !L.Browser.opera) {
@@ -253,7 +253,7 @@ function init() {
     layer.setStyle({
       weight: 1,
       //opacity: 1,
-      illOpacity: 0.8
+      fillOpacity: 0.8
     });
     //viheralueet.resetStyle(e.target);
   }
@@ -271,10 +271,10 @@ function init() {
       //Asetetaan bufferin tyyli
       buffer_layer.setStyle({
       	color: "red",
-        weight: 5,
+        weight: 2,
         fillColor: "black",
         opacity: 0.5,
-        illOpacity: 0.9
+        fillOpacity: 0.9
       });
       
     }
