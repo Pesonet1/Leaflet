@@ -43,7 +43,7 @@ function init() {
   //BASEMAP
   var map = L.map('map', {
     center: new L.LatLng(60.1708, 24.9375),
-    zoom: 13,
+    zoom: 12,
     minZoom: 11,
     maxZoom: 18,
   });
@@ -106,31 +106,31 @@ function init() {
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
   //Viheralueet WFS
   function update_all() {
-  var viheralueet_layer = $.ajax({ 
-    url: all,
-    datatype:"json",
-    jsonCallback: 'getJson',
-    success : function (response) {
-      viheralueet = L.geoJson(response, {
-        style: function (feature) {
-          var fillColor, 
-          kaytto = feature.properties.kayttotarkoitus;
+    var viheralueet_layer = $.ajax({ 
+      url: all,
+      datatype:"json",
+      jsonCallback: 'getJson',
+      success : function (response) {
+        viheralueet = L.geoJson(response, {
+          style: function (feature) {
+            var fillColor, 
+            kaytto = feature.properties.kayttotarkoitus;
       
-          if ( kaytto.indexOf("semakaavoitettu") > -1) fillColor = "#336666";
-          else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#336666";
-          else if ( kaytto == "Ulkoilumetsä" ) fillColor = "#336666";
-          else if ( kaytto == "Kartano- ja huvila-alue" ) fillColor = "#996699";
-          else if ( kaytto == "Kesämaja-alue" || kaytto == "Siirtolapuutarha" || kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue") fillColor = "#666699";
-          else if ( kaytto == "Koira-aitaus" ) fillColor = "#666699";
-          else if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
-          else if ( kaytto == "Luonnonsuojelualue" ) fillColor = "#336666";
-          else if ( kaytto.indexOf("luonnonsuojelualue") > -1 ) fillColor = "#336666";
-          else if ( kaytto == "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama" ) fillColor = "#336699";
-          else if ( kaytto.indexOf("Haudat") > -1 ) fillColor = "#666666";
-          else if ( kaytto == "Muut viheralueet" ) fillColor = "#fff";
+            if ( kaytto.indexOf("semakaavoitettu") > -1) fillColor = "#336666";
+            else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#336666";
+            else if ( kaytto == "Ulkoilumetsä" ) fillColor = "#336666";
+            else if ( kaytto == "Kartano- ja huvila-alue" ) fillColor = "#996699";
+            else if ( kaytto == "Kesämaja-alue" || kaytto == "Siirtolapuutarha" || kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue") fillColor = "#666699";
+            else if ( kaytto == "Koira-aitaus" ) fillColor = "#666699";
+            else if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
+            else if ( kaytto == "Luonnonsuojelualue" ) fillColor = "#336666";
+            else if ( kaytto.indexOf("luonnonsuojelualue") > -1 ) fillColor = "#336666";
+            else if ( kaytto == "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama" ) fillColor = "#336699";
+            else if ( kaytto.indexOf("Haudat") > -1 ) fillColor = "#666666";
+            else if ( kaytto == "Muut viheralueet" ) fillColor = "#fff";
       
-          //else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#ff0000";
-          else fillColor = "#999";  // no data
+            //else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#ff0000";
+            else fillColor = "#999";  // no data
 		      
           //Muu toimiluokka
           //Yleiskaavan viheralue / luonnonsuojelualue
@@ -150,20 +150,21 @@ function init() {
           //Rata-alue
           //Saari (saaret ilman siltayhteyttä)
       
-          return {
-      	    color: "black", 
-      	    weight: 1, 
-      	    fillColor: fillColor, 
-      	    fillOpacity: 0.8 
-          };
+            return {
+      	      color: "black", 
+      	      weight: 1, 
+      	      fillColor: fillColor, 
+      	      fillOpacity: 0.8 
+            };
                     	
-          },
-          onEachFeature: onEachFeature_viheralueet
-        }
-      }).addTo(tasot);//.addTo(map);
-    }
-  	
-  });
+            },
+            onEachFeature: onEachFeature_viheralueet
+          }
+        }).addTo(tasot);//.addTo(map);
+      }
+    });
+    
+    tasot.addTo(map);
   }
   
   
