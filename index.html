@@ -44,6 +44,17 @@
           sidebar.style.display = "none";
         }
       }
+      
+      function modify_boxes(to_be_checked,total_boxes){ 
+ 	for ( i=0 ; i < total_boxes ; i++ ){ 
+   	  if (to_be_checked){   
+ 	    document.forms[0].layers[i].checked=true; 
+	  } else { 
+	    document.forms[0].layers[i].checked=false; 
+   	  } 
+ 	}   
+      } 
+      
     </script>
     
     <div class="span9" style="height:100%">
