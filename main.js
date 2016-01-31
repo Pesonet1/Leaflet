@@ -270,7 +270,7 @@ function init() {
       //Jostain syysta ei vaihda muotoilua, vaikka sen pitaisi
       buffered.properties = {
         //"fill": "#a63603",
-        stroke: "#a63603",
+        stroke: "#a63603"
         //"stroke-width": 2
       };
     
