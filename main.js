@@ -17,26 +17,6 @@
   };
 })();
 */
-
-/*
-function change_layer() {
-  var valinta = document.getElementById('taso_filter');
-  var valinta_arvo = valinta.value;
-    
-  if (valinta_arvo == 'testi1') {
-    alert('testiääääää!');
-  }
-  else if (valinta_arvo == 'testi2') {
-    //filter = "Ulkoilumetsä"
-    //fillcolor = "red"
-    //window.init = init();
-    //Ei saa suoraan kutsuttua funktiota init()-funktion sisältä...
-    //window.init.update_layer();
-    //tasot.addTo(map);
-  }
-}
-*/
- 
   
 function init() {
     	
@@ -71,6 +51,7 @@ function init() {
   var filter = null;
   var fillcolor = null;
   
+  
   //Taman funktion avulla uusi karttataso voidaan kutsua kayttaen haluttua filteria ja tason varia
   function update_layer() {
     var viheralueet = $.ajax({
@@ -102,7 +83,6 @@ function init() {
     tasot.addTo(map);
   }
  
-  	
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
   //Viheralueet WFS
   function update_all() {
@@ -160,7 +140,7 @@ function init() {
           },
           onEachFeature: onEachFeature_viheralueet
         
-        }).addTo(kaikki);//.addTo(map);
+        }).addTo(kaikki);
       }
     });
     
@@ -221,7 +201,7 @@ function init() {
           });    
                         
         }
-      }).addTo(map);//.addTo(tasot);
+      }).addTo(map);
     }
   }); 
   
@@ -326,6 +306,8 @@ function init() {
       map.removeLayer(kaikki);
     }
   });
+  
+  
 	
   ulkoilumetsa.addEventListener('change', function() {
     var checked = this.checked;
@@ -333,7 +315,6 @@ function init() {
       filter = "Ulkoilumetsä"
       fillcolor = "red"
       update_layer();
-      //tasot.addTo(map)
     } else {
       map.removeLayer(tasot);
     }
@@ -462,29 +443,5 @@ function init() {
     }
   });
 
-	
-	
-	//Legendan koodia...
-	/*
-	var legend = L.control({position: 'bottomright'});
-
-	legend.onAdd = function (map) {
-	
-	    var div = L.DomUtil.create('div', 'info legend'),
-	        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-	        labels = [];
-	
-	    // loop through our density intervals and generate a label with a colored square for each interval
-	    for (var i = 0; i < grades.length; i++) {
-	        div.innerHTML +=
-	            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-	            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-	    }
-	
-	    return div;
-	};
-	
-	legend.addTo(map);
-	*/
 	
 }
