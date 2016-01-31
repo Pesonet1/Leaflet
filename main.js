@@ -64,8 +64,9 @@ function change_layer() {
   else if (valinta_arvo == 'testi2') {
     filter = "Ulkoilumetsä"
     fillcolor = "red"
+    window.init = init();
     //Ei saa suoraan kutsuttua funktiota init()-funktion sisältä...
-    update_layer();
+    window.init.update_layer();
     //tasot.addTo(map);
   }
 }
