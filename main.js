@@ -366,6 +366,8 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
+      filter = "*"
+      fillcolor = "blue"
       update_layer();
       //tasot.addTo(map)
     } else {
