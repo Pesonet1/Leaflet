@@ -369,7 +369,7 @@ function init() {
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = ""
+      filter = (feature.properties.type == "Polygon")
       fillcolor = "blue"
       update_layer();
       //tasot.addTo(map)
