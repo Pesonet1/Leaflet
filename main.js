@@ -313,7 +313,8 @@ function init() {
   }
 
   function mouseout(e) {
-    viheralueet.resetStyle(e.target);
+    //viheralueet.resetStyle(e.target);
+    resetStyle(e.target);
   }
 
   //Funktio bufferin luonnista, joka luodaan viheralueetta klikatessa
