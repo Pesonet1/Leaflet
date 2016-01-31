@@ -287,7 +287,7 @@ function init() {
     //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
     layer.on({
       mousemove: mousemove,
-      //mouseout: mouseout, 
+      mouseout: mouseout, 
       click: addBuffer
     });
   }
