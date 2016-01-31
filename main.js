@@ -273,8 +273,8 @@ function init() {
       	color: "red",
         weight: 2,
         fillColor: "black",
-        opacity: 0.5,
-        fillOpacity: 0.9
+        opacity: 1,
+        fillOpacity: 0.5
       });
       
     }
