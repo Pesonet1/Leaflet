@@ -57,6 +57,8 @@ function init() {
     var viheralueet = $.ajax({
       url: all,
       type: 'GET',
+      //datatype:"json",
+      //jsonCallback: 'getJson',
       success: function(response) {
         viheralueet = L.geoJson(response, {
           style: function (feature) {
@@ -88,8 +90,9 @@ function init() {
   function update_all() {
     var viheralueet = $.ajax({ 
       url: all,
-      datatype:"json",
-      jsonCallback: 'getJson',
+      type: 'GET',
+      //datatype:"json",
+      //jsonCallback: 'getJson',
       success : function (response) {
         viheralueet = L.geoJson(response, {
           style: function (feature) {
@@ -246,7 +249,7 @@ function init() {
 
   function mouseout(e) {
     //Jostain syysta ei tunnista enaan viheralueet tasoa -> funktion sisalla, mutta silti poistaa stylen?!
-    update_layer().viheralueet.resetStyle(e.target);
+    viheralueet.resetStyle(e.target);
   }
 
   //Funktio bufferin luonnista, joka luodaan viheralueetta klikatessa
