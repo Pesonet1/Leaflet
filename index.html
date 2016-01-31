@@ -44,6 +44,23 @@
           sidebar.style.display = "none";
         }
       }
+      
+      function getCheckedCheckboxesFor(checkboxName) {
+        var checkboxes = document.querySelectorAll('input[name="' + checkboxName + '"]:checked'), values = [];
+        Array.prototype.forEach.call(checkboxes, function(el) {
+          values.push(el.value);
+        });
+        return values;
+      }
+      
+      /*
+      $('input').on('click', function(){
+	var selected = [];
+	$('.data input:checked').each(function() {
+          selected.push($(this).val());
+        });
+      });
+      */
     </script>
     
     <div class="span9" style="height:100%">
