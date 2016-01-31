@@ -408,7 +408,7 @@ function init() {
   hauta.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = kaytto.indexOf("Haudat") > -1 )
+      filter = kaytto.indexOf("Haudat") > -1
       fillcolor = "#666666"
       update_layer();
     } else {
@@ -419,7 +419,7 @@ function init() {
   muut_asema.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = kaytto.indexOf("semakaavoitettu") > -1)
+      filter = kaytto.indexOf("semakaavoitettu") > -1
       fillcolor = "#336666"
       update_layer();
     } else {
