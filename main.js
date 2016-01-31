@@ -159,7 +159,7 @@ function init() {
                     	
             },
             onEachFeature: onEachFeature_viheralueet
-          }
+        
         }).addTo(tasot);//.addTo(map);
       }
     });
