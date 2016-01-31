@@ -276,10 +276,10 @@ function init() {
       */
       buffered.setStyle({
       	color: "red",
-      	fillColor: "black",
         weight: 3,
-        opacity: 0.3,
-        illOpacity: 0.9
+        fillColor: "black"
+        //opacity: 0.3,
+        //illOpacity: 0.9
       });
     
       var buffer_layer = L.geoJson(buffered).addTo(map);
