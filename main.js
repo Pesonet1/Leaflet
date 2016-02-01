@@ -351,10 +351,13 @@ function init() {
       fillcolor = "#666699"
       filter = "Kesämaja-alue"
       update_layer();
+      fillcolor = "#666699"
       filter = "Siirtolapuutarha"
       update_layer();
+      fillcolor = "#666699"
       filter = "Viljelypalsta"
       update_layer();
+      fillcolor = "#666699"
       filter = "Viljelypalsta-alue"
       update_layer();
       tasot.addTo(map);
