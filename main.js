@@ -82,7 +82,7 @@ function init() {
       }
     });
     
-    //tasot.addTo(map);
+    tasot.addTo(map);
   }
  
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
@@ -351,16 +351,12 @@ function init() {
       fillcolor = "#666699"
       filter = "Kesämaja-alue"
       update_layer();
-      fillcolor = "#666699"
       filter = "Siirtolapuutarha"
       update_layer();
-      fillcolor = "#666699"
       filter = "Viljelypalsta"
       update_layer();
-      fillcolor = "#666699"
       filter = "Viljelypalsta-alue"
       update_layer();
-      tasot.addTo(map);
     } else {
       map.removeLayer(tasot);
     }
