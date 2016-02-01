@@ -66,7 +66,6 @@ function init() {
             kaytto = feature.properties.kayttotarkoitus;
             
             if ( kaytto == filter ) fillColor = fillcolor;
-            else if ( kaytto == filter1 ) fillColor = fillcolor;
             
             return {
       	      color: "black", 
@@ -349,7 +348,7 @@ function init() {
     var checked = this.checked;
     if (checked) {
       //Ei lisaa kartalle muita kuin Kesamaja-alueet... :/
-      filter = "Kesämaja-alue", "Siirtolapuutarha", "Viljelypalsta", "Viljelypalsta-alue"
+      filter = "Kesämaja-alue, Siirtolapuutarha, Viljelypalsta, Viljelypalsta-alue"
       fillcolor = "#666699"
       update_layer();
     } else {
