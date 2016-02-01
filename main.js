@@ -67,7 +67,7 @@ function init() {
             kaytto = feature.properties.kayttotarkoitus;
             
             if ( kaytto == filter ) fillColor = fillcolor;
-            else if ( kaytto == filte1 ) fillColor = fillcolor;
+            else if ( kaytto == filter1 ) fillColor = fillcolor;
             
             return {
       	      color: "black", 
