@@ -86,7 +86,7 @@ function init() {
   }
  
   //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
-  //Viheralueet WFS
+  //Oma funktio kaikkien viheralueiden hankkimiselle, myös varit ovat maaritelty
   function update_all() {
     var viheralueet = $.ajax({ 
       url: all,
@@ -248,8 +248,9 @@ function init() {
   }
 
   function mouseout(e) {
-    //Jostain syysta ei tunnista enaan viheralueet tasoa -> funktion sisalla, mutta silti poistaa stylen?!
     var layer = e.target;
+    
+    //"Palauttaa" tyylin takaisin
     layer.setStyle({
       weight: 1,
       //opacity: 1,
@@ -279,6 +280,7 @@ function init() {
       
     }
   
+    //Bufferin poisto-nappia varten tarvitaan sille eventlisteneri
     var removeButton = document.getElementById('remove');
     removeButton.addEventListener('click',function(event) {
       buffer_layer.clearLayers();
@@ -345,7 +347,8 @@ function init() {
   siirtola.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Kesämaja-alue" || kaytto == "Siirtolapuutarha" || kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue"
+      //Ei lisaa kartalle muita kuin Kesamaja-alueet... :/
+      filter = ("Kesämaja-alue" || kaytto == "Siirtolapuutarha" || kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue")
       fillcolor = "#666699"
       update_layer();
     } else {
@@ -367,6 +370,7 @@ function init() {
   leikki.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
+      //Lisaa kartalle vain leikkipaikat...
       filter = "Leikkipaikka" || kaytto == "Leikkipuisto"
       fillcolor = "#666699"
       update_layer();
@@ -389,6 +393,7 @@ function init() {
   uima.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
+      //Lisaa alueella vain Uimaranta-alueet
       filter = "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama"
       fillcolor = "#336699"
       update_layer();
@@ -400,6 +405,7 @@ function init() {
   hauta.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
+      //Ei lisaa mitaan
       filter = kaytto.indexOf("Haudat") > -1
       fillcolor = "#666666"
       update_layer();
@@ -411,6 +417,7 @@ function init() {
   muut_asema.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
+      //Ei lisaa mitaan
       filter = kaytto.indexOf("semakaavoitettu") > -1
       fillcolor = "#336666"
       update_layer();
