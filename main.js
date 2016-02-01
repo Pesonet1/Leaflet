@@ -349,13 +349,7 @@ function init() {
     if (checked) {
       //Ei lisaa kartalle muita kuin Kesamaja-alueet... :/
       fillcolor = "#666699"
-      filter = "Kesämaja-alue"
-      update_layer();
-      filter = "Siirtolapuutarha"
-      update_layer();
-      filter = "Viljelypalsta"
-      update_layer();
-      filter = "Viljelypalsta-alue"
+      filter = "Kesämaja-alue" || filter = "Siirtolapuutarha" || filter = "Viljelypalsta" || filter = "Viljelypalsta-alue"
       update_layer();
     } else {
       map.removeLayer(tasot);
