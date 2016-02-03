@@ -187,6 +187,7 @@ function init() {
 		      
           },
           onEachFeature: function (feature, layer) {
+            container.innerHTML += feature.get('nimi') + feature.get('pinta_ala');
             popupOptions = {maxWidth: 200};
             layer.bindPopup("<b>Alueen nimi: </b> " + feature.properties.nimi + 
               "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala + " m2" +
@@ -208,6 +209,8 @@ function init() {
     }
   }); 
   
+  var container = document.getElementById('information');
+  //container.innerHTML = '';
   
   
   function onEachFeature_viheralueet(feature, layer) {
