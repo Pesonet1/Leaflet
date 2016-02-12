@@ -1,98 +1,116 @@
-//CORS:n aktivointi, mahdollistaa pyyntöjen tekemisen verkkopiirin ulkopuolelta (domain)
-/*
-(function() {
-  var cors_api_host = 'cors-anywhere.herokuapp.com';
-  var cors_api_url = 'https://' + cors_api_host + '/';
-  var slice = [].slice;
-  var origin = window.location.protocol + '//' + window.location.host;
-  var open = XMLHttpRequest.prototype.open;
-  XMLHttpRequest.prototype.open = function() {
-    var args = slice.call(arguments);
-    var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
-    if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
-      targetOrigin[1] !== cors_api_host) {
-      args[1] = cors_api_url + args[1];
-    }
-    return open.apply(this, args);
-  };
-})();
-*/
-  
+
 function init() {
-    	
-  //BASEMAP
+  
+  //Laitetaan kaikki muuttujat tahan...
+  document.getElementById("none").checked = true;
+  var information = document.getElementById('information');
+  var removeButton = document.getElementById('remove');
+  var resetButton = document.getElementById('reset');
+  
+  var legend = L.control({position: 'bottomleft'});
+  
+  //Kaytetaan valmiiksi ladattua aineistoa -> on huomattavasti nopeampi kuin aina ladata aineisto uudestaan
+  var all = "https://pesonet1.github.io/Leaflet/all.json"
+  var paavo_wfs = "https://pesonet1.github.io/Leaflet/paavo.json"
+  
+  //Geojson-objektit lisataan omiin layergrouppeihin
+  var kaikki = new L.LayerGroup();
+  
+  var ulkoilu_taso = new L.LayerGroup();
+  var kartano_taso = new L.LayerGroup();
+  var kesasiirtola_taso = new L.LayerGroup();
+  var viljelyalueet_taso = new L.LayerGroup();
+  var koirat_taso = new L.LayerGroup();
+  var leikkipaikat_taso = new L.LayerGroup();
+  var luonnonsuojelu_taso = new L.LayerGroup();
+  var uimavene_taso = new L.LayerGroup();
+  var hauta_taso = new L.LayerGroup();
+  var muut_taso = new L.LayerGroup();
+  
+  //Muuttujat filterointiin
+  var filter1;
+  var filter2;
+  var filter3;
+  var fillcolor1;
+  var fillcolor2;
+  var fillcolor3;
+  var radius;
+  var taso;
+  
+  var southWest = L.latLng(60.083745, 24.760265);
+  var northEast = L.latLng(60.317492, 25.368633);
+  var bounds = L.latLngBounds(southWest, northEast);
+  
+  
   var map = L.map('map', {
-    center: new L.LatLng(60.1708, 24.9375),
-    zoom: 12,
-    minZoom: 11,
+    maxBounds: bounds,
     maxZoom: 18,
+    minZoom: 11
   });
+  
+  //Fit to bounds
+  map.fitBounds(bounds);
   	
   //Scale
-  L.control.scale().addTo(map);
+  L.control.scale({
+  	position: 'bottomleft',
+  	updateWhenIdle: true,
+  	maxWidth: 200
+  }).addTo(map);
   
   
-  var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
+  //MapBox-light taustakartta
+  basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
     maxZoom: 18,
-    /*attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-      'Imagery © <a href="http://mapbox.com">Mapbox</a>',*/
     id: 'mapbox.light'
   }).addTo(map);
 
-  
-  //WFS-layerit lisataan tasot grouppiin
-  var tasot = new L.LayerGroup();
-  var kaikki = new L.LayerGroup();
-	
-  //Kaytetaan valmiiksi ladattua aineistoa -> on huomattavasti nopeampi kuin aina ladata aineisto uudestaan
-  var all = "https://pesonet1.github.io/Leaflet/all.json"
-  
-  var filter = null;
-  var fillcolor = null;
-  
+
   
   //Taman funktion avulla uusi karttataso voidaan kutsua kayttaen haluttua filteria ja tason varia
   function update_layer() {
-    var viheralueet = $.ajax({
+    var viheralueet_layer = $.ajax({
       url: all,
       type: 'GET',
-      //datatype:"json",
-      //jsonCallback: 'getJson',
       success: function(response) {
-        viheralueet = L.geoJson(response, {
+        var viheralueet = L.geoJson(response, {
           style: function (feature) {
             var fillColor, 
             kaytto = feature.properties.kayttotarkoitus;
             
-            if ( kaytto == filter ) fillColor = fillcolor;
-            
+            if ( kaytto.indexOf(filter1) > -1 ) fillColor = fillcolor1;
+            else if ( kaytto.indexOf(filter2) > -1 ) fillColor = fillcolor2;
+            else if ( kaytto.indexOf(filter3) > -1 ) fillColor = fillcolor3;
+          
             return {
       	      color: "black", 
       	      weight: 1, 
       	      fillColor: fillColor, 
       	      fillOpacity: 0.8 
             };
-            
           },
-          filter: function(feature, layer) {return (feature.properties.kayttotarkoitus == filter);},
+          filter: function(feature, layer) {
+            return (feature.properties.kayttotarkoitus == filter1) ||
+            	   (feature.properties.kayttotarkoitus == filter2) || 
+            	   (feature.properties.kayttotarkoitus == filter3);
+            	   
+          },
           onEachFeature: onEachFeature_viheralueet
             
-        }).addTo(tasot);
+        })//.addTo(tasot);
+        
+        taso.addLayer(viheralueet);
       }
     });
-    
-    tasot.addTo(map);
   }
  
-  //var viheralueet_wfs = "http://geoserver.hel.fi/geoserver/hkr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=hkr:ylre_viheralue&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson"
-  //Oma funktio kaikkien viheralueiden hankkimiselle, myös varit ovat maaritelty
+ 
+  
+  //Oma funktio kaikkien viheralueiden hankkimiselle, myös varit ovat ennalta maaritelty
   function update_all() {
     var viheralueet = $.ajax({ 
       url: all,
       type: 'GET',
-      //datatype:"json",
-      //jsonCallback: 'getJson',
       success : function (response) {
         viheralueet = L.geoJson(response, {
           style: function (feature) {
@@ -100,39 +118,20 @@ function init() {
             kaytto = feature.properties.kayttotarkoitus;
       
             if ( kaytto.indexOf("semakaavoitettu") > -1) fillColor = "#336666";
-            else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#336666";
-            else if ( kaytto == "Ulkoilumetsä" ) fillColor = "#336666";
+            else if ( kaytto.indexOf("Yleiskaavan viheralue") > -1 ) fillColor = "#336666";
+            else if ( kaytto == "Ulkoilumetsä" ) fillColor = "#669966";
+            else if ( kaytto == "Kesämaja-alue" || kaytto == "Siirtolapuutarha") fillColor = "#666699";
+            else if ( kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue") fillColor = "#003366";            
+            else if ( kaytto == "Koira-aitaus" ) fillColor = "#666633";
+            else if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#663399";
+            else if ( kaytto == "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama" ) fillColor = "#66cccc";
             else if ( kaytto == "Kartano- ja huvila-alue" ) fillColor = "#996699";
-            else if ( kaytto == "Kesämaja-alue" || kaytto == "Siirtolapuutarha" || kaytto == "Viljelypalsta" || kaytto == "Viljelypalsta-alue") fillColor = "#666699";
-            else if ( kaytto == "Koira-aitaus" ) fillColor = "#666699";
-            else if ( kaytto == "Leikkipaikka" || kaytto == "Leikkipuisto" ) fillColor = "#666699";
-            else if ( kaytto == "Luonnonsuojelualue" ) fillColor = "#336666";
-            else if ( kaytto.indexOf("luonnonsuojelualue") > -1 ) fillColor = "#336666";
-            else if ( kaytto == "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama" ) fillColor = "#336699";
+            else if ( kaytto == "Luonnonsuojelualue" ) fillColor = "#336699";
+            else if ( kaytto.indexOf("luonnonsuojelualue") > -1 ) fillColor = "#336699";
             else if ( kaytto.indexOf("Haudat") > -1 ) fillColor = "#666666";
-            else if ( kaytto == "Muut viheralueet" ) fillColor = "#fff";
-      
-            //else if ( kaytto == "Yleiskaavan viheralue" ) fillColor = "#ff0000";
-            else fillColor = "#999";  // no data
-		      
-          //Muu toimiluokka
-          //Yleiskaavan viheralue / luonnonsuojelualue
-          //Yleiskaavan viheralue / kesämaja-alue
-          //Yleiskaavan viheralue / kartanoalue
-          //Yleiskaavan viheralue / leikkipuisto
-          //Yleiskaavan viheralue
-          //Yleiskaavan viheralue / erityiskohteet
-          //Yleiskaavan viheralue / koira-aitaus
-          //Ulkoilumetsä
-          //Tontti (rakentamattomat / sopimus)
-          //Erityiskohteet, asemakaavoitettu viheralue
-          //Viljelypalsta-alue
-          //Haudat (hautausmaat)
-          //Suojaviheralue
-          //Katualue
-          //Rata-alue
-          //Saari (saaret ilman siltayhteyttä)
-      
+            else if ( kaytto == "Muut viheralueet" ) fillColor = "#336666";
+            else fillColor = "#336666";  // no data
+
             return {
       	      color: "black", 
       	      weight: 1, 
@@ -149,12 +148,31 @@ function init() {
     
     kaikki.addTo(map);
   }
+ 
+ 
   
-  
-  //var paavo_wfs = "http://geoserv.stat.fi:8080/geoserver/postialue/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=postialue:pno_tilasto_2015&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Ekunta%3C/PropertyName%3E%3CLiteral%3E091%3C/Literal%3E%3C/PropertyIsEqualTo%3E&maxFeatures=1000&srsName=EPSG:4326&format=json&outputFormat=json&format_options=callback:getJson";
-  var paavo_wfs = "https://pesonet1.github.io/Leaflet/paavo.json"
-  
-  //Paavo WFS
+  //Taman tarkoituksena on mahdollistaa popupin ja muiden funktioiden toimimisen viheralueet-tasoilla
+  function onEachFeature_viheralueet(feature, layer) {
+    
+    popupOptions = {maxWidth: 200, closeOnClick: true};
+    content = "<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
+        "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
+        "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
+        "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
+        "<br><b>Pinta-ala: </b> " + Math.round(feature.properties.pinta_ala) + " m2";
+
+    layer.bindPopup(content, popupOptions);
+    
+    layer.on({
+      mousemove: mousemove,
+      mouseout: mouseout, 
+      click: addBuffer
+    });
+  }
+
+
+
+  //Paavo-aineisto
   var paavo_layer = $.ajax({ 
     url: paavo_wfs,
     datatype:"json",
@@ -167,7 +185,6 @@ function init() {
           ala = feature.properties.pinta_ala / 1000000,
           astiheys = vaki / ala;
                       
-          //if ( vaki > 22000) fillColor =
           if ( astiheys > 12000) fillColor = "#a63603";
           else if ( astiheys > 10000) fillColor = "#d94801";
           else if ( astiheys > 8000 ) fillColor = "#f16913";
@@ -185,60 +202,48 @@ function init() {
       	    fillOpacity: 0.5 
           };
 		      
-          },
-          onEachFeature: function (feature, layer) {
-            //container.innerHTML += feature.get('nimi') + feature.get('pinta_ala');
-            popupOptions = {maxWidth: 200};
-            layer.bindPopup("<b>Alueen nimi: </b> " + feature.properties.nimi + 
-              "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala + " m2" +
-              "<br><b>Asukasmäärä: </b> " + feature.properties.he_vakiy +
-              "<br><b>Asukastiheys: </b> " + Math.round(feature.properties.he_vakiy / (feature.properties.pinta_ala / 1000000)) + " as/k-m2" +
-              "<br><b>Asuntojen määrä: </b> " + feature.properties.ra_asunn +
-              "<br><b>Asumisväljyys: </b> " + feature.properties.te_as_valj
-              ,popupOptions);
+        },
+        onEachFeature: function (feature, layer) {
+            
+          layer.on('click', function() {
+            information.innerHTML = '';
+            information.innerHTML = ("<b>Alueen nimi: </b> " + feature.properties.nimi +
+            "<br><b>Pinta-ala: </b> " + Math.round(feature.properties.pinta_ala) + " m2" +
+            "<br><b>Asukasmäärä: </b> " + feature.properties.he_vakiy +
+            "<br><b>Asukastiheys: </b> " + Math.round(feature.properties.he_vakiy / (feature.properties.pinta_ala / 1000000)) + " as/k-m2" +
+            "<br><b>Asuntojen määrä: </b> " + feature.properties.ra_asunn +
+            "<br><b>Asumisväljyys: </b> " + Math.round(feature.properties.te_as_valj));
+          });
         
-          //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
           layer.on({
-            //mousemove: mousemove,
-            //mouseout: mouseout, 
             click: zoomToFeature
           });    
-                        
+                      
         }
       }).addTo(map);
     }
   }); 
   
-  var container = document.getElementById('information');
-  //container.innerHTML = '';
   
   
-  function onEachFeature_viheralueet(feature, layer) {
-    popupOptions = {maxWidth: 200};
-    layer.bindPopup("<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
-      "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
-      "<br><b>Käyttötarkoitus: </b> " + feature.properties.kayttotarkoitus +
-      "<br><b>Käyttötarkoitus id: </b> " + feature.properties.kayttotarkoitus_id +
-      "<br><b>Pinta-ala: </b> " + feature.properties.pinta_ala
-      ,popupOptions);
-      
-    //Mahdollistaa kohteen korostuksen ja kohdetta klikkaamalla siihen kohdistuksen  
-    layer.on({
-      mousemove: mousemove,
-      mouseout: mouseout, 
-      click: addBuffer
-    });
-  }
-
+  //Tyhjentaa containerin, kun klikataan muuta kuin kuin kohdetta
+  map.on('click', function(e) {
+  	information.innerHTML = '<em>' + 'Valitse kaupunginalue' + '</em>';
+  });
+  
+  
   //Tasojen funktioita: kohteeseen zoomaus ja kohteen korostus
   function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
+    zoomlevel = map.getZoom();
+    if (zoomlevel > 12) {
+      map.panInsideBounds(e.target.getBounds());
+    }
   }
+
 
   function mousemove(e) {
     var layer = e.target;
 	
-    //Korostaa kohteen, jonka paalla hiiri on 
     layer.setStyle({
       weight: 3,
       opacity: 0.3,
@@ -250,29 +255,28 @@ function init() {
     }
   }
 
+  //"Palauttaa" tyylin takaisin
   function mouseout(e) {
     var layer = e.target;
-    
-    //"Palauttaa" tyylin takaisin
     layer.setStyle({
       weight: 1,
-      //opacity: 1,
       fillOpacity: 0.8
     });
-    //viheralueet.resetStyle(e.target);
   }
 
+
+    
   //Funktio bufferin luonnista, joka luodaan viheralueetta klikatessa
-  var radius = null;
   function addBuffer(e) {
-		
+    var layer = e.target;
+    
     if (radius != null) {
-      var layer = e.target;
+      layer.closePopup();
+      
       var layer_geojson = layer.toGeoJSON();
       var buffered = turf.buffer(layer_geojson, radius, 'miles');
       var buffer_layer = L.geoJson(buffered).addTo(map);
       
-      //Asetetaan bufferin tyyli
       buffer_layer.setStyle({
       	color: "red",
         weight: 2,
@@ -283,37 +287,73 @@ function init() {
       
     }
   
-    //Bufferin poisto-nappia varten tarvitaan sille eventlisteneri
-    var removeButton = document.getElementById('remove');
+    //Bufferin poisto-nappia varten tarvitaan sille eventlistener
     removeButton.addEventListener('click',function(event) {
       buffer_layer.clearLayers();
     });
   }
+  
+  
+  function getColor(d) {
+    return d > 12000  ? "#a63603" :
+    	   d > 10000  ? "#d94801" :
+    	   d > 8000   ? "#f16913" :
+	   d > 6000   ? "#fd8d3c" :
+           d > 4000   ? "#fdae6b" :
+	   d > 2000   ? "#fdd0a2" :
+	   d > 1000   ? "#fee6ce" :
+	   d > 0      ? "#fff5eb" :
+	                "#ffffff";
+  }
+
+  legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 1000, 2000, 4000, 6000, 8000, 10000, 12000],
+        labels = [];
+    
+    div.innerHTML = "<b>" + "Väestötiheys" + "</b>" + "<br>";
+        
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+    return div;
+  };
+  
+  legend.addTo(map);
 	
-	
-	
-  //Bufferikoon eventlistenerit
+  
+  
+  none.addEventListener('change', function() {
+    radius = null;
+  });
+  	
+  //Bufferikoon 150m eventlisteneri
   box_150.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      radius = 150 * 0.000621371192
+      radius = 150 * 0.000621371192;
     } else {
-      radius = null
+      radius = null;
     }
   });
-	
+ 
+  //Bufferikoon 300m eventlisteneri
   box_300.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      radius = 300 * 0.000621371192
+      radius = 300 * 0.000621371192;
     } else {
-      radius = null
+      radius = null;
     }
   });
 
 
 
-  //Layereiden eventlistenerit
+  //Kaikkien viheralueiden eventlistener
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
@@ -324,151 +364,188 @@ function init() {
   });
   
   
-	
+  //Nollaa tasot ja checkboxit
+  resetButton.addEventListener('click',function(event) {
+      ulkoilu_taso.clearLayers();
+      document.getElementById("ulkoilumetsa").checked = false
+      kartano_taso.clearLayers();
+      document.getElementById("kartano").checked = false
+      kesasiirtola_taso.clearLayers();
+      document.getElementById("kesamajasiirtola").checked = false
+      viljelyalueet_taso.clearLayers();
+      document.getElementById("viljelypalsta_alueet").checked = false
+      koirat_taso.clearLayers();
+      document.getElementById("koira").checked = false
+      leikkipaikat_taso.clearLayers();
+      document.getElementById("leikkipaikat").checked = false
+      luonnonsuojelu_taso.clearLayers();
+      document.getElementById("luonto").checked = false
+      uimavene_taso.clearLayers();
+      document.getElementById("uimaranta_venesatama").checked = false
+      hauta_taso.clearLayers();
+      document.getElementById("haudat").checked = false
+      muut_taso.clearLayers();
+      document.getElementById("muut").checked = false
+    });
+  
+  
+  //Loput eventlistenerit eri tasoille
   ulkoilumetsa.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Ulkoilumetsä"
-      fillcolor = "red"
+      taso = ulkoilu_taso
+      filter1 = "Ulkoilumetsä"
+      fillcolor1 = "#669966"
+      
       update_layer();
+      ulkoilu_taso.addTo(map);
     } else {
-      map.removeLayer(tasot);
+      ulkoilu_taso.clearLayers();
     }
   });
 
   kartano.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Kartano- ja huvila-alue"
-      fillcolor = "#996699"
+      taso = kartano_taso
+      filter1 = "Kartano- ja huvila-alue"
+      fillcolor1 = "#996699"
+ 
       update_layer();
+      kartano_taso.addTo(map);
     } else {
-      map.removeLayer(tasot);
+      kartano_taso.clearLayers();
     }
   });
   
-  siirtola.addEventListener('change', function() {
+  kesamajasiirtola.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      //Ei lisaa kartalle muita kuin Kesamaja-alueet... :/
-      fillcolor = "#666699"
-      filter = "Kesämaja-alue" 
+      taso = kesasiirtola_taso
+      filter1 = "Kesämaja-alue"
+      fillcolor1 = "#666699"
+      
+      filter2 = "Siirtolapuutarha"
+      fillcolor2 = "#666699"
+      
       update_layer();
-      filter = "Siirtolapuutarha"
-      update_layer();
-      filter = "Viljelypalsta"
-      update_layer();
-      filter = "Viljelypalsta-alue"
-      update_layer();
+      kesasiirtola_taso.addTo(map);
     } else {
-      map.removeLayer(tasot);
+      kesasiirtola_taso.clearLayers();
     }
   });
   
+  viljelypalsta_alueet.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      taso = viljelyalueet_taso
+      filter1 = "Viljelypalsta"
+      fillcolor1 = "#003366"
+      
+      filter2 = "Viljelypalsta-alue"
+      fillcolor2 = "#003366"
+      
+      update_layer();
+      viljelyalueet_taso.addTo(map);
+    } else {
+      viljelyalueet_taso.clearLayers();
+    }
+  });
+
   koira.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Koira-aitaus"
-      fillcolor = "#666699"
+      taso = koirat_taso
+      filter1 = "Koira-aitaus"
+      fillcolor1 = "#666633"
+      
       update_layer();
+      koirat_taso.addTo(map);
     } else {
-      map.removeLayer(tasot);
+      koirat_taso.clearLayers();
     }
   });
   
-  leikki.addEventListener('change', function() {
+  leikkipaikat.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      //Lisaa kartalle vain leikkipaikat...
-      filter = "Leikkipaikka" || kaytto == "Leikkipuisto"
-      fillcolor = "#666699"
+      taso = leikkipaikat_taso
+      filter1 = "Leikkipaikka"
+      fillcolor1 = "#663399"
+      
+      filter2 = "Leikkipuisto"
+      fillcolor2 = "#663399"
+      
       update_layer();
+      leikkipaikat_taso.addTo(map);
     } else {
-      map.removeLayer(tasot);
+      leikkipaikat_taso.clearLayers();
     }
   });
-  
+
   luonto.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Luonnonsuojelualue"
-      fillcolor = "#336666"
+      taso = luonnonsuojelu_taso
+      filter1 = "Luonnonsuojelualue"
+      fillcolor1 = "#336699"
+      
       update_layer();
+      luonnonsuojelu_taso.addTo(map);
     } else {
-      map.removeLayer(tasot);
+      luonnonsuojelu_taso.clearLayers();
+    }
+  });
+ 
+  uimaranta_venesatama.addEventListener('change', function() {
+    var checked = this.checked;
+    if (checked) {
+      taso = uimavene_taso
+      filter1 = "Uimaranta-alue"
+      fillcolor1 = "#66cccc"
+      
+      filter2 = "Venesatama / Venevalkama"
+      fillcolor2 = "#66cccc"
+      
+      update_layer();
+      uimavene_taso.addTo(map);
+    } else {
+      uimavene_taso.clearLayers();
     }
   });
   
-  uima.addEventListener('change', function() {
+  haudat.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      //Lisaa alueella vain Uimaranta-alueet
-      filter = "Uimaranta-alue" || kaytto == "Venesatama / Venevalkama"
-      fillcolor = "#336699"
+      taso = hauta_taso
+      filter1 = "Haudat (hautausmaat)"
+      fillcolor1 = "#666666"
+      
       update_layer();
+      hauta_taso.addTo(map);
     } else {
-      map.removeLayer(tasot);
-    }
-  });
-  
-  hauta.addEventListener('change', function() {
-    var checked = this.checked;
-    if (checked) {
-      //Ei lisaa mitaan
-      filter = kaytto.indexOf("Haudat") > -1
-      fillcolor = "#666666"
-      update_layer();
-    } else {
-      map.removeLayer(tasot);
-    }
-  });
-  
-  muut_asema.addEventListener('change', function() {
-    var checked = this.checked;
-    if (checked) {
-      //Ei lisaa mitaan
-      filter = kaytto.indexOf("semakaavoitettu") > -1
-      fillcolor = "#336666"
-      update_layer();
-    } else {
-      map.removeLayer(tasot);
-    }
-  });
-  
-  yleiskaava.addEventListener('change', function() {
-    var checked = this.checked;
-    if (checked) {
-      filter = "Yleiskaavan viheralue"
-      fillcolor = "#336666"
-      update_layer();
-    } else {
-      map.removeLayer(tasot);
+      hauta_taso.clearLayers();
     }
   });
   
   muut.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
-      filter = "Muut viheralueet"
-      fillcolor = "#fff"
+      taso = muut_taso
+      filter1 = "semakaavoitettu"
+      fillcolor1 = "#336666"
+      
+      filter2 = "Yleiskaavan viheralue"
+      fillcolor2 = "#336666"
+      
+      filter3 = "Muut viheralueet"
+      fillcolor3 = "#336666"
+      
       update_layer();
+      muut_taso.addTo(map);
     } else {
-      map.removeLayer(tasot);
+      muut_taso.clearLayers();
     }
   });
-  
-
-  //Tama scripti hoitaa sen, etta yksi laatikoista voi vain olla kerrallaan valittuna
-  $("input:checkbox").on('click', function() {
-    var $box = $(this);
-    if ($box.is(":checked")) {
-      var group = "input:checkbox[name='" + $box.attr("name") + "']";
-      $(group).prop("checked", false);
-      $box.prop("checked", true);
-    } else {
-      $box.prop("checked", false);
-    }
-  });
-
 	
 }
