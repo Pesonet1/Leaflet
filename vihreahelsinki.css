@@ -10,21 +10,6 @@ html, body {
 	left:0;	
         }
   
-      .btn {
-	  margin:3px;
-	} 
-	
-      .btn-round { 
-	font-weight: bold;
-	width: 19px;
-	height: 19px;
-	text-align: center;
-	padding: 1px 0;
-	font-size: 13px;
-	line-height: 0.1;
-	border-radius: 30px;
-	}
-  
       .sidebar {
 	position:absolute;
 	top:0; right:0; width:300px;
@@ -40,20 +25,68 @@ html, body {
 	z-index:80;
 	}
   
-      #sidebar H1{
+      #sidebar H1  {
       	text-align:left;
       	font-size:medium;
       	font-weight:bold;
       }
 
-      #sidebar H2{
+      #sidebar H2 {
       	text-align:left;
       	font-size:small;
       	font-weight:bold;
       }      
 
-      #sidebar P{
+      #sidebar P {
       	text-align:left;
       	font-size:small;
+      }
+      
+      .ScrollStyle {
+      	left: 0px;
+      	float: left;
+	/*max-height: 250px;*/
+	/*overflow-y: auto; /*scroll*/
+	clear:both;
+      }
+      
+      .bufferi {
+      	left: 0px;
+      	/*float: left;*/
+	clear:both;     	
       }      
+      
+      .ScrollStyle label, .bufferi label {
+      	font-weight:normal;
+      	font-size: 13px;
+      	display: block;
+      	float: left;
+      	clear:both;
+      }
+
+      .info {
+	padding: 6px 8px;
+	font: 14px/16px Arial, Helvetica, sans-serif;
+	background: white;
+	background: rgba(255,255,255,0.8);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 5px;
+      }
+	
+      .info h4 {
+	margin: 0 0 5px;
+	color: #777;
+      }
    
+      .legend {
+        line-height: 18px;
+        color: #555;
+      }
+      
+      .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+      }
