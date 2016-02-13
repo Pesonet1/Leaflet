@@ -149,7 +149,8 @@ function init() {
     kaikki.addTo(map);
   }
  
- 
+  document.getElementById("karttataso").checked = true;
+  update_all();
   
   //Taman tarkoituksena on mahdollistaa popupin ja muiden funktioiden toimimisen viheralueet-tasoilla
   function onEachFeature_viheralueet(feature, layer) {
@@ -359,7 +360,7 @@ function init() {
     if (checked) {
       update_all();
     } else {
-      map.removeLayer(kaikki);
+      kaikki.clearLayers();
     }
   });
   
