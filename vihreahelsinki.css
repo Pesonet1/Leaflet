@@ -9,6 +9,21 @@
 	position:absolute;
 	left:0;	
         }
+        
+      .btn {
+	  margin:3px;
+	} 
+	
+      .btn-round { 
+	font-weight: bold;
+	width: 19px;
+	height: 19px;
+	text-align: center;
+	padding: 1px 0;
+	font-size: 13px;
+	line-height: 0.1;
+	border-radius: 30px;
+	}
   
       .sidebar {
 	position:absolute;
