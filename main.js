@@ -28,12 +28,7 @@ function init() {
   var muut_taso = new L.LayerGroup();
   
   //Muuttujat filterointiin
-  var filter1;
-  var filter2;
-  var filter3;
-  var fillcolor1;
-  var fillcolor2;
-  var fillcolor3;
+  var filter1, filter2, filter3, fillcolor1, fillcolor2, fillcolor3;
   var radius;
   var taso;
   
@@ -407,8 +402,8 @@ function init() {
 
   kartano.addEventListener('change', function() {
     var checked = this.checked;
+    taso = kartano_taso
     if (checked) {
-      taso = kartano_taso
       filter1 = "Kartano- ja huvila-alue"
       fillcolor1 = "#996699"
  
@@ -421,8 +416,8 @@ function init() {
   
   kesamajasiirtola.addEventListener('change', function() {
     var checked = this.checked;
+    taso = kesasiirtola_taso
     if (checked) {
-      taso = kesasiirtola_taso
       filter1 = "Kesämaja-alue"
       fillcolor1 = "#666699"
       
@@ -438,8 +433,8 @@ function init() {
   
   viljelypalsta_alueet.addEventListener('change', function() {
     var checked = this.checked;
+    taso = viljelyalueet_taso
     if (checked) {
-      taso = viljelyalueet_taso
       filter1 = "Viljelypalsta"
       fillcolor1 = "#003366"
       
@@ -455,8 +450,8 @@ function init() {
 
   koira.addEventListener('change', function() {
     var checked = this.checked;
+    taso = koirat_taso
     if (checked) {
-      taso = koirat_taso
       filter1 = "Koira-aitaus"
       fillcolor1 = "#666633"
       
@@ -469,8 +464,8 @@ function init() {
   
   leikkipaikat.addEventListener('change', function() {
     var checked = this.checked;
+    taso = leikkipaikat_taso
     if (checked) {
-      taso = leikkipaikat_taso
       filter1 = "Leikkipaikka"
       fillcolor1 = "#663399"
       
@@ -486,8 +481,8 @@ function init() {
 
   luonto.addEventListener('change', function() {
     var checked = this.checked;
+    taso = luonnonsuojelu_taso
     if (checked) {
-      taso = luonnonsuojelu_taso
       filter1 = "Luonnonsuojelualue"
       fillcolor1 = "#336699"
       
@@ -500,8 +495,8 @@ function init() {
  
   uimaranta_venesatama.addEventListener('change', function() {
     var checked = this.checked;
+    taso = uimavene_taso
     if (checked) {
-      taso = uimavene_taso
       filter1 = "Uimaranta-alue"
       fillcolor1 = "#66cccc"
       
@@ -517,8 +512,8 @@ function init() {
   
   haudat.addEventListener('change', function() {
     var checked = this.checked;
+    taso = hauta_taso
     if (checked) {
-      taso = hauta_taso
       filter1 = "Haudat (hautausmaat)"
       fillcolor1 = "#666666"
       
@@ -531,8 +526,8 @@ function init() {
   
   muut_viheralueet.addEventListener('change', function() {
     var checked = this.checked;
+    taso = muut_taso
     if (checked) {
-      taso = muut_taso
       filter1 = "semakaavoitettu"
       fillcolor1 = "#336666"
       
