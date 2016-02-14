@@ -529,7 +529,7 @@ function init() {
     }
   });
   
-  muut.addEventListener('change', function() {
+  muut_viheralueet.addEventListener('change', function() {
     var checked = this.checked;
     if (checked) {
       taso = muut_taso
