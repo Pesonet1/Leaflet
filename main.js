@@ -393,8 +393,8 @@ function init() {
   //Loput eventlistenerit eri tasoille
   ulkoilumetsa.addEventListener('change', function() {
     var checked = this.checked;
+    taso = ulkoilu_taso
     if (checked) {
-      taso = ulkoilu_taso
       filter1 = "Ulkoilumetsä"
       fillcolor1 = "#669966"
       
