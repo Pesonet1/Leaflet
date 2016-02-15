@@ -396,6 +396,7 @@ function init() {
       update_layer();
       ulkoilu_taso.addTo(map);
     } else {
+      filter1 = null;
       ulkoilu_taso.clearLayers();
     }
   });
@@ -410,6 +411,7 @@ function init() {
       update_layer();
       kartano_taso.addTo(map);
     } else {
+      filter1 = null;
       kartano_taso.clearLayers();
     }
   });
@@ -427,6 +429,8 @@ function init() {
       update_layer();
       kesasiirtola_taso.addTo(map);
     } else {
+      filter1 = null;
+      filter2 = null;
       kesasiirtola_taso.clearLayers();
     }
   });
@@ -444,6 +448,8 @@ function init() {
       update_layer();
       viljelyalueet_taso.addTo(map);
     } else {
+      filter1 = null;
+      filter2 = null;
       viljelyalueet_taso.clearLayers();
     }
   });
@@ -458,6 +464,7 @@ function init() {
       update_layer();
       koirat_taso.addTo(map);
     } else {
+      filter1 = null;
       koirat_taso.clearLayers();
     }
   });
@@ -475,6 +482,8 @@ function init() {
       update_layer();
       leikkipaikat_taso.addTo(map);
     } else {
+      filter1 = null;
+      filter2 = null;
       leikkipaikat_taso.clearLayers();
     }
   });
@@ -489,6 +498,7 @@ function init() {
       update_layer();
       luonnonsuojelu_taso.addTo(map);
     } else {
+      filter1 = null;
       luonnonsuojelu_taso.clearLayers();
     }
   });
@@ -506,6 +516,8 @@ function init() {
       update_layer();
       uimavene_taso.addTo(map);
     } else {
+      filter1 = null;
+      filter2 = null;
       uimavene_taso.clearLayers();
     }
   });
@@ -520,6 +532,7 @@ function init() {
       update_layer();
       hauta_taso.addTo(map);
     } else {
+      filter1 = null;
       hauta_taso.clearLayers();
     }
   });
@@ -540,6 +553,9 @@ function init() {
       update_layer();
       muut_taso.addTo(map);
     } else {
+      filter1 = null;
+      filter2 = null;
+      filter3 = null;
       muut_taso.clearLayers();
     }
   });
