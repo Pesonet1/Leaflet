@@ -382,7 +382,7 @@ function init() {
       hauta_taso.clearLayers();
       document.getElementById("haudat").checked = false
       muut_taso.clearLayers();
-      document.getElementById("muut").checked = false
+      document.getElementById("muut_viheralueet").checked = false
     });
   
   
