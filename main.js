@@ -1,7 +1,6 @@
 function init() {
   
   //Kaikki webbikartassa käytettävät globaalit muuttujat
-  document.getElementById("none").checked = true;
   var information = document.getElementById('information');
   var removeButton = document.getElementById('remove');
   var resetButton = document.getElementById('reset');
@@ -321,6 +320,7 @@ function init() {
 	
   
   //None arvo on ensisijaisesti valittuna "bufferikokona"
+  document.getElementById("none").checked = true;
   none.addEventListener('change', function() {
     radius = null;
   });
