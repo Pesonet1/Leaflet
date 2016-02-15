@@ -1,7 +1,6 @@
-
 function init() {
   
-  //Laitetaan kaikki muuttujat tahan...
+  //Kaikki webbikartassa käytettävät globaalit muuttujat
   document.getElementById("none").checked = true;
   var information = document.getElementById('information');
   var removeButton = document.getElementById('remove');
@@ -9,13 +8,12 @@ function init() {
   
   var legend = L.control({position: 'bottomleft'});
   
-  //Kaytetaan valmiiksi ladattua aineistoa -> on huomattavasti nopeampi kuin aina ladata aineisto uudestaan
+  //Aineistot ovat esiladattuja nopeamman toimivuuden takaamiseksi
   var all = "https://pesonet1.github.io/Leaflet/all.json"
   var paavo_wfs = "https://pesonet1.github.io/Leaflet/paavo.json"
   
   //Geojson-objektit lisataan omiin layergrouppeihin
   var kaikki = new L.LayerGroup();
-  
   var ulkoilu_taso = new L.LayerGroup();
   var kartano_taso = new L.LayerGroup();
   var kesasiirtola_taso = new L.LayerGroup();
@@ -32,10 +30,10 @@ function init() {
   var radius;
   var taso;
   
+  
   var southWest = L.latLng(60.083745, 24.760265);
   var northEast = L.latLng(60.317492, 25.368633);
   var bounds = L.latLngBounds(southWest, northEast);
-  
   
   var map = L.map('map', {
     maxBounds: bounds,
@@ -52,7 +50,6 @@ function init() {
   	updateWhenIdle: true,
   	maxWidth: 200
   }).addTo(map);
-  
   
   //MapBox-light taustakartta
   basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGVzb25ldDEiLCJhIjoiY2lqNXJua2k5MDAwaDI3bTNmaGZqc2ZuaSJ9.nmLkOlsQKzwMir9DfmCNPg', {
@@ -92,7 +89,7 @@ function init() {
           },
           onEachFeature: onEachFeature_viheralueet
             
-        })//.addTo(tasot);
+        })
         
         taso.addLayer(viheralueet);
       }
@@ -101,7 +98,7 @@ function init() {
  
  
   
-  //Oma funktio kaikkien viheralueiden hankkimiselle, myös varit ovat ennalta maaritelty
+  //Funktio kaikkien viheralueiden hakemiselle, myös varit ovat ennalta maaritelty
   function update_all() {
     var viheralueet = $.ajax({ 
       url: all,
@@ -144,12 +141,11 @@ function init() {
     kaikki.addTo(map);
   }
  
-  document.getElementById("karttataso").checked = true;
-  update_all();
+  
   
   //Taman tarkoituksena on mahdollistaa popupin ja muiden funktioiden toimimisen viheralueet-tasoilla
   function onEachFeature_viheralueet(feature, layer) {
-    
+  	
     popupOptions = {maxWidth: 200, closeOnClick: true};
     content = "<b>Viheralueen tunnus: </b> " + feature.properties.viheralue_id +
         "<br><b>Nimi: </b> " + feature.properties.puiston_nimi +
@@ -212,7 +208,7 @@ function init() {
           });
         
           layer.on({
-            click: zoomToFeature
+            click: panToFeature
           });    
                       
         }
@@ -228,15 +224,15 @@ function init() {
   });
   
   
-  //Tasojen funktioita: kohteeseen zoomaus ja kohteen korostus
-  function zoomToFeature(e) {
+  //Siirrytaan kohteen ylapuolelle, kun ollaan sopivalla zoom-tasolla
+  function panToFeature(e) {
     zoomlevel = map.getZoom();
     if (zoomlevel > 12) {
       map.panInsideBounds(e.target.getBounds());
     }
   }
 
-
+  //Korostaa kohteen
   function mousemove(e) {
     var layer = e.target;
 	
@@ -251,7 +247,8 @@ function init() {
     }
   }
 
-  //"Palauttaa" tyylin takaisin
+
+  //"Palauttaa" korostetun tyylin takaisin
   function mouseout(e) {
     var layer = e.target;
     layer.setStyle({
@@ -283,13 +280,14 @@ function init() {
       
     }
   
-    //Bufferin poisto-nappia varten tarvitaan sille eventlistener
+    //Bufferin poisto-nappia varten tarvitaan sille oma eventlistener
     removeButton.addEventListener('click',function(event) {
       buffer_layer.clearLayers();
     });
   }
   
   
+  //Legendan varitys
   function getColor(d) {
     return d > 12000  ? "#a63603" :
     	   d > 10000  ? "#d94801" :
@@ -302,6 +300,7 @@ function init() {
 	                "#ffffff";
   }
 
+  //Legendan lisaamista varten funktio
   legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
@@ -310,7 +309,6 @@ function init() {
     
     div.innerHTML = "<b>" + "Väestötiheys" + "</b>" + "<br>";
         
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
             '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
@@ -322,7 +320,7 @@ function init() {
   legend.addTo(map);
 	
   
-  
+  //None arvo on ensisijaisesti valittuna "bufferikokona"
   none.addEventListener('change', function() {
     radius = null;
   });
@@ -348,7 +346,10 @@ function init() {
   });
 
 
-
+  //Asetetaan taso päälle vakiona
+  document.getElementById("karttataso").checked = true;
+  update_all();
+  
   //Kaikkien viheralueiden eventlistener
   karttataso.addEventListener('change', function() {
     var checked = this.checked;
