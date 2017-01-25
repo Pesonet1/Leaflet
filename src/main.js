@@ -8,8 +8,8 @@ function init() {
   var legend = L.control({position: 'bottomleft'});
   
   //Aineistot ovat esiladattuja nopeamman toimivuuden takaamiseksi
-  var all = "https://pesonet1.github.io/Leaflet/all.json"
-  var paavo_wfs = "https://pesonet1.github.io/Leaflet/paavo.json"
+  var all = "https://pesonet1.github.io/VihreaHelsinki/data/all.json"
+  var paavo_wfs = "https://pesonet1.github.io/VihreaHelsinki/data/paavo.json"
   
   //Geojson-objektit lisataan omiin layergrouppeihin
   var kaikki = new L.LayerGroup();
